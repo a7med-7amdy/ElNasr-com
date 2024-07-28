@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+
+    <!-- Tree view -->
+    <record id="view_blanket_order_tree" model="ir.ui.view">
+        <field name="name">purchase.requisition.line.tree</field>
+        <field name="model">purchase.requisition.line</field>
+        <field name="arch" type="xml">
+            <tree string="Blanket Order" create="false" delete="false" duplicate="false">
+                <field name="requisition_id"/>
+                <field name="vendor_id"/>
+                <field name="operation_name"/>
+                <field name="contract_start_date"/>
+                <field name="contract_end_date"/>
+                <field name="assigned_to"/>
+                <field name="product_id"/>
+                <field name="lot_id"/>
+                <field name="product_qty" sum="Total Qty" />
+                <field name="qty_ordered" sum="Total Ordred Qty"  optional="show"/>
+                <field name="price_unit" sum="Total Price"  optional="show"/>
+
+              </tree>
+        </field>
+    </record>
+
+    <!-- Action -->
+    <record id="action_blanket_order" model="ir.actions.act_window">
+        <field name="name">Blanket Order Analysis</field>
+        <field name="res_model">purchase.requisition.line</field>
+         <field name="view_mode">tree</field>
+    </record>
+
+
+    <menuitem id="menu_blanket_order" name="Blanket Order " parent="purchase.purchase_report_main" action="action_blanket_order"/>
+
+</odoo>

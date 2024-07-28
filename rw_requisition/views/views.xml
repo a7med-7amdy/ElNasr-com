@@ -1,0 +1,32 @@
+<odoo>
+  <data>
+
+
+
+    <!-- Inherit Form View to Modify it -->
+    <record id="view_purchase_requisition_form_inherited1" model="ir.ui.view">
+        <field name="name">purchase.requisition</field>
+        <field name="model">purchase.requisition</field>
+        <field name="inherit_id" ref="purchase_requisition.view_purchase_requisition_form"/>
+        <field name="arch" type="xml">
+
+            <xpath expr="//field[@name='schedule_date']" position="after">
+                  <field name="contract_start_date"/>
+                        <field name="contract_end_date"/>
+
+            </xpath>
+               <xpath expr="//field[@name='vendor_id']" position="after">
+
+                        <field name="operation_name"/>
+                        <field name="assigned_to"/>
+            </xpath>
+
+                <xpath expr="//field[@name='line_ids']//tree//field[@name='product_id']" position="after">
+                <field name="lot_id" context="{  'default_product_id': product_id }"/>
+            </xpath>
+
+
+        </field>
+    </record>
+  </data>
+</odoo>

@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+
+
+        <!-- Inherit Form View to Modify it -->
+        <record id="fleet_vehicle_view_form_service" model="ir.ui.view">
+            <field name="name">fleet.vehicle</field>
+            <field name="model">fleet.vehicle</field>
+            <field name="inherit_id" ref="fleet.fleet_vehicle_view_form"/>
+            <field name="arch" type="xml">
+
+                <xpath expr="//field[@name='driver_id']" position="after">
+                    <field name="service_id"/>
+                    <field name="analytic_account_id"/>
+
+                </xpath>
+
+            </field>
+        </record>
+
+        <!-- Form View -->
+        <record id="view_fleet_vehicle_moves_form" model="ir.ui.view">
+            <field name="name">vehicle.move.form</field>
+            <field name="model">vehicle.move</field>
+            <field name="arch" type="xml">
+                <form string="Vehicle Moves">
+                    <header>
+                        <button name="confirm" type="object" string="Confirm" invisible="state!='draft'"/>
+                        <button name="reset_to_draft" type="object" string="Reset To Draft" invisible="state!='confirmed'"/>
+                        <button name="create_invoice" type="object" string="Create Invoice" invisible="invoice_id or state!='confirmed'"/>
+                        <field name="state" widget="statusbar" statusbar_visible="draft,confirmed,invoiced"/>
+                    </header>
+                    <sheet>
+
+                        <h1>
+                            <field name="name" readonly="1"/>
+
+                        </h1>
+                        <group col="3">
+                            <group string="Vehicle Data">
+                                <field name="type_id"/>
+                                <field name="date"/>
+                                <field name="vehicle_id"/>
+                                <field name="driver_id"/>
+                                <field name="follower_id"/>
+                            </group>
+                            <group string="Sale Data">
+                                <field name="sale_id"/>
+                                <field name="partner_id"/>
+                                <field name="service_id"/>
+                                <field name="uom"/>
+                                <field name="qty"/>
+                                <field name="price" invisible="1"/>
+                            </group>
+                            <group string="Extra Data">
+                                       <field name="destination"/>
+                                <field name="notes"/>
+                                <field name="invoice_id"/>
+                                <field name="payment_state"/>
+
+                            </group>
+
+
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <!-- Tree View -->
+        <record id="view_fleet_vehicle_moves_tree" model="ir.ui.view">
+            <field name="name">vehicle.move.tree</field>
+            <field name="model">vehicle.move</field>
+            <field name="arch" type="xml">
+                <tree string="Vehicle Moves" editable="bottom">
+                    <field name="name" readonly="1"/>
+
+                    <field name="type_id"/>
+                    <field name="date"/>
+                    <field name="vehicle_id"/>
+                    <field name="driver_id"/>
+                    <field name="follower_id"/>
+                    <field name="destination"/>
+                    <field name="sale_id"/>
+                    <field name="partner_id"/>
+                    <field name="service_id"/>
+                    <field name="uom"/>
+                    <field name="qty"/>
+                    <field name="state"/>
+                     <field name="invoice_id" optional="show" />
+                    <field name="payment_state" optional="show"/>
+                    <field name="notes" optional="show"/>
+
+
+
+                </tree>
+            </field>
+        </record>
+
+        <!-- Menu Action -->
+        <record id="action_fleet_vehicle_moves" model="ir.actions.act_window">
+            <field name="name">Vehicle Moves</field>
+            <field name="res_model">vehicle.move</field>
+            <field name="view_mode">tree,form,kanban</field>
+            <field name="help" type="html">
+                <p class="oe_view_nocontent_create">Create the first vehicle move</p>
+            </field>
+        </record>
+
+        <!-- Menu Item -->
+        <menuitem id="menu_fleet_vehicle_moves" name="Vehicle Moves"
+                  web_icon="rw_vehicle_move,static/description/icon.png" sequence="10"/>
+        <menuitem id="menu_fleet_vehicle_moves_list" name="Vehicle Moves"
+                  parent="menu_fleet_vehicle_moves" action="action_fleet_vehicle_moves" sequence="10"/>
+    </data>
+</odoo>

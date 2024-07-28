@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+
+    <record id="group_create_vehicle_invoice" model="res.groups">
+        <field name="name">Create Vehicle Invoice</field>
+     </record>
+    </data>
+</odoo>

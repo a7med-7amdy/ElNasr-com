@@ -1,0 +1,3 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_fleet_vehicle_moves_manager,fleet.vehicle.moves manager,model_vehicle_move,,1,1,1,1
+vehicle_move_type_id,vehicle_move_type,model_vehicle_move_type,,1,1,1,1
