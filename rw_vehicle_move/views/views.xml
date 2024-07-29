@@ -2,8 +2,6 @@
 <odoo>
     <data>
 
-
-
         <!-- Inherit Form View to Modify it -->
         <record id="fleet_vehicle_view_form_service" model="ir.ui.view">
             <field name="name">fleet.vehicle</field>
@@ -28,8 +26,10 @@
                 <form string="Vehicle Moves">
                     <header>
                         <button name="confirm" type="object" string="Confirm" invisible="state!='draft'"/>
-                        <button name="reset_to_draft" type="object" string="Reset To Draft" invisible="state!='confirmed'"/>
-                        <button name="create_invoice" type="object" string="Create Invoice" invisible="invoice_id or state!='confirmed'"/>
+                        <button name="reset_to_draft" type="object" string="Reset To Draft"
+                                invisible="invoice_id"/>
+                        <button name="create_invoice" type="object" string="Create Invoice"
+                                invisible="invoice_id or state!='confirmed'"/>
                         <field name="state" widget="statusbar" statusbar_visible="draft,confirmed,invoiced"/>
                     </header>
                     <sheet>
@@ -38,25 +38,28 @@
                             <field name="name" readonly="1"/>
 
                         </h1>
-                        <group col="3">
+                        <group col="3" >
                             <group string="Vehicle Data">
-                                <field name="type_id"/>
-                                <field name="date"/>
-                                <field name="vehicle_id"/>
-                                <field name="driver_id"/>
-                                <field name="follower_id"/>
+                                <field name="type_id" readonly="state!='draft'"/>
+                                <field name="date" readonly="state!='draft'"/>
+                                <field name="vehicle_id" readonly="state!='draft'"/>
+                                <field name="driver_id" readonly="state!='draft'"/>
+                                <field name="follower_id" readonly="state!='draft'"/>
                             </group>
                             <group string="Sale Data">
-                                <field name="sale_id"/>
-                                <field name="partner_id"/>
-                                <field name="service_id"/>
-                                <field name="uom"/>
-                                <field name="qty"/>
+                                <field name="sale_id" readonly="state!='draft'"/>
+                                <field name="partner_id" readonly="state!='draft'"/>
+                                <field name="customer_share" readonly="state!='draft'"/>
+                                <field name="service_id" readonly="state!='draft'"/>
+                                <field name="uom" readonly="state!='draft'"/>
+                                <field name="loaded_qty" readonly="state!='draft'"/>
+                                <field name="discharged_qty" readonly="state!='draft'"/>
+
                                 <field name="price" invisible="1"/>
                             </group>
                             <group string="Extra Data">
-                                       <field name="destination"/>
-                                <field name="notes"/>
+                                <field name="destination" readonly="state!='draft'"/>
+                                <field name="notes" readonly="state!='draft'"/>
                                 <field name="invoice_id"/>
                                 <field name="payment_state"/>
 
@@ -77,22 +80,23 @@
                 <tree string="Vehicle Moves" editable="bottom">
                     <field name="name" readonly="1"/>
 
-                    <field name="type_id"/>
-                    <field name="date"/>
-                    <field name="vehicle_id"/>
-                    <field name="driver_id"/>
-                    <field name="follower_id"/>
-                    <field name="destination"/>
-                    <field name="sale_id"/>
-                    <field name="partner_id"/>
-                    <field name="service_id"/>
-                    <field name="uom"/>
-                    <field name="qty"/>
-                    <field name="state"/>
-                     <field name="invoice_id" optional="show" />
-                    <field name="payment_state" optional="show"/>
-                    <field name="notes" optional="show"/>
-
+                    <field name="type_id" readonly="state!='draft'"/>
+                    <field name="date" readonly="state!='draft'"/>
+                    <field name="vehicle_id" readonly="state!='draft'"/>
+                    <field name="driver_id" readonly="state!='draft'"/>
+                    <field name="follower_id" readonly="state!='draft'"/>
+                    <field name="destination" readonly="state!='draft'"/>
+                    <field name="sale_id" readonly="state!='draft'"/>
+                    <field name="partner_id" readonly="state!='draft'"/>
+                    <field name="customer_share" readonly="state!='draft'"/>
+                    <field name="service_id" readonly="state!='draft'"/>
+                    <field name="uom" readonly="state!='draft'"/>
+                    <field name="loaded_qty" readonly="state!='draft'"/>
+                    <field name="discharged_qty" readonly="state!='draft'"/>
+                    <field name="state" readonly="state!='draft'"/>
+                    <field name="invoice_id" optional="show" readonly="state!='draft'"/>
+                    <field name="payment_state" optional="show" readonly="state!='draft'"/>
+                    <field name="notes" optional="show" readonly="state!='draft'"/>
 
 
                 </tree>

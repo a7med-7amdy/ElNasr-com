@@ -15,6 +15,12 @@ class FleetVehicleMoves(models.Model):
     _name = 'vehicle.move'
     _description = 'Vehicle Moves'
 
+    def unlink(self):
+        for rec in self:
+            if rec.state not in ('draft'):
+                raise UserError(_('You can not delete Vehicle Moves which is not in draft state'))
+        return super(FleetVehicleMoves, self).unlink()
+
 
     name= fields.Char( string='Name',copy=False)
     type_id= fields.Many2one(
@@ -55,7 +61,7 @@ class FleetVehicleMoves(models.Model):
                     'invoice_line_ids': [(0, 0, {
                         'name': rec.service_id.name,
                         'product_id': rec.service_id.id,
-                        'quantity': rec.qty,
+                        'quantity': rec.discharged_qty,
                         # 'price_unit': self.price,
                         'price_unit': 0.0,
                         'analytic_distribution': {rec.vehicle_id.analytic_account_id.id: 100},
@@ -74,8 +80,12 @@ class FleetVehicleMoves(models.Model):
     driver_id = fields.Many2one('res.partner', string='Driver',required=True)
     follower_id = fields.Many2one('res.partner', string='Follower')
     partner_id = fields.Many2one('res.partner', string='Partner',required=True)
+    customer_share= fields.Char(string=' Customer Share' )
+
     service_id = fields.Many2one('product.product', string='Service',required=True,domain=[('detailed_type','=','service')])
-    qty = fields.Float(string='Quantity',default=1)
+    loaded_qty = fields.Float(string='Loaded َuantity',default=1)
+    discharged_qty = fields.Float(string='Discharged Quantity',default=1)
+
     price = fields.Float(string='Price' )
     uom = fields.Many2one('uom.uom', string='Unit of Measure')
     destination = fields.Char(string='Destination')

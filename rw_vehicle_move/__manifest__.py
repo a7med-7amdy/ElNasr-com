@@ -25,6 +25,7 @@ Long description of module's purpose
         'security/ir.model.access.csv',
         'security/groups.xml',
         'views/views.xml',
+        'views/accountmove.xml',
         'views/sale.xml',
         'views/templates.xml',
         'demo/demo.xml',
