@@ -10,20 +10,50 @@
         <field name="inherit_id" ref="purchase_requisition.view_purchase_requisition_form"/>
         <field name="arch" type="xml">
 
-            <xpath expr="//field[@name='schedule_date']" position="after">
-                  <field name="contract_start_date"/>
-                        <field name="contract_end_date"/>
 
+
+            <xpath expr="//sheet" position="before">
+                <center>
+                    <field name="alert_flag" invisible="1"/>
+              <div role="alert" class="alert alert-danger" invisible="not alert_flag">
+                 Please Check Ordered Quantities For
+
+                                 <field name="alert_details"  />
+
+
+             </div>
+
+                </center>
             </xpath>
+
+
                <xpath expr="//field[@name='vendor_id']" position="after">
 
                         <field name="operation_name"/>
                         <field name="assigned_to"/>
+                            <field name="customer_id"/>
+<!--                            <field name="alert_flag"/>-->
+<!--                            <field name="alert_details"/>-->
             </xpath>
+
 
                 <xpath expr="//field[@name='line_ids']//tree//field[@name='product_id']" position="after">
                 <field name="lot_id" context="{  'default_product_id': product_id }"/>
             </xpath>
+
+                     <xpath expr="//field[@name='line_ids']//tree//field[@name='qty_ordered']" position="after">
+            <field name="least_qty"/>
+            <field name="contract_start_date"/>
+                        <field name="contract_end_date"/>
+                         <field name="assigned_to"/>
+                            <field name="date_to_notify" optional="hide"/>
+                        <field name="qty_to_notify" optional="hide"/>
+                     </xpath>
+
+
+
+
+
 
 
         </field>

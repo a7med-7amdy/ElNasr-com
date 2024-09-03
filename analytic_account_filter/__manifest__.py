@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 {
-    'name': "rw_vehicle_move",
+    'name': "analytic_account_filter",
 
     'summary': "Short (1 phrase/line) summary of the module's purpose",
 
@@ -18,19 +18,17 @@ Long description of module's purpose
     'version': '0.1',
 
     # any module necessary for this one to work correctly
-    'depends': ['base','fleet','sale_management','account'],
+    'depends': ['base','account'],
 
     # always loaded
     'data': [
-        'security/ir.model.access.csv',
-        'security/groups.xml',
+        # 'security/ir.model.access.csv',
         'views/views.xml',
- 
-        'views/sale.xml',
         'views/templates.xml',
-        'demo/demo.xml',
-
     ],
-
+    # only loaded in demonstration mode
+    'demo': [
+        'demo/demo.xml',
+    ],
 }
 
