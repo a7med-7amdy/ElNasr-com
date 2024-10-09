@@ -1,0 +1,242 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <!-- Action to open the contract views -->
+        <record id="contract_views_action" model="ir.actions.act_window">
+            <field name="name">Contracts</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">contract.contract</field>
+            <field name="view_mode">tree,form</field>
+            <field name="help" type="html">
+                <p class="oe_view_nocontent_create">
+                    Create a new contract.
+                </p>
+            </field>
+        </record>
+
+
+        <!-- Form view for Contracts -->
+        <record id="contract_view_form" model="ir.ui.view">
+            <field name="name">contract.contract.form</field>
+            <field name="model">contract.contract</field>
+            <field name="arch" type="xml">
+                <form string="Contract">
+                    <header>
+                        <button name="action_confirm" string="Confirm" class="btn-primary" data-hotkey="q"
+                                invisible="state  not in 'draft'"
+                                type="object"/>
+
+                        <button name="sent_to_contract_update" string="Create Update?" class="btn-primary"
+                                data-hotkey="q"
+                                invisible="state  not in 'confirmed' or contract_type not in ('general')"
+
+                                type="object"/>
+
+
+                        <button name="action_cancel" string="Cancel" class="btn-primary" data-hotkey="q"
+                                invisible="state not in 'draft'"
+                                type="object"/>
+
+
+                        <button name="create_purchase_order" string="Create Purchase Orders"
+                                class="btn-primary" invisible="state != 'confirmed' or contract_type not in 'indirect'"
+                                type="object"/>
+
+                        <button name="create_sales_order" string="Create Sales Orders"
+                                class="btn-primary" invisible="state != ('confirmed') or contract_type in ('general')"
+                                type="object"/>
+                        <button name="action_done" string="Done" class="btn-primary" data-hotkey="q"
+                                groups="contract_custom.button_access_to_done"
+                                invisible="state not in 'confirmed'"
+                                type="object"/>
+                        <button name="action_reset" string="Reset To Confirmed" class="btn-primary" data-hotkey="q"
+                                invisible="state not in 'done'"
+                                groups="contract_custom.button_access_to_return_confirmed"
+                                type="object"/>
+                        <button name="action_reset_draft" string="Reset To Draft" class="btn-primary" data-hotkey="q"
+                                groups="contract_custom.button_access_to_return_draft"
+                                invisible="state not in 'confirmed'"
+                                type="object"/>
+                        <field name="state" widget="statusbar"/>
+
+                    </header>
+                    <sheet>
+                        <div name="button_box" class="oe_button_box">
+                            <button class="oe_stat_button" type="object" invisible="contract_type not in ('indirect')"
+                                    name="open_purchase_order" icon="fa-book">
+                                <div class="o_stat_info">
+                                    <span class="o_stat_text">Purchase Order</span>
+                                </div>
+                            </button>
+                            <button class="oe_stat_button" type="object"
+                                    name="open_sales_order" icon="fa-book">
+                                <div class="o_stat_info">
+                                    <span class="o_stat_text">Sales Order</span>
+                                </div>
+                            </button>
+                            <button class="oe_stat_button" type="object" invisible="contract_type not in ('general')"
+                                    name="open_vehicles_entry" icon="fa-book">
+                                <div class="o_stat_info">
+                                    <span class="o_stat_text">Vehicles Entry</span>
+                                </div>
+                            </button>
+                            <button class="oe_stat_button" type="object" invisible=" contract_type not in ('general')"
+                                    name="open_contract_update" icon="fa-book">
+                                <div class="o_stat_info">
+                                    <span class="o_stat_text">Updates</span>
+                                </div>
+                            </button>
+                            <button class="oe_stat_button" type="object"
+                                    name="open_vehicle_of_contract" icon="fa-book">
+                                <div class="o_stat_info">
+                                    <span class="o_stat_text">Vehicle Move</span>
+                                </div>
+                            </button>
+                        </div>
+                        <group>
+                            <group>
+                                <field name="name" readonly="state in 'confirmed'"/>
+                                <field name="purchase_ids" invisible="1"/>
+                                <field name="orders" widget="many2many_tags" readonly="1" invisible="1"/>
+                                <field name="vehicles" widget="many2many_tags" readonly="1" invisible="1"/>
+                                <field name="purchased" invisible="1"/>
+                                <field name="contract_type" widget="radio" readonly="state in ('confirmed')"/>
+                                <field name="vendor" invisible="contract_type != 'indirect'"
+                                       readonly="state in 'confirmed'"
+                                       required="contract_type in ('indirect')"/>
+                                <field name="customer" readonly="state in 'confirmed'"/>
+                            </group>
+                            <group>
+                                <field name="contract_date"/>
+                                <field name="construction_date" invisible="contract_type in 'general'"/>
+                                <field name="mixing_date" invisible="contract_type in 'general'"/>
+                                <field name="commercial_registration_number"
+                                       invisible="contract_type not in 'general'"/>
+                                <field name="tax_number" invisible="contract_type not in 'general'"/>
+                                <field name="contract_start_date" invisible="contract_type not in 'general'"/>
+                                <field name="contract_end_date" invisible="contract_type not in 'general'"/>
+                            </group>
+                        </group>
+                        <notebook>
+                            <page string="Indirect  Contracts" invisible="contract_type not in 'indirect'">
+                                <field name="contract_lines" widget="one2many">
+                                    <tree string="Lines" editable="bottom">
+                                        <field name="lots_id" column_invisible="1"/>
+                                        <field name="contract_type" column_invisible="1"/>
+                                        <field name="product_id" optional="show"/>
+                                        <field name="name" column_invisible="1"/>
+                                        <field name="contract_ids" column_invisible="1"/>
+                                        <field name="lot_id" context="{'default_product_id': product_id }"/>
+                                        <field name="qty" optional="show"/>
+                                        <field name="price"/>
+                                        <field name="withdrawn_quantity" invisible="contract_type in 'general'"
+                                               optional="show" options="{'no_label': True}"/>
+                                        <field name="remaining_quantity" optional="show"/>
+                                        <field name="quantity_sent" optional="show"/>
+                                        <field name="contract_start_date"/>
+                                        <field name="contract_end_date"/>
+                                        <field name="assigning_party"/>
+                                        <field name="total_price"/>
+                                    </tree>
+                                </field>
+                            </page>
+                            <page string="Transfer Contract" invisible="contract_type not in 'transfer'">
+                                <field name="contract_lines" widget="one2many">
+                                    <tree string="Lines" editable="bottom">
+                                        <field name="lots_id" column_invisible="1"/>
+                                        <field name="contract_type" column_invisible="1"/>
+                                        <field name="product_id" optional="show"/>
+                                        <field name="lot_id" context="{ 'default_product_id': product_id }"/>
+                                        <field name="qty" optional="show"/>
+                                        <field name="price"/>
+                                        <field name="name" column_invisible="1"/>
+                                        <field name="withdrawn_quantity"
+                                               optional="show"/>
+                                        <field name="remaining_quantity" optional="show"/>
+                                        <field name="contract_start_date"/>
+                                        <field name="contract_end_date"/>
+                                        <field name="assigning_party"/>
+                                        <field name="total_price"/>
+                                    </tree>
+                                </field>
+                            </page>
+                            <page string="General Contract" invisible="contract_type not in 'general'">
+                                <field name="contract_lines" widget="one2many">
+                                    <tree string="Lines" editable="bottom">
+                                        <field name="lots_id" column_invisible="1"/>
+                                        <field name="contract_type" column_invisible="1"/>
+                                        <field name="product_id" optional="show"/>
+                                        <field name="qty" optional="show"/>
+                                        <field name="name" column_invisible="1"/>
+                                        <field name="price"/>
+                                        <field name="withdrawn_quantity" optional="show"/>
+                                        <field name="remaining_quantity" optional="show"/>
+                                        <field name="load_place"
+                                               optional="show"/>
+                                        <field name="unloading_place" optional="show"/>
+                                        <field name="total_price"/>
+                                    </tree>
+                                </field>
+                            </page>
+                        </notebook>
+                        <div dir="ltr">
+                            <dive>
+                                <strong>Quantity</strong>:
+                                <field name="total_qty"/>
+                            </dive>
+                            <div>
+                                <strong>Total Withdrawn Quantity</strong>:
+                                <field name="total_withdrawn_quantity"/>
+                            </div>
+                            <div>
+                                <strong>Total Remaining Quantity</strong>:
+                                <field name="total_remaining_quantity"/>
+                            </div>
+                        </div>
+                        <div dir="rtl">
+                            <strong>Total</strong>
+                            :
+                            <field name="total_cost"/>
+                        </div>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+        <!-- Tree view for Contracts -->
+        <record id="contract_view_tree" model="ir.ui.view">
+            <field name="name">contract.contract.tree</field>
+            <field name="model">contract.contract</field>
+            <field name="arch" type="xml">
+                <tree string="Contracts">
+                    <field name="name"/>
+                    <field name="contract_type"/>
+                    <field name="vendor"/>
+                    <field name="customer"/>
+                    <field name="contract_date"/>
+                    <field name="state"/>
+                </tree>
+            </field>
+        </record>
+        <!--  Inherited form view of the model sale order  -->
+        <record id="purchase_order_form_custom" model="ir.ui.view">
+            <field name="name">purchase.order.view.form.inherit.sale.selection</field>
+            <field name="model">purchase.order</field>
+            <field name="inherit_id" ref="purchase.purchase_order_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='partner_ref']" position="after">
+                    <field name="contract_id"/>
+                </xpath>
+                <xpath expr="//field[@name='order_line']//tree//field[@name='product_id']" position="after">
+                    <field name="contract_id" column_invisible="1"/>
+                </xpath>
+            </field>
+        </record>
+
+
+        <!-- Menu for accessing Contracts -->
+        <menuitem id="contract_menu_root" name="Contracts"/>
+        <menuitem id="contract_menu_sub" name="Choose Contract" parent="contract_menu_root" sequence="1"/>
+        <menuitem id="contract_menu_all" name="ِAll Contracts" parent="contract_menu_sub" sequence="0"
+                  action="contract_views_action"/>
+    </data>
+</odoo>

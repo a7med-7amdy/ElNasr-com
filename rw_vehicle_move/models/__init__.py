@@ -2,4 +2,5 @@
 
 from . import vehicle
 from . import sale
- 
+from . import product
+

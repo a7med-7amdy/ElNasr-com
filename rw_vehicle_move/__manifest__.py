@@ -18,14 +18,15 @@ Long description of module's purpose
     'version': '0.1',
 
     # any module necessary for this one to work correctly
-    'depends': ['base','fleet','sale_management','account'],
+    'depends': ['base','fleet','sale_management','account','product'],
 
     # always loaded
     'data': [
         'security/ir.model.access.csv',
-        'security/groups.xml',
+        'views/groups.xml',
         'views/views.xml',
- 
+        'views/product.xml',
+
         'views/sale.xml',
         'views/templates.xml',
         'demo/demo.xml',

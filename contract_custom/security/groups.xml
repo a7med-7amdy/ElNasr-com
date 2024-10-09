@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="button_access_to_return_confirmed" model="res.groups">
+            <field name="name">Contract Reset Button</field>
+        </record>
+        <record id="button_access_to_done" model="res.groups">
+            <field name="name">Contract Done Button</field>
+        </record>
+        <record id="button_access_to_return_draft" model="res.groups">
+            <field name="name">Contract Draft Button</field>
+        </record>
+    </data>
+</odoo>

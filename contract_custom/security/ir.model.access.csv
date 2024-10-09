@@ -1,0 +1,9 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_contract_contract,contract.contract,model_contract_contract,base.group_user,1,1,1,1
+access_contract_lines,contract_lines.contract_lines,model_contract_lines,base.group_user,1,1,1,1
+access_assign_assign,assign_assign.assign_assign,model_assign_assign,base.group_user,1,1,1,1
+access_place_place,place_place.place_place,model_place_place,base.group_user,1,1,1,1
+access_contract_update,contract_update.contract_update,model_contract_update,base.group_user,1,1,1,1
+access_contract_update_line,contract_update_line.contract_update_line,model_contract_update_line,base.group_user,1,1,1,1
+access_contract_update_wizard,contract_update_wizard.contract_update_wizard,model_contract_update_wizard,base.group_user,1,1,1,1
+access_contract_update_wizard_line,contract_update_wizard_line,model_contract_update_wizard_line,base.group_user,1,1,1,1

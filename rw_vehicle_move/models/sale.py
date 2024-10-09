@@ -64,3 +64,5 @@ class AccountMove(models.Model):
                 'res_id': self.vehicle_move_ids.id
             })
         return action
+
+

@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="contract_views_action_transfer" model="ir.actions.act_window">
+            <field name="name">Contracts</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">contract.contract</field>
+            <field name="context">{"default_contract_type":"transfer"}</field>
+            <field name="domain">[('contract_type','=','transfer')]</field>
+            <field name="view_mode">tree,form</field>
+            <field name="help" type="html">
+                <p class="oe_view_nocontent_create">
+                    Create a new contract.
+                </p>
+            </field>
+        </record>
+
+
+        <menuitem id="contract_menu_transfer" name="Transfer Contracts" parent="contract_menu_sub"
+                  action="contract_views_action_transfer" />
+    </data>
+</odoo>

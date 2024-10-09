@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <!-- Inherit Form View to Modify it -->
+        <record id="company_base_custom" model="ir.ui.view">
+            <field name="name">company.base.custom</field>
+            <field name="model">res.company</field>
+            <field name="inherit_id" ref="base.view_company_form"/>
+            <field name="arch" type="xml">
+
+                <xpath expr="//field[@name='currency_id']" position="after">
+                    <field name="debit_account"/>
+                    <field name="credit_account"/>
+                    <field name="journal_id"/>
+                </xpath>
+
+            </field>
+        </record>
+        <!-- Inherit Form View to Modify it -->
+        <record id="res_config_settings_view_form_custom" model="ir.ui.view">
+            <field name="name">res.config.settings.view.form.inherit</field>
+            <field name="model">res.config.settings</field>
+            <field name="inherit_id" ref="base.res_config_settings_view_form"/>
+            <field name="arch" type="xml">
+
+                <!--                             <xpath expr="//form" position="inside">-->
+                <!--                    <setting id="contract_bacs" string="BACS" company_dependent="1"-->
+                <!--                             help="Set general contract journal and accounts">-->
+                <!--                        <div class="content-group">-->
+                <!--                            <div class="row">-->
+                <!--                                <label for="debit_account" class="col-lg-3 o_light_label"/>-->
+                <!--                                <field name="debit_account" class="oe_inline"/>-->
+                <!--                            </div>-->
+                <!--                        </div>-->
+                <!--                    </setting>-->
+                <!--                </xpath>-->
+
+                <!--                <xpath expr="//form" position="inside">-->
+                <!--                    <setting id="contract_bacs" string="BACS" company_dependent="1"-->
+                <!--                             help="set general contract journal and accounts">-->
+                <!--                        <div class="content-group">-->
+                <!--                            <div class="row">-->
+                <!--                                <label for="debit_account" class="col-lg-3 o_light_label"/>-->
+                <!--                                <field name="debit_account" class="oe_inline"/>-->
+                <!--                            </div>-->
+                <!--                        </div>-->
+                <!--                    </setting>-->
+                <!--                </xpath>-->
+                <!--                <xpath expr="//form" position="inside">-->
+                <!--                    <block title="set general contract journal and accounts">-->
+                <!--                        <setting id="general_contract_accounts" string="General Contract Accounts"-->
+                <!--                                 help="set general contract journal and accounts.">-->
+                <!--                            <field name="debit_account"/>-->
+                <!--                        </setting>-->
+                <!--                    </block>-->
+                <!--                </xpath>-->
+                <xpath expr="//form" position="inside">
+                    <app data-string="contract_custom" string="Contracts" name="contracts">
+                        <block title="contract journal and accounts">
+                            <setting help="set general contract journal and accounts">
+                                <label for="journal_id" class="col-lg-3 o_light_label"/>
+                                <field name="journal_id"/>
+                                <br/>
+                               <label for="credit_account" class="col-lg-3 o_light_label"/>
+                                <field name="credit_account"/>
+                                <br/>
+                                <label for="debit_account" class="col-lg-3 o_light_label"/>
+                                <field name="debit_account"/>
+                            </setting>
+                        </block>
+                    </app>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>

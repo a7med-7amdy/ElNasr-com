@@ -12,6 +12,7 @@
                 <xpath expr="//field[@name='driver_id']" position="after">
                     <field name="service_id"/>
                     <field name="analytic_account_id"/>
+                    <field name="trailer"/>
 
                 </xpath>
 
@@ -38,17 +39,18 @@
                             <field name="name" readonly="1"/>
 
                         </h1>
-                        <group col="3" >
+                        <group col="3">
                             <group string="Vehicle Data">
                                 <field name="type_id" readonly="state!='draft'"/>
                                 <field name="date" readonly="state!='draft'"/>
                                 <field name="vehicle_id" readonly="state!='draft'"/>
+                                <field name="trailer" readonly="state!='draft'"/>
                                 <field name="driver_id" readonly="state!='draft'"/>
                                 <field name="follower_id" readonly="state!='draft'"/>
                             </group>
                             <group string="Sale Data">
                                 <field name="sale_id" readonly="state!='draft'"/>
-                                <field name="partner_id" readonly="state!='draft'"/>
+                                <field name="partner_id"/>
                                 <field name="customer_share" readonly="state!='draft'"/>
                                 <field name="service_id" readonly="state!='draft'"/>
                                 <field name="uom" readonly="state!='draft'"/>
@@ -77,28 +79,28 @@
             <field name="name">vehicle.move.tree</field>
             <field name="model">vehicle.move</field>
             <field name="arch" type="xml">
-                <tree string="Vehicle Moves" editable="bottom">
+                <tree string="Vehicle Moves" editable="top">
                     <field name="name" readonly="1"/>
-
                     <field name="type_id" readonly="state!='draft'"/>
                     <field name="date" readonly="state!='draft'"/>
                     <field name="vehicle_id" readonly="state!='draft'"/>
+                    <field name="trailer" readonly="state!='draft'"/>
                     <field name="driver_id" readonly="state!='draft'"/>
                     <field name="follower_id" readonly="state!='draft'"/>
-                    <field name="destination" readonly="state!='draft'"/>
-                    <field name="sale_id" readonly="state!='draft'"/>
-                    <field name="partner_id" readonly="state!='draft'"/>
+                    <field name="destination" readonly="state!='draft'" column_invisible="1"/>
                     <field name="customer_share" readonly="state!='draft'"/>
                     <field name="service_id" readonly="state!='draft'"/>
-                    <field name="uom" readonly="state!='draft'"/>
+                    <field name="lot_id" readonly="state!='draft'" context="{'default_product_id': service_id }"/>
                     <field name="loaded_qty" readonly="state!='draft'"/>
-                    <field name="discharged_qty" readonly="state!='draft'"/>
-                    <field name="state" readonly="state!='draft'"/>
+                    <field name="partner_id"/>
+                    <field name="lots_id" column_invisible="1"/>
+                    <field name="uom" readonly="state!='draft'" column_invisible="1"/>
+                    <field name="discharged_qty" readonly="state!='draft'" column_invisible="1"/>
+                    <field name="state" readonly="1"/>
+                    <field name="sale_id" readonly="state!='draft'"/>
                     <field name="invoice_id" optional="show" readonly="state!='draft'"/>
-                    <field name="payment_state" optional="show" readonly="state!='draft'"/>
-                    <field name="notes" optional="show" readonly="state!='draft'"/>
-
-
+                    <field name="payment_state" optional="show" readonly="state!='draft'" column_invisible="1"/>
+                    <field name="notes" optional="show" readonly="state!='draft'" column_invisible="1"/>
                 </tree>
             </field>
         </record>
@@ -112,6 +114,27 @@
                 <p class="oe_view_nocontent_create">Create the first vehicle move</p>
             </field>
         </record>
+        <record model="ir.actions.server" id="create_quotation_for_vehicles">
+            <field name="name">Create Quotation</field>
+            <field name="model_id" ref="model_vehicle_move"/>
+            <field name="binding_model_id" ref="model_vehicle_move"/>
+            <field name="state">code</field>
+            <field name="code">
+                if records:
+                action = records.action_create_quotation()
+            </field>
+        </record>
+        <record model="ir.actions.server" id="create_generate_entries_for_vehicles">
+            <field name="name">Create Entry</field>
+            <field name="model_id" ref="model_vehicle_move"/>
+            <field name="binding_model_id" ref="model_vehicle_move"/>
+            <field name="state">code</field>
+            <field name="code">
+                if records:
+                action = records.generate_entries()
+            </field>
+        </record>
+
 
         <!-- Menu Item -->
         <menuitem id="menu_fleet_vehicle_moves" name="Vehicle Moves"

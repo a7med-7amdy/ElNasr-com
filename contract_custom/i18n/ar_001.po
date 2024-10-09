@@ -1,0 +1,828 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* contract_custom
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 17.0+e\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2024-10-07 20:51+0000\n"
+"PO-Revision-Date: 2024-10-07 20:51+0000\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: contract_custom
+#: model_terms:ir.ui.view,arch_db:contract_custom.contract_view_form
+msgid ""
+"<br/>\n"
+"                            <strong>Total Remaining Quantity</strong>:"
+msgstr "إجمالى الكمية المتبقة                            "
+
+#. module: contract_custom
+#: model_terms:ir.ui.view,arch_db:contract_custom.contract_view_form
+msgid ""
+"<br/>\n"
+"                            <strong>Total Withdrawn Quantity</strong>:"
+msgstr "إجمالى الكمية المسحوبة"
+
+#. module: contract_custom
+#: model_terms:ir.ui.view,arch_db:contract_custom.contract_view_form
+msgid "<span class=\"o_stat_text\">Purchase Order</span>"
+msgstr "أوامر الشراء"
+
+#. module: contract_custom
+#: model_terms:ir.ui.view,arch_db:contract_custom.contract_view_form
+msgid "<span class=\"o_stat_text\">Sales Order</span>"
+msgstr "أوامر البيع"
+
+#. module: contract_custom
+#: model_terms:ir.ui.view,arch_db:contract_custom.contract_view_form
+msgid "<span class=\"o_stat_text\">Updates</span>"
+msgstr "الملحقات"
+
+#. module: contract_custom
+#: model_terms:ir.ui.view,arch_db:contract_custom.contract_view_form
+msgid "<span class=\"o_stat_text\">Vehicle Move</span>"
+msgstr "حركة السيارات"
+
+#. module: contract_custom
+#: model_terms:ir.ui.view,arch_db:contract_custom.contract_view_form
+msgid "<span class=\"o_stat_text\">Vehicles Entry</span>"
+msgstr "قيود اليومية"
+
+#. module: contract_custom
+#: model_terms:ir.ui.view,arch_db:contract_custom.contract_view_form
+msgid "<strong>Quantity</strong>:"
+msgstr "الكمية"
+
+#. module: contract_custom
+#: model_terms:ir.ui.view,arch_db:contract_custom.contract_view_form
+msgid ""
+"<strong>Total</strong>\n"
+"                            :"
+msgstr "الاجمالى"
+
+#. module: contract_custom
+#: model:ir.model,name:contract_custom.model_assign_assign
+msgid "Assign Party"
+msgstr ""
+
+#. module: contract_custom
+#: model_terms:ir.ui.view,arch_db:contract_custom.contract_view_form
+#: model_terms:ir.ui.view,arch_db:contract_custom.wizard_contract_update_action_view_form
+msgid "Cancel"
+msgstr "الغاء"
+
+#. module: contract_custom
+#: model:ir.model.fields.selection,name:contract_custom.selection__contract_contract__state__cancel
+msgid "Canceled"
+msgstr "ملغى"
+
+#. module: contract_custom
+#: model:ir.ui.menu,name:contract_custom.contract_menu_sub
+msgid "Choose Contract"
+msgstr "العقد"
+
+#. module: contract_custom
+#: model:ir.model.fields,field_description:contract_custom.field_contract_contract__commercial_registration_number
+#: model:ir.model.fields,field_description:contract_custom.field_res_partner__commercial_registration_number
+#: model:ir.model.fields,field_description:contract_custom.field_res_users__commercial_registration_number
+msgid "Commercial Registration Number"
+msgstr "رقم السجل الضريبى"
+
+#. module: contract_custom
+#: model:ir.model,name:contract_custom.model_res_company
+msgid "Companies"
+msgstr "الشركات"
+
+#. module: contract_custom
+#: model:ir.model,name:contract_custom.model_res_config_settings
+msgid "Config Settings"
+msgstr "تهيئة الإعدادات "
+
+#. module: contract_custom
+#: model_terms:ir.ui.view,arch_db:contract_custom.contract_view_form
+msgid "Confirm"
+msgstr "موافقة"
+
+#. module: contract_custom
+#: model:ir.model.fields.selection,name:contract_custom.selection__contract_contract__state__confirmed
+msgid "Confirmed"
+msgstr "مؤكد"
+
+#. module: contract_custom
+#: model:ir.model.fields,field_description:contract_custom.field_contract_contract__construction_date
+#: model:ir.model.fields,field_description:contract_custom.field_res_partner__construction_date
+#: model:ir.model.fields,field_description:contract_custom.field_res_users__construction_date
+msgid "Construction Date"
+msgstr "تاريخ البناء والتشيد"
+
+#. module: contract_custom
+#: model:ir.model,name:contract_custom.model_res_partner
+msgid "Contact"
+msgstr "جهة الاتصال"
+
+#. module: contract_custom
+#: model:ir.model.fields,field_description:contract_custom.field_contract_lines__contract
+#: model:ir.model.fields,field_description:contract_custom.field_contract_update__contract_id
+#: model:ir.model.fields,field_description:contract_custom.field_contract_update_wizard__contract_id
+#: model:ir.model.fields,field_description:contract_custom.field_purchase_order__contract_id
+#: model:ir.model.fields,field_description:contract_custom.field_purchase_order_line__contract_id
+#: model:ir.model.fields,field_description:contract_custom.field_sale_order__contract_id
+#: model_terms:ir.ui.view,arch_db:contract_custom.contract_update_action_view_form
+#: model_terms:ir.ui.view,arch_db:contract_custom.contract_update_view_tree
+#: model_terms:ir.ui.view,arch_db:contract_custom.contract_view_form
+#: model_terms:ir.ui.view,arch_db:contract_custom.wizard_contract_update_action_view_form
+msgid "Contract"
+msgstr "العقود"
+
+#. module: contract_custom
+#: model:ir.model.fields,field_description:contract_custom.field_contract_contract__contract_date
+msgid "Contract Date"
+msgstr "تاريخ العقد"
+
+#. module: contract_custom
+#: model:res.groups,name:contract_custom.button_access_to_done
+msgid "Contract Done Button"
+msgstr ""
+
+#. module: contract_custom
+#: model:res.groups,name:contract_custom.button_access_to_return_draft
+msgid "Contract Draft Button"
+msgstr ""
+
+#. module: contract_custom
+#: model:ir.model.fields,field_description:contract_custom.field_contract_contract__contract_end_date
+#: model:ir.model.fields,field_description:contract_custom.field_contract_lines__contract_end_date
+#: model:ir.model.fields,field_description:contract_custom.field_contract_update__contract_end_date
+#: model:ir.model.fields,field_description:contract_custom.field_contract_update_wizard__contract_end_date
+msgid "Contract End Date"
+msgstr "تاريخ انتهاء "
+
+#. module: contract_custom
+#: model:ir.model.fields,field_description:contract_custom.field_contract_lines__contract_ids
+#: model:ir.model.fields,field_description:contract_custom.field_purchase_order__contract_ids
+msgid "Contract Ids"
+msgstr ""
+
+#. module: contract_custom
+#: model:ir.model,name:contract_custom.model_contract_lines
+#: model:ir.model.fields,field_description:contract_custom.field_contract_contract__contract_lines
+msgid "Contract Lines"
+msgstr ""
+
+#. module: contract_custom
+#: model:ir.model.fields,field_description:contract_custom.field_contract_contract__name
+msgid "Contract Number"
+msgstr "رقم العقد"
+
+#. module: contract_custom
+#. odoo-python
+#: code:addons/contract_custom/models/models.py:0
+#, python-format
+msgid "Contract Purchase Order"
+msgstr ""
+
+#. module: contract_custom
+#: model:res.groups,name:contract_custom.button_access_to_return_confirmed
+msgid "Contract Reset Button"
+msgstr ""
+
+#. module: contract_custom
+#. odoo-python
+#: code:addons/contract_custom/models/models.py:0
+#, python-format
+msgid "Contract Sales Order"
+msgstr "اوامر البيع"
+
+#. module: contract_custom
+#: model:ir.model.fields,field_description:contract_custom.field_contract_contract__contract_start_date
+#: model:ir.model.fields,field_description:contract_custom.field_contract_lines__contract_start_date
+#: model:ir.model.fields,field_description:contract_custom.field_contract_update__contract_start_date
+#: model:ir.model.fields,field_description:contract_custom.field_contract_update_wizard__contract_start_date
+msgid "Contract Start Date"
+msgstr "تاريخ البدء"
+
+#. module: contract_custom
+#: model:ir.model.fields,field_description:contract_custom.field_contract_contract__contract_type
+#: model:ir.model.fields,field_description:contract_custom.field_contract_lines__contract_type
+msgid "Contract Type"
+msgstr "نوع العقد"
+
+#. module: contract_custom
+#: model:ir.actions.act_window,name:contract_custom.contract_update_action
+#: model:ir.model,name:contract_custom.model_contract_update
+#: model:ir.model.fields,field_description:contract_custom.field_contract_update_line__contract_update_ids
+#: model:ir.model.fields,field_description:contract_custom.field_contract_update_wizard_line__contract_update_id
+msgid "Contract Update"
+msgstr "عمل ملحق"
+
+#. module: contract_custom
+#: model:ir.model,name:contract_custom.model_contract_update_line
+msgid "Contract Update Lines"
+msgstr "تحديث بنود العقد "
+
+#. module: contract_custom
+#: model:ir.model,name:contract_custom.model_contract_update_wizard
+msgid "Contract Update Wizard"
+msgstr "معالجة تحديث العقد "
+
+#. module: contract_custom
+#: model:ir.model,name:contract_custom.model_contract_update_wizard_line
+msgid "Contract Update Wizard Lines"
+msgstr "معالجة تحديث بنود العقد "
+
+#. module: contract_custom
+#. odoo-python
+#: code:addons/contract_custom/models/models.py:0
+#, python-format
+msgid "Contract Updates"
+msgstr "ملحقات العقود "
+
+#. module: contract_custom
+#: model:ir.actions.act_window,name:contract_custom.contract_views_action
+#: model:ir.actions.act_window,name:contract_custom.contract_views_action_general
+#: model:ir.actions.act_window,name:contract_custom.contract_views_action_indirect
+#: model:ir.actions.act_window,name:contract_custom.contract_views_action_transfer
+#: model:ir.ui.menu,name:contract_custom.contract_menu_root
+#: model_terms:ir.ui.view,arch_db:contract_custom.contract_view_tree
+#: model_terms:ir.ui.view,arch_db:contract_custom.res_config_settings_view_form_custom
+msgid "Contracts"
+msgstr "العقود "
+
+#. module: contract_custom
+#: model_terms:ir.ui.view,arch_db:contract_custom.contract_view_form
+msgid "Create Purchase Orders"
+msgstr "انشاء امر شراء "
+
+#. module: contract_custom
+#: model_terms:ir.ui.view,arch_db:contract_custom.contract_view_form
+msgid "Create Sales Orders"
+msgstr "انشاء امر بيع "
+
+#. module: contract_custom
+#: model_terms:ir.ui.view,arch_db:contract_custom.wizard_contract_update_action_view_form
+msgid "Create Update"
+msgstr "انشاء ملحق "
+
+#. module: contract_custom
+#: model_terms:ir.ui.view,arch_db:contract_custom.contract_view_form
+msgid "Create Update?"
+msgstr "انشاء ملحق"
+
+#. module: contract_custom
+#: model_terms:ir.actions.act_window,help:contract_custom.contract_views_action
+#: model_terms:ir.actions.act_window,help:contract_custom.contract_views_action_general
+#: model_terms:ir.actions.act_window,help:contract_custom.contract_views_action_indirect
+#: model_terms:ir.actions.act_window,help:contract_custom.contract_views_action_transfer
+msgid "Create a new contract."
+msgstr "انشاء عقد جديد "
+
+#. module: contract_custom
+#: model:ir.model.fields,field_description:contract_custom.field_assign_assign__create_uid
+#: model:ir.model.fields,field_description:contract_custom.field_contract_contract__create_uid
+#: model:ir.model.fields,field_description:contract_custom.field_contract_lines__create_uid
+#: model:ir.model.fields,field_description:contract_custom.field_contract_update__create_uid
+#: model:ir.model.fields,field_description:contract_custom.field_contract_update_line__create_uid
+#: model:ir.model.fields,field_description:contract_custom.field_contract_update_wizard__create_uid
+#: model:ir.model.fields,field_description:contract_custom.field_contract_update_wizard_line__create_uid
+#: model:ir.model.fields,field_description:contract_custom.field_place_place__create_uid
+msgid "Created by"
+msgstr "انشأ بواسطة "
+
+#. module: contract_custom
+#: model:ir.model.fields,field_description:contract_custom.field_assign_assign__create_date
+#: model:ir.model.fields,field_description:contract_custom.field_contract_contract__create_date
+#: model:ir.model.fields,field_description:contract_custom.field_contract_lines__create_date
+#: model:ir.model.fields,field_description:contract_custom.field_contract_update__create_date
+#: model:ir.model.fields,field_description:contract_custom.field_contract_update_line__create_date
+#: model:ir.model.fields,field_description:contract_custom.field_contract_update_wizard__create_date
+#: model:ir.model.fields,field_description:contract_custom.field_contract_update_wizard_line__create_date
+#: model:ir.model.fields,field_description:contract_custom.field_place_place__create_date
+msgid "Created on"
+msgstr "اونشئ في "
+
+#. module: contract_custom
+#: model:ir.model.fields,field_description:contract_custom.field_res_company__credit_account
+#: model:ir.model.fields,field_description:contract_custom.field_res_config_settings__credit_account
+msgid "Credit Account"
+msgstr ""
+
+#. module: contract_custom
+#: model:ir.model,name:contract_custom.model_contract_contract
+msgid "Custom For Contracts"
+msgstr ""
+
+#. module: contract_custom
+#: model:ir.model.fields,field_description:contract_custom.field_contract_contract__customer
+msgid "Customer"
+msgstr "العميل "
+
+#. module: contract_custom
+#: model:ir.model.fields,field_description:contract_custom.field_res_company__debit_account
+#: model:ir.model.fields,field_description:contract_custom.field_res_config_settings__debit_account
+msgid "Debit Account"
+msgstr ""
+
+#. module: contract_custom
+#: model:ir.model.fields,field_description:contract_custom.field_assign_assign__display_name
+#: model:ir.model.fields,field_description:contract_custom.field_contract_contract__display_name
+#: model:ir.model.fields,field_description:contract_custom.field_contract_lines__display_name
+#: model:ir.model.fields,field_description:contract_custom.field_contract_update__display_name
+#: model:ir.model.fields,field_description:contract_custom.field_contract_update_line__display_name
+#: model:ir.model.fields,field_description:contract_custom.field_contract_update_wizard__display_name
+#: model:ir.model.fields,field_description:contract_custom.field_contract_update_wizard_line__display_name
+#: model:ir.model.fields,field_description:contract_custom.field_place_place__display_name
+msgid "Display Name"
+msgstr "الاسم "
+
+#. module: contract_custom
+#: model:ir.model.fields.selection,name:contract_custom.selection__contract_contract__state__done
+#: model_terms:ir.ui.view,arch_db:contract_custom.contract_view_form
+msgid "Done"
+msgstr "تم "
+
+#. module: contract_custom
+#: model:ir.model.fields.selection,name:contract_custom.selection__contract_contract__state__draft
+msgid "Draft"
+msgstr "مسودة "
+
+#. module: contract_custom
+#: model:ir.model.fields.selection,name:contract_custom.selection__contract_contract__contract_type__general
+msgid "General"
+msgstr "عام"
+
+#. module: contract_custom
+#: model_terms:ir.ui.view,arch_db:contract_custom.contract_view_form
+msgid "General Contract"
+msgstr "عقد عام "
+
+#. module: contract_custom
+#: model:ir.ui.menu,name:contract_custom.contract_menu_general
+msgid "General Contracts"
+msgstr "العقود العامة "
+
+#. module: contract_custom
+#: model:ir.model.fields,field_description:contract_custom.field_assign_assign__id
+#: model:ir.model.fields,field_description:contract_custom.field_contract_contract__id
+#: model:ir.model.fields,field_description:contract_custom.field_contract_lines__id
+#: model:ir.model.fields,field_description:contract_custom.field_contract_update__id
+#: model:ir.model.fields,field_description:contract_custom.field_contract_update_line__id
+#: model:ir.model.fields,field_description:contract_custom.field_contract_update_wizard__id
+#: model:ir.model.fields,field_description:contract_custom.field_contract_update_wizard_line__id
+#: model:ir.model.fields,field_description:contract_custom.field_place_place__id
+msgid "ID"
+msgstr "الرقم التعريفي "
+
+#. module: contract_custom
+#: model:ir.model.fields.selection,name:contract_custom.selection__contract_contract__contract_type__indirect
+msgid "Indirect"
+msgstr "غير مباشر  "
+
+#. module: contract_custom
+#: model_terms:ir.ui.view,arch_db:contract_custom.contract_view_form
+msgid "Indirect  Contracts"
+msgstr "عقد غير مباشر "
+
+#. module: contract_custom
+#: model:ir.ui.menu,name:contract_custom.contract_menu_indirect
+msgid "Indirect Contracts"
+msgstr "العقود الغير مباشر "
+
+#. module: contract_custom
+#: model:ir.model.fields,field_description:contract_custom.field_res_company__journal_id
+#: model:ir.model.fields,field_description:contract_custom.field_res_config_settings__journal_id
+msgid "Journal"
+msgstr "دفتر اليومية"
+
+#. module: contract_custom
+#: model:ir.model,name:contract_custom.model_account_move
+msgid "Journal Entry"
+msgstr "قيد اليومية"
+
+#. module: contract_custom
+#: model:ir.model.fields,field_description:contract_custom.field_assign_assign__write_uid
+#: model:ir.model.fields,field_description:contract_custom.field_contract_contract__write_uid
+#: model:ir.model.fields,field_description:contract_custom.field_contract_lines__write_uid
+#: model:ir.model.fields,field_description:contract_custom.field_contract_update__write_uid
+#: model:ir.model.fields,field_description:contract_custom.field_contract_update_line__write_uid
+#: model:ir.model.fields,field_description:contract_custom.field_contract_update_wizard__write_uid
+#: model:ir.model.fields,field_description:contract_custom.field_contract_update_wizard_line__write_uid
+#: model:ir.model.fields,field_description:contract_custom.field_place_place__write_uid
+msgid "Last Updated by"
+msgstr "اخر تحديث بواسطة"
+
+#. module: contract_custom
+#: model:ir.model.fields,field_description:contract_custom.field_assign_assign__write_date
+#: model:ir.model.fields,field_description:contract_custom.field_contract_contract__write_date
+#: model:ir.model.fields,field_description:contract_custom.field_contract_lines__write_date
+#: model:ir.model.fields,field_description:contract_custom.field_contract_update__write_date
+#: model:ir.model.fields,field_description:contract_custom.field_contract_update_line__write_date
+#: model:ir.model.fields,field_description:contract_custom.field_contract_update_wizard__write_date
+#: model:ir.model.fields,field_description:contract_custom.field_contract_update_wizard_line__write_date
+#: model:ir.model.fields,field_description:contract_custom.field_place_place__write_date
+msgid "Last Updated on"
+msgstr "اخر تحديث"
+
+#. module: contract_custom
+#: model_terms:ir.ui.view,arch_db:contract_custom.contract_update_action_view_form
+#: model_terms:ir.ui.view,arch_db:contract_custom.contract_view_form
+#: model_terms:ir.ui.view,arch_db:contract_custom.wizard_contract_update_action_view_form
+msgid "Lines"
+msgstr "البنود "
+
+#. module: contract_custom
+#: model:ir.model.fields,field_description:contract_custom.field_contract_lines__load_place
+#: model:ir.model.fields,field_description:contract_custom.field_contract_update_line__load_place
+#: model:ir.model.fields,field_description:contract_custom.field_contract_update_wizard_line__load_place
+msgid "Load Place"
+msgstr "مكان التحميل"
+
+#. module: contract_custom
+#: model:ir.model.fields,field_description:contract_custom.field_contract_lines__lots_id
+msgid "Lots"
+msgstr ""
+
+#. module: contract_custom
+#: model:ir.model.fields,field_description:contract_custom.field_contract_contract__mixing_date
+#: model:ir.model.fields,field_description:contract_custom.field_res_partner__mixing_date
+#: model:ir.model.fields,field_description:contract_custom.field_res_users__mixing_date
+msgid "Mixing Date"
+msgstr "تاريخ الخلاطة"
+
+#. module: contract_custom
+#: model:ir.model.fields,field_description:contract_custom.field_assign_assign__name
+#: model:ir.model.fields,field_description:contract_custom.field_contract_lines__name
+#: model:ir.model.fields,field_description:contract_custom.field_contract_update__name
+#: model:ir.model.fields,field_description:contract_custom.field_contract_update_wizard_line__name
+#: model:ir.model.fields,field_description:contract_custom.field_res_config_settings__name
+msgid "Name"
+msgstr "الاسم "
+
+#. module: contract_custom
+#: model:ir.model.fields,field_description:contract_custom.field_contract_update__new_lines_ids
+#: model:ir.model.fields,field_description:contract_custom.field_contract_update_wizard__new_lines_ids
+msgid "New Contract Lines"
+msgstr "البيانات الحديثة"
+
+#. module: contract_custom
+#: model_terms:ir.ui.view,arch_db:contract_custom.contract_update_action_view_form
+msgid "New data in lines"
+msgstr "التاريخ الحديث"
+
+#. module: contract_custom
+#: model:ir.model.fields,field_description:contract_custom.field_contract_update__old_contract_end_date
+#: model:ir.model.fields,field_description:contract_custom.field_contract_update_wizard__old_contract_end_date
+msgid "Old Contract End Date"
+msgstr "تاريخ العقد النهائى الاصلى"
+
+#. module: contract_custom
+#: model:ir.model.fields,field_description:contract_custom.field_contract_update__old_lines_ids
+#: model:ir.model.fields,field_description:contract_custom.field_contract_update_wizard__old_lines_ids
+msgid "Old Contract Lines"
+msgstr "البيانات الاصلية للمنتج"
+
+#. module: contract_custom
+#: model:ir.model.fields,field_description:contract_custom.field_contract_update__old_contract_start_date
+#: model:ir.model.fields,field_description:contract_custom.field_contract_update_wizard__old_contract_start_date
+msgid "Old Contract Start Date"
+msgstr "تاريخ العقد الابتدئى الاصلى"
+
+#. module: contract_custom
+#: model:ir.model.fields,field_description:contract_custom.field_contract_update_line__old_load_place
+#: model:ir.model.fields,field_description:contract_custom.field_contract_update_wizard_line__old_load_place
+msgid "Old Load Place"
+msgstr "مكان التحميل الاصلى"
+
+#. module: contract_custom
+#: model:ir.model.fields,field_description:contract_custom.field_contract_update_line__old_product_id
+#: model:ir.model.fields,field_description:contract_custom.field_contract_update_wizard_line__old_product_id
+msgid "Old Product"
+msgstr "المنتج الاصلى"
+
+#. module: contract_custom
+#: model:ir.model.fields,field_description:contract_custom.field_contract_update_line__old_qty
+#: model:ir.model.fields,field_description:contract_custom.field_contract_update_wizard_line__old_qty
+msgid "Old Quantity"
+msgstr "الكمية الاصلية"
+
+#. module: contract_custom
+#: model:ir.model.fields,field_description:contract_custom.field_contract_update_line__old_price
+#: model:ir.model.fields,field_description:contract_custom.field_contract_update_wizard_line__old_price
+msgid "Old Unit Price"
+msgstr "السعر الاصلى"
+
+#. module: contract_custom
+#: model:ir.model.fields,field_description:contract_custom.field_contract_update_line__old_unloading_place
+#: model:ir.model.fields,field_description:contract_custom.field_contract_update_wizard_line__old_unloading_place
+msgid "Old Unloading Location"
+msgstr "مكان التحميل الاصلى"
+
+#. module: contract_custom
+#: model_terms:ir.ui.view,arch_db:contract_custom.contract_update_action_view_form
+#: model_terms:ir.ui.view,arch_db:contract_custom.wizard_contract_update_action_view_form
+msgid "Old data in lines"
+msgstr "التاريخ الاصلى"
+
+#. module: contract_custom
+#: model:ir.model.fields,field_description:contract_custom.field_contract_lines__lot_id
+msgid "Operation"
+msgstr "العملية"
+
+#. module: contract_custom
+#: model:ir.model.fields,field_description:contract_custom.field_contract_contract__orders
+msgid "Orders"
+msgstr "اوامر البيع"
+
+#. module: contract_custom
+#: model:ir.model,name:contract_custom.model_place_place
+msgid "Places"
+msgstr "المكان"
+
+#. module: contract_custom
+#: model:ir.model.fields,field_description:contract_custom.field_contract_lines__product_id
+#: model:ir.model.fields,field_description:contract_custom.field_contract_update_line__product_id
+#: model:ir.model.fields,field_description:contract_custom.field_contract_update_wizard_line__product_id
+msgid "Product"
+msgstr "المنتج"
+
+#. module: contract_custom
+#: model:ir.model.fields,field_description:contract_custom.field_contract_contract__purchase_ids
+msgid "Purchase"
+msgstr ""
+
+#. module: contract_custom
+#: model:ir.model,name:contract_custom.model_purchase_order
+msgid "Purchase Order"
+msgstr "أمر شراء"
+
+#. module: contract_custom
+#: model:ir.model,name:contract_custom.model_purchase_order_line
+msgid "Purchase Order Line"
+msgstr "بند أمر الشراء"
+
+#. module: contract_custom
+#: model:ir.model.fields,field_description:contract_custom.field_contract_contract__purchased
+msgid "Purchased"
+msgstr ""
+
+#. module: contract_custom
+#: model:ir.model.fields,field_description:contract_custom.field_contract_contract__total_qty
+#: model:ir.model.fields,field_description:contract_custom.field_contract_lines__qty
+#: model:ir.model.fields,field_description:contract_custom.field_contract_update_line__qty
+#: model:ir.model.fields,field_description:contract_custom.field_contract_update_wizard_line__qty
+msgid "Quantity"
+msgstr "الكمية"
+
+#. module: contract_custom
+#: model:ir.model.fields,field_description:contract_custom.field_contract_lines__quantity_sent
+msgid "Quantity Sent"
+msgstr "الكمية المرسلة"
+
+#. module: contract_custom
+#: model:ir.model.fields,field_description:contract_custom.field_contract_lines__remaining_quantity
+msgid "Remaining Quantity"
+msgstr "الكمية المتبقية"
+
+#. module: contract_custom
+#: model_terms:ir.ui.view,arch_db:contract_custom.contract_view_form
+msgid "Reset To Confirmed"
+msgstr "اعادة الى الموافقة"
+
+#. module: contract_custom
+#: model_terms:ir.ui.view,arch_db:contract_custom.contract_view_form
+msgid "Reset To Draft"
+msgstr "اعادة الى مسودة"
+
+#. module: contract_custom
+#: model:ir.model.fields.selection,name:contract_custom.selection__contract_update__state__return
+#: model_terms:ir.ui.view,arch_db:contract_custom.contract_update_action_view_form
+msgid "Return"
+msgstr "اعادة تحديث"
+
+#. module: contract_custom
+#: model:ir.model.fields,field_description:contract_custom.field_contract_contract__sales
+#: model:ir.model.fields,field_description:contract_custom.field_contract_contract__sales_ids
+msgid "Sales"
+msgstr "المبيعات"
+
+#. module: contract_custom
+#: model:ir.model,name:contract_custom.model_sale_order
+msgid "Sales Order"
+msgstr "أمر البيع"
+
+#. module: contract_custom
+#: model:ir.model.fields,field_description:contract_custom.field_contract_contract__state
+msgid "State"
+msgstr "الحالة"
+
+#. module: contract_custom
+#: model:ir.model.fields,field_description:contract_custom.field_contract_update__state
+msgid "Status"
+msgstr "الحالة"
+
+#. module: contract_custom
+#: model:ir.model.fields,field_description:contract_custom.field_contract_contract__tax_number
+msgid "Tax Number"
+msgstr "الرقم الضريبى"
+
+#. module: contract_custom
+#: model:ir.model.fields,help:contract_custom.field_contract_contract__tax_number
+msgid ""
+"The Tax Identification Number. Values here will be validated based on the "
+"country format. You can use '/' to indicate that the partner is not subject "
+"to tax."
+msgstr ""
+
+#. module: contract_custom
+#: model:ir.model.fields,field_description:contract_custom.field_contract_contract__total_cost
+msgid "Total"
+msgstr "الاجمالى"
+
+#. module: contract_custom
+#: model:ir.model.fields,field_description:contract_custom.field_contract_contract__total_quantity_sent
+msgid "Total Quantity Sent"
+msgstr "إجمالى الكمية المرسلة"
+
+#. module: contract_custom
+#: model:ir.model.fields,field_description:contract_custom.field_contract_contract__total_remaining_quantity
+msgid "Total Remaining Quantity"
+msgstr "إجمالى الكمية المتبقة"
+
+#. module: contract_custom
+#: model:ir.model.fields,field_description:contract_custom.field_contract_contract__total_withdrawn_quantity
+msgid "Total Withdrawn Quantity"
+msgstr "إجمالى الكمية المسحوبة"
+
+#. module: contract_custom
+#: model:ir.model.fields,field_description:contract_custom.field_sale_order__total_qty
+msgid "Total qty"
+msgstr "الكمية الاجمالية"
+
+#. module: contract_custom
+#: model:ir.model.fields.selection,name:contract_custom.selection__contract_contract__contract_type__transfer
+msgid "Transfer"
+msgstr "نقل"
+
+#. module: contract_custom
+#: model_terms:ir.ui.view,arch_db:contract_custom.contract_view_form
+msgid "Transfer Contract"
+msgstr "عقد نقل"
+
+#. module: contract_custom
+#: model:ir.ui.menu,name:contract_custom.contract_menu_transfer
+msgid "Transfer Contracts"
+msgstr "بنود عقود نقل"
+
+#. module: contract_custom
+#: model:ir.model.fields,field_description:contract_custom.field_contract_update_line__price
+#: model:ir.model.fields,field_description:contract_custom.field_contract_update_wizard_line__price
+msgid "Unit Price"
+msgstr "السعر"
+
+#. module: contract_custom
+#: model:ir.model.fields,field_description:contract_custom.field_contract_lines__unloading_place
+#: model:ir.model.fields,field_description:contract_custom.field_contract_update_line__unloading_place
+#: model:ir.model.fields,field_description:contract_custom.field_contract_update_wizard_line__unloading_place
+msgid "Unloading Location"
+msgstr "مكان التفريغ"
+
+#. module: contract_custom
+#: model_terms:ir.ui.view,arch_db:contract_custom.contract_update_action_view_form
+msgid "Update"
+msgstr "اجراء ملحق"
+
+#. module: contract_custom
+#: model:ir.ui.menu,name:contract_custom.contract_update_action_menu
+msgid "Update Contracts"
+msgstr "ملحقات العقود"
+
+#. module: contract_custom
+#: model:ir.model.fields,field_description:contract_custom.field_contract_update_wizard__name
+msgid "Update Name"
+msgstr ""
+
+#. module: contract_custom
+#: model:ir.model.fields.selection,name:contract_custom.selection__contract_update__state__update
+msgid "Updated"
+msgstr "اجراء ملحق"
+
+#. module: contract_custom
+#: model:ir.model.fields,field_description:contract_custom.field_account_bank_statement_line__vehicle_id
+#: model:ir.model.fields,field_description:contract_custom.field_account_move__vehicle_id
+#: model:ir.model.fields,field_description:contract_custom.field_account_payment__vehicle_id
+msgid "Vehicle"
+msgstr "السيارة"
+
+#. module: contract_custom
+#: model:ir.model,name:contract_custom.model_vehicle_move
+msgid "Vehicle Moves"
+msgstr "حركة السيارات"
+
+#. module: contract_custom
+#. odoo-python
+#: code:addons/contract_custom/models/models.py:0
+#, python-format
+msgid "Vehicle Of Contract"
+msgstr "عقد سيارات"
+
+#. module: contract_custom
+#: model:ir.model.fields,field_description:contract_custom.field_contract_contract__vehicles
+msgid "Vehicles"
+msgstr "السيارات"
+
+#. module: contract_custom
+#. odoo-python
+#: code:addons/contract_custom/models/models.py:0
+#, python-format
+msgid "Vehicles Entry"
+msgstr "قيود السيارات"
+
+#. module: contract_custom
+#: model:ir.model.fields,field_description:contract_custom.field_contract_contract__vendor
+msgid "Vendor"
+msgstr "المورد"
+
+#. module: contract_custom
+#: model:ir.model.fields,field_description:contract_custom.field_contract_lines__withdrawn_quantity
+msgid "Withdrawn Quantity"
+msgstr "الكمية المسحوبة"
+
+#. module: contract_custom
+#: model:ir.actions.act_window,name:contract_custom.wizard_contract_update_action
+msgid "Wizard Contract Update"
+msgstr "إنشاء ملحق عقد عام"
+
+#. module: contract_custom
+#. odoo-python
+#: code:addons/contract_custom/models/models.py:0
+#, python-format
+msgid "You can not delete Contracts  which is not in draft state"
+msgstr "لا يمكنك حذف عقد تم الموافقة عليه بالفعل"
+
+#. module: contract_custom
+#: model:ir.model.fields,field_description:contract_custom.field_contract_lines__assigning_party
+msgid "assigning"
+msgstr "الجهة المسندة"
+
+#. module: contract_custom
+#: model:ir.model.fields,field_description:contract_custom.field_account_bank_statement_line__contract_id
+#: model:ir.model.fields,field_description:contract_custom.field_account_move__contract_id
+#: model:ir.model.fields,field_description:contract_custom.field_account_payment__contract_id
+#: model:ir.model.fields,field_description:contract_custom.field_vehicle_move__contract_id
+msgid "contract"
+msgstr "العقد"
+
+#. module: contract_custom
+#: model_terms:ir.ui.view,arch_db:contract_custom.res_config_settings_view_form_custom
+msgid "contract journal and accounts"
+msgstr ""
+
+#. module: contract_custom
+#: model_terms:ir.ui.view,arch_db:contract_custom.contract_update_action_view_form
+msgid "contract_update_action_form"
+msgstr ""
+
+#. module: contract_custom
+#: model_terms:ir.ui.view,arch_db:contract_custom.contract_update_view_tree
+msgid "contract_update_tree"
+msgstr ""
+
+#. module: contract_custom
+#: model:ir.model.fields,field_description:contract_custom.field_contract_lines__total_price
+msgid "cost"
+msgstr "التكلفة"
+
+#. module: contract_custom
+#: model_terms:ir.ui.view,arch_db:contract_custom.wizard_contract_update_action_view_form
+msgid "or"
+msgstr "او"
+
+#. module: contract_custom
+#: model_terms:ir.ui.view,arch_db:contract_custom.res_config_settings_view_form_custom
+msgid "set general contract journal and accounts"
+msgstr ""
+
+#. module: contract_custom
+#: model:ir.model.fields,field_description:contract_custom.field_place_place__name
+msgid "string"
+msgstr "الاسم"
+
+#. module: contract_custom
+#: model:ir.model.fields,field_description:contract_custom.field_contract_lines__price
+msgid "unit Price"
+msgstr "السعر"
+
+#. module: contract_custom
+#: model_terms:ir.ui.view,arch_db:contract_custom.wizard_contract_update_action_view_form
+msgid "wizard_contract_update_action_form"
+msgstr ""
+
+#. module: contract_custom
+#: model:ir.ui.menu,name:contract_custom.contract_menu_all
+msgid "ِAll Contracts"
+msgstr "جميع العقود"

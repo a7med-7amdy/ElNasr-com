@@ -1,0 +1,450 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* rw_vehicle_move
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 17.0+e\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2024-10-07 20:45+0000\n"
+"PO-Revision-Date: 2024-10-07 20:45+0000\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: rw_vehicle_move
+#. odoo-python
+#: code:addons/rw_vehicle_move/models/vehicle.py:0
+#, python-format
+msgid "All entries must have the same partner!"
+msgstr "لابد من تواجد نفس العميل / المورد بكل المدخلات "
+
+#. module: rw_vehicle_move
+#. odoo-python
+#: code:addons/rw_vehicle_move/models/vehicle.py:0
+#, python-format
+msgid ""
+"All selected records must have the same Contract. Please select one contract"
+" for all records."
+msgstr "يجب أن تحتوي كافة السجلات المحددة على نفس العقد. الرجاء اختيار عقد واحد"
+"لجميع السجلات"
+
+#. module: rw_vehicle_move
+#. odoo-python
+#: code:addons/rw_vehicle_move/models/vehicle.py:0
+#, python-format
+msgid ""
+"All selected records must have the same Partner. Please select one Partner "
+"for all records."
+msgstr "يجب أن يكون لجميع السجلات المحددة نفس الشريك. الرجاء اختيار شريك واحد "
+"لجميع السجلات"
+
+#. module: rw_vehicle_move
+#: model:ir.model.fields,field_description:rw_vehicle_move.field_fleet_vehicle__analytic_account_id
+msgid "Analytic Account"
+msgstr "مركز التكلفة "
+
+#. module: rw_vehicle_move
+#: model:ir.model,name:rw_vehicle_move.model_account_analytic_plan
+msgid "Analytic Plans"
+msgstr "الخطط التحليلية "
+
+#. module: rw_vehicle_move
+#: model:ir.model.fields.selection,name:rw_vehicle_move.selection__vehicle_move__state__confirmed
+#: model_terms:ir.ui.view,arch_db:rw_vehicle_move.view_fleet_vehicle_moves_form
+msgid "Confirm"
+msgstr "تأكيد "
+
+#. module: rw_vehicle_move
+#: model:ir.actions.server,name:rw_vehicle_move.vehicle_move_action_confirm
+msgid "Confirm (s)"
+msgstr "تأكيد"
+
+#. module: rw_vehicle_move
+#. odoo-python
+#: code:addons/rw_vehicle_move/models/vehicle.py:0
+#, python-format
+msgid "Contract Type should be general"
+msgstr "يجب ان يكون العقد عام "
+
+#. module: rw_vehicle_move
+#: model:ir.actions.server,name:rw_vehicle_move.create_generate_entries_for_vehicles
+msgid "Create Entry"
+msgstr "انشاء قيد يومية"
+
+#. module: rw_vehicle_move
+#: model_terms:ir.ui.view,arch_db:rw_vehicle_move.view_fleet_vehicle_moves_form
+msgid "Create Invoice"
+msgstr "انشاء فاتورة"
+
+#. module: rw_vehicle_move
+#: model:ir.actions.server,name:rw_vehicle_move.vehicle_move_action_create_invoice
+msgid "Create Invoice (s)"
+msgstr "انشاء فواتير "
+
+#. module: rw_vehicle_move
+#: model:ir.actions.server,name:rw_vehicle_move.create_quotation_for_vehicles
+msgid "Create Quotation"
+msgstr "انشاء امر بيع "
+
+#. module: rw_vehicle_move
+#: model:res.groups,name:rw_vehicle_move.group_create_vehicle_invoice
+msgid "Create Vehicle Invoice"
+msgstr "انشاء فاتوره للسيارة"
+
+#. module: rw_vehicle_move
+#: model_terms:ir.actions.act_window,help:rw_vehicle_move.action_fleet_vehicle_moves
+msgid "Create the first vehicle move"
+msgstr "انشاء اول حركة سيارة "
+
+#. module: rw_vehicle_move
+#: model:ir.model.fields,field_description:rw_vehicle_move.field_vehicle_move__create_uid
+#: model:ir.model.fields,field_description:rw_vehicle_move.field_vehicle_move_type__create_uid
+msgid "Created by"
+msgstr "انشئ بواسطة "
+
+#. module: rw_vehicle_move
+#: model:ir.model.fields,field_description:rw_vehicle_move.field_vehicle_move__create_date
+#: model:ir.model.fields,field_description:rw_vehicle_move.field_vehicle_move_type__create_date
+msgid "Created on"
+msgstr "انشئ في "
+
+#. module: rw_vehicle_move
+#: model:ir.model.fields,field_description:rw_vehicle_move.field_vehicle_move__date
+msgid "Date"
+msgstr "التاريخ"
+
+#. module: rw_vehicle_move
+#: model:ir.model.fields,field_description:rw_vehicle_move.field_vehicle_move__destination
+msgid "Destination"
+msgstr "جهة التفريغ"
+
+#. module: rw_vehicle_move
+#: model:ir.model.fields,field_description:rw_vehicle_move.field_vehicle_move__discharged_qty
+msgid "Discharged Quantity"
+msgstr "كمية التفريغ "
+
+#. module: rw_vehicle_move
+#: model:ir.model.fields,field_description:rw_vehicle_move.field_vehicle_move__partner_id
+msgid "Discharging"
+msgstr "جهة التفريغ "
+
+#. module: rw_vehicle_move
+#: model:ir.model.fields,field_description:rw_vehicle_move.field_vehicle_move__display_name
+#: model:ir.model.fields,field_description:rw_vehicle_move.field_vehicle_move_type__display_name
+msgid "Display Name"
+msgstr "الاسم"
+
+#. module: rw_vehicle_move
+#: model:ir.model.fields.selection,name:rw_vehicle_move.selection__vehicle_move__state__draft
+msgid "Draft"
+msgstr "مسودة "
+
+#. module: rw_vehicle_move
+#: model:ir.model.fields,field_description:rw_vehicle_move.field_vehicle_move__driver_id
+msgid "Driver"
+msgstr "السائق"
+
+#. module: rw_vehicle_move
+#: model_terms:ir.ui.view,arch_db:rw_vehicle_move.view_fleet_vehicle_moves_form
+msgid "Extra Data"
+msgstr "تاريخ اضافي"
+
+#. module: rw_vehicle_move
+#: model:ir.model.fields,field_description:rw_vehicle_move.field_vehicle_move__follower_id
+msgid "Follower"
+msgstr "التباع"
+
+#. module: rw_vehicle_move
+#: model:ir.model.fields,field_description:rw_vehicle_move.field_vehicle_move__id
+#: model:ir.model.fields,field_description:rw_vehicle_move.field_vehicle_move_type__id
+msgid "ID"
+msgstr "رقم تعريفي "
+
+#. module: rw_vehicle_move
+#: model:ir.model.fields,field_description:rw_vehicle_move.field_vehicle_move__invoice_id
+msgid "Invoice"
+msgstr "فاتورة"
+
+#. module: rw_vehicle_move
+#: model:ir.model.fields.selection,name:rw_vehicle_move.selection__vehicle_move__state__invoiced
+msgid "Invoiced"
+msgstr "مفوتر"
+
+#. module: rw_vehicle_move
+#: model:ir.model.fields,field_description:rw_vehicle_move.field_product_product__is_vehicle
+#: model:ir.model.fields,field_description:rw_vehicle_move.field_product_template__is_vehicle
+msgid "Is Vehicle"
+msgstr "هي مركبة"
+
+#. module: rw_vehicle_move
+#: model:ir.model.fields,field_description:rw_vehicle_move.field_vehicle_move__journal_id
+msgid "Journal"
+msgstr "دفتر اليومية"
+
+#. module: rw_vehicle_move
+#: model:ir.model,name:rw_vehicle_move.model_account_move
+msgid "Journal Entry"
+msgstr "قيد اليومية"
+
+#. module: rw_vehicle_move
+#: model:ir.model.fields,field_description:rw_vehicle_move.field_vehicle_move__write_uid
+#: model:ir.model.fields,field_description:rw_vehicle_move.field_vehicle_move_type__write_uid
+msgid "Last Updated by"
+msgstr "اخر تحديث بواسطة "
+
+#. module: rw_vehicle_move
+#: model:ir.model.fields,field_description:rw_vehicle_move.field_vehicle_move__write_date
+#: model:ir.model.fields,field_description:rw_vehicle_move.field_vehicle_move_type__write_date
+msgid "Last Updated on"
+msgstr "اخر تحديث في "
+
+#. module: rw_vehicle_move
+#: model:ir.model.fields,field_description:rw_vehicle_move.field_vehicle_move__lots_id
+msgid "Lots"
+msgstr "العملية "
+
+#. module: rw_vehicle_move
+#: model:ir.model.fields,field_description:rw_vehicle_move.field_vehicle_move__type_id
+msgid "Move Type"
+msgstr "نوع الحركة"
+
+#. module: rw_vehicle_move
+#: model:ir.model.fields,field_description:rw_vehicle_move.field_vehicle_move__name
+#: model:ir.model.fields,field_description:rw_vehicle_move.field_vehicle_move_type__name
+msgid "Name"
+msgstr "الاسم "
+
+#. module: rw_vehicle_move
+#. odoo-python
+#: code:addons/rw_vehicle_move/models/vehicle.py:0
+#: code:addons/rw_vehicle_move/models/vehicle.py:0
+#, python-format
+msgid "New"
+msgstr "جديد "
+
+#. module: rw_vehicle_move
+#: model:ir.model.fields,field_description:rw_vehicle_move.field_account_analytic_plan__no_delete
+msgid "No Delete"
+msgstr ""
+
+#. module: rw_vehicle_move
+#: model:ir.model.fields,field_description:rw_vehicle_move.field_vehicle_move__notes
+msgid "Notes"
+msgstr "ملاحظات "
+
+#. module: rw_vehicle_move
+#: model:ir.model.fields,field_description:rw_vehicle_move.field_vehicle_move__lot_id
+msgid "Operation"
+msgstr "العميلة "
+
+#. module: rw_vehicle_move
+#: model:ir.model.fields,field_description:rw_vehicle_move.field_vehicle_move__customer_share
+msgid "Partner"
+msgstr "حصة العميل "
+
+#. module: rw_vehicle_move
+#: model:ir.model.fields,field_description:rw_vehicle_move.field_vehicle_move__payment_state
+msgid "Payment Status"
+msgstr "حالة الدفعات "
+
+#. module: rw_vehicle_move
+#. odoo-python
+#: code:addons/rw_vehicle_move/models/vehicle.py:0
+#, python-format
+msgid "Please Choose Contract To Create Quotation"
+msgstr "الرجاء اختيار العقد لإنشاء عرض الأسعار"
+
+#. module: rw_vehicle_move
+#. odoo-python
+#: code:addons/rw_vehicle_move/models/vehicle.py:0
+#, python-format
+msgid "Please choose a contract first!"
+msgstr "الرجاء اختيار العقد اولا "
+
+#. module: rw_vehicle_move
+#. odoo-python
+#: code:addons/rw_vehicle_move/models/vehicle.py:0
+#, python-format
+msgid "Please set a receivable account for this contract!"
+msgstr "الرجاء تعيين الحساب لهذا العقد"
+
+#. module: rw_vehicle_move
+#. odoo-python
+#: code:addons/rw_vehicle_move/models/vehicle.py:0
+#, python-format
+msgid "Please set an income account for this contract!"
+msgstr "الرجاء تعيين الحساب لهذا العقد"
+
+#. module: rw_vehicle_move
+#. odoo-python
+#: code:addons/rw_vehicle_move/models/vehicle.py:0
+#, python-format
+msgid "Please set sales accounting journal!"
+msgstr "الرجاء تعيين دفتر اليومية "
+
+#. module: rw_vehicle_move
+#: model:ir.model.fields,field_description:rw_vehicle_move.field_vehicle_move__price
+msgid "Price"
+msgstr "السعر"
+
+#. module: rw_vehicle_move
+#: model:ir.model,name:rw_vehicle_move.model_product_template
+#: model:ir.model.fields,field_description:rw_vehicle_move.field_vehicle_move__service_id
+msgid "Product"
+msgstr "المنتج"
+
+#. module: rw_vehicle_move
+#: model:ir.model,name:rw_vehicle_move.model_product_product
+msgid "Product Variant"
+msgstr "متغير المنتج "
+
+#. module: rw_vehicle_move
+#: model:ir.model.fields,field_description:rw_vehicle_move.field_vehicle_move__loaded_qty
+msgid "Quantity"
+msgstr "الكمية"
+
+#. module: rw_vehicle_move
+#: model_terms:ir.ui.view,arch_db:rw_vehicle_move.view_fleet_vehicle_moves_form
+msgid "Reset To Draft"
+msgstr "اعادة تعين الي مسودة "
+
+#. module: rw_vehicle_move
+#: model_terms:ir.ui.view,arch_db:rw_vehicle_move.view_fleet_vehicle_moves_form
+msgid "Sale Data"
+msgstr "تاريخ البيع "
+
+#. module: rw_vehicle_move
+#: model:ir.model.fields,field_description:rw_vehicle_move.field_vehicle_move__sale_id
+msgid "Sale Order"
+msgstr "امر البيع "
+
+#. module: rw_vehicle_move
+#: model:ir.model,name:rw_vehicle_move.model_sale_order
+msgid "Sales Order"
+msgstr "أمر البيع"
+
+#. module: rw_vehicle_move
+#: model:ir.model.fields,field_description:rw_vehicle_move.field_fleet_vehicle__service_id
+msgid "Service"
+msgstr "المنتج"
+
+#. module: rw_vehicle_move
+#: model:ir.model.fields,field_description:rw_vehicle_move.field_vehicle_move__state
+msgid "State"
+msgstr "الحالة"
+
+#. module: rw_vehicle_move
+#. odoo-python
+#: code:addons/rw_vehicle_move/models/vehicle.py:0
+#, python-format
+msgid "There is no product in this contract like vehicle product!"
+msgstr "لا يوجد منتج في هذا العقد مثل منتج السيارة"
+
+#. module: rw_vehicle_move
+#: model:ir.model.fields,field_description:rw_vehicle_move.field_fleet_vehicle__trailer
+#: model:ir.model.fields,field_description:rw_vehicle_move.field_vehicle_move__trailer
+msgid "Trailer"
+msgstr "المقطورة"
+
+#. module: rw_vehicle_move
+#: model:ir.model.fields,field_description:rw_vehicle_move.field_vehicle_move__uom
+msgid "Unit of Measure"
+msgstr "الوحدة "
+
+#. module: rw_vehicle_move
+#: model:ir.model,name:rw_vehicle_move.model_fleet_vehicle
+#: model:ir.model.fields,field_description:rw_vehicle_move.field_vehicle_move__vehicle_id
+msgid "Vehicle"
+msgstr "السيارة"
+
+#. module: rw_vehicle_move
+#: model_terms:ir.ui.view,arch_db:rw_vehicle_move.view_fleet_vehicle_moves_form
+msgid "Vehicle Data"
+msgstr "تاريخ السيارة"
+
+#. module: rw_vehicle_move
+#: model:ir.model.fields,field_description:rw_vehicle_move.field_account_bank_statement_line__vehicle_move_ids
+#: model:ir.model.fields,field_description:rw_vehicle_move.field_account_move__vehicle_move_ids
+#: model:ir.model.fields,field_description:rw_vehicle_move.field_account_payment__vehicle_move_ids
+#: model:ir.model.fields,field_description:rw_vehicle_move.field_sale_order__vehicle_move_ids
+msgid "Vehicle Move"
+msgstr "حركة السيارات"
+
+#. module: rw_vehicle_move
+#. odoo-python
+#: code:addons/rw_vehicle_move/models/sale.py:0
+#: code:addons/rw_vehicle_move/models/sale.py:0
+#: model:ir.actions.act_window,name:rw_vehicle_move.action_fleet_vehicle_moves
+#: model:ir.model,name:rw_vehicle_move.model_vehicle_move
+#: model:ir.ui.menu,name:rw_vehicle_move.menu_fleet_vehicle_moves
+#: model:ir.ui.menu,name:rw_vehicle_move.menu_fleet_vehicle_moves_list
+#: model_terms:ir.ui.view,arch_db:rw_vehicle_move.view_fleet_vehicle_moves_form
+#: model_terms:ir.ui.view,arch_db:rw_vehicle_move.view_fleet_vehicle_moves_tree
+#: model_terms:ir.ui.view,arch_db:rw_vehicle_move.view_order_form_vehicle
+#, python-format
+msgid "Vehicle Moves"
+msgstr "حركات السيارات"
+
+#. module: rw_vehicle_move
+#: model:ir.model.fields,field_description:rw_vehicle_move.field_account_bank_statement_line__vehicle_move_count
+#: model:ir.model.fields,field_description:rw_vehicle_move.field_account_move__vehicle_move_count
+#: model:ir.model.fields,field_description:rw_vehicle_move.field_account_payment__vehicle_move_count
+#: model:ir.model.fields,field_description:rw_vehicle_move.field_sale_order__vehicle_move_count
+msgid "Vehicle Moves Count"
+msgstr "عدد حركات السيارات "
+
+#. module: rw_vehicle_move
+#: model:account.analytic.plan,name:rw_vehicle_move.vehicle_analytic_plan
+msgid "Vehicles"
+msgstr "السيارات"
+
+#. module: rw_vehicle_move
+#. odoo-python
+#: code:addons/rw_vehicle_move/models/vehicle.py:0
+#, python-format
+msgid "You Can Create Quotation For Confirmed Moves Only"
+msgstr "يمكنك إنشاء عرض أسعار للتحركات المؤكدة فقط"
+
+#. module: rw_vehicle_move
+#. odoo-python
+#: code:addons/rw_vehicle_move/models/vehicle.py:0
+#, python-format
+msgid "You Can Not Create Quotation For 2 Times For The Same Vehicle Move"
+msgstr "لا يمكنك إنشاء عرض أسعار لمرتين لنفس حركة السيارة"
+
+#. module: rw_vehicle_move
+#. odoo-python
+#: code:addons/rw_vehicle_move/models/vehicle.py:0
+#, python-format
+msgid "You can not delete This Record"
+msgstr "لا يمكنك حذف هذا السجل"
+
+#. module: rw_vehicle_move
+#. odoo-python
+#: code:addons/rw_vehicle_move/models/vehicle.py:0
+#, python-format
+msgid "You can not delete Vehicle Moves which is not in draft state"
+msgstr "لا يمكنك حذف تحركات السيارة التي ليست في حالة المسودة"
+
+#. module: rw_vehicle_move
+#: model:ir.model,name:rw_vehicle_move.model_vehicle_move_type
+msgid "vehicle.move.type"
+msgstr ""
+
+#. module: rw_vehicle_move
+#. odoo-python
+#: code:addons/rw_vehicle_move/models/vehicle.py:0
+#, python-format
+msgid "you should choose lot same as in contract lots"
+msgstr "يجب عليك اختيار العملية كما هو الحال في الكثير من العقود"
+
+#. module: rw_vehicle_move
+#. odoo-python
+#: code:addons/rw_vehicle_move/models/vehicle.py:0
+#, python-format
+msgid "you should choose service same as in contract products"
+msgstr "يجب عليك اختيار المنتجات نفسها كما هو الحال في المنتجات التعاقدية"
