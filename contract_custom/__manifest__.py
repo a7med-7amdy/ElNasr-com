@@ -8,7 +8,7 @@
     'category': 'Uncategorized',
     'version': '17.0.1.8',
     'license': 'LGPL-3',
-    'depends': ['base','contacts','sale_management','purchase_auto_lot_selection','stock','rw_vehicle_move'],
+    'depends': ['base','contacts','sale_management','purchase_auto_lot_selection','stock','rw_vehicle_move','account'],
     'data': [
         'security/ir.model.access.csv',
         'security/groups.xml',

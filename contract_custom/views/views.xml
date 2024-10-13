@@ -57,6 +57,9 @@
                                 groups="contract_custom.button_access_to_return_draft"
                                 invisible="state not in 'confirmed'"
                                 type="object"/>
+                         <button name="create_invoice" string="Create Invoice" class="btn-primary" data-hotkey="q"
+                                invisible="state not in 'confirmed'  or contract_type not in ('general')"
+                                type="object"/>
                         <field name="state" widget="statusbar"/>
 
                     </header>
@@ -92,6 +95,12 @@
                                     <span class="o_stat_text">Vehicle Move</span>
                                 </div>
                             </button>
+                            <button class="oe_stat_button" type="object"
+                                    name="action_open_invoice" icon="fa-book">
+                                <div class="o_stat_info">
+                                    <span class="o_stat_text">General Contract Invoices</span>
+                                </div>
+                            </button>
                         </div>
                         <group>
                             <group>
@@ -99,6 +108,7 @@
                                 <field name="purchase_ids" invisible="1"/>
                                 <field name="orders" widget="many2many_tags" readonly="1" invisible="1"/>
                                 <field name="vehicles" widget="many2many_tags" readonly="1" invisible="1"/>
+                                <field name="vehicles_entry" widget="many2many_tags" readonly="1" invisible="1"/>
                                 <field name="purchased" invisible="1"/>
                                 <field name="contract_type" widget="radio" readonly="state in ('confirmed')"/>
                                 <field name="vendor" invisible="contract_type != 'indirect'"
@@ -166,15 +176,19 @@
                                         <field name="lots_id" column_invisible="1"/>
                                         <field name="contract_type" column_invisible="1"/>
                                         <field name="product_id" optional="show"/>
+                                        <field name="lot_id" context="{ 'default_product_id': product_id }"/>
                                         <field name="qty" optional="show"/>
+                                        <field name="qty_entry_sent" column_invisible="1"/>
                                         <field name="name" column_invisible="1"/>
                                         <field name="price"/>
+                                        <field name="tax_id" widget="many2many_tags"/>
+                                        <field name="tax_unit_price" optional="show"/>
                                         <field name="withdrawn_quantity" optional="show"/>
                                         <field name="remaining_quantity" optional="show"/>
-                                        <field name="load_place"
-                                               optional="show"/>
+                                        <field name="load_place" optional="show"/>
                                         <field name="unloading_place" optional="show"/>
-                                        <field name="total_price"/>
+                                        <field name="taxed_total_price" string="Taxed Cost" optional="show"/>
+                                        <field name="total_price" optional="show" string="Untaxed Cost"/>
                                     </tree>
                                 </field>
                             </page>
@@ -198,6 +212,17 @@
                             :
                             <field name="total_cost"/>
                         </div>
+                        <div dir="rtl" invisible="contract_type not in 'general'">
+                            <strong>Tax Totals</strong>
+                            :
+                            <field name="total_taxes"/>
+                        </div>
+                        <div dir="rtl" invisible="contract_type not in 'general'">
+                            <strong>Amount With Tax</strong>
+                            :
+                            <field name="total_amount_with_tax"/>
+                        </div>
+
                     </sheet>
                 </form>
             </field>

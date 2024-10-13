@@ -45,6 +45,9 @@ class FleetVehicleMoves(models.Model):
         comodel_name='fleet.vehicle',domain=[('trailer', '=', True)],
         string='Trailer',
         required=False)
+    has_entry  = fields.Boolean(
+        string='Has Entry',
+        required=False)
 
     def unlink(self):
         for rec in self:
@@ -68,7 +71,7 @@ class FleetVehicleMoves(models.Model):
         string='State',
         selection=[('draft', 'Draft'),
                    ('confirmed', 'Confirm'),
-                   ('invoiced', 'Invoiced'),
+                   ('invoiced', 'Invoiced'), ('done', 'Done'),
                    ], default='draft', readonly=True
     )
     journal_id = fields.Many2one('account.journal', string="Journal")
@@ -106,8 +109,6 @@ class FleetVehicleMoves(models.Model):
                 rec.state = 'invoiced'
 
     def generate_entries(self):
-        # journal_pool = self.env['account.journal']
-        # journal = journal_pool.search([('type', '=', 'general')], limit=1)
         journal = self.env.company.journal_id
         if not journal:
             raise UserError(_('Please set sales accounting journal!'))
@@ -126,7 +127,7 @@ class FleetVehicleMoves(models.Model):
                 raise UserError(_('Contract Type should be general'))
 
             debit = self.env.company.debit_account
-            credit = self.env.companycredit_account
+            credit = self.env.company.credit_account
             entry = rec.vehicle_id.analytic_account_id
 
             if not debit:
@@ -148,7 +149,7 @@ class FleetVehicleMoves(models.Model):
             elif partner_id != rec.partner_id.id:
                 raise UserError(_('All entries must have the same partner!'))
 
-        account_move_obj.create({
+        entry = account_move_obj.create({
             'ref': "Vehicle Entry",
             'journal_id': journal.id,
             'vehicle_id': self[0].id,
@@ -171,6 +172,8 @@ class FleetVehicleMoves(models.Model):
                 })
             ]
         })
+        if entry:
+            rec.has_entry = True
 
 
 

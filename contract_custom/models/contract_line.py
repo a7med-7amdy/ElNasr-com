@@ -67,6 +67,48 @@ class ContractLines(models.Model):
         comodel_name='assign.assign',
         string='assigning',
         required=False)
+    tax_id = fields.Many2many(
+        comodel_name='account.tax',
+        string="Taxes",
+        store=True, readonly=False, precompute=True,)
+    taxed_total_price = fields.Float(
+        string='taxed Cost',compute='calculate_taxed_total_price',
+        required=False)
+    tax_unit_price  = fields.Float(compute='calculate_taxed_total_price',
+        string='Tax Price',
+        required=False)
+    total_amount_with_tax  = fields.Float(
+        string='', 
+        required=False)
+    taxed_total_amount  = fields.Float(
+        string='', compute='calculate_taxed_total_price',
+        required=False)
+
+    qty_entry_sent = fields.Float(
+        string='Qty Entry', compute='get_total_qty_per_product_sent',
+        required=False)
+
+    def get_total_qty_per_product_sent(self):
+        for line in self:
+            total_sent_quantity = 0.0
+            vehicles = line.contract_ids.vehicles_entry
+            if vehicles:
+                for vehicle in vehicles:
+                    if vehicle.service_id == line.product_id and vehicle.lot_id == line.lot_id and vehicle.has_entry == True and vehicle.state == 'confirmed':
+                        total_sent_quantity += vehicle.loaded_qty
+            line.qty_entry_sent = total_sent_quantity
+
+    def calculate_taxed_total_price(self):
+        for rec in self:
+            total_taxes_amount = 0
+            for tax in rec.tax_id:
+                total_taxes_amount += (tax.amount / 100)
+            rec.tax_unit_price = rec.price * total_taxes_amount + rec.price
+            rec.taxed_total_price = rec.tax_unit_price * rec.qty
+            rec.taxed_total_amount = total_taxes_amount * rec.price
+
+
+
 
 
 
@@ -115,7 +157,7 @@ class ContractLines(models.Model):
                 vehicles = line.contract_ids.vehicles
                 if vehicles:
                     for vehicle in vehicles:
-                        if vehicle.partner_id == line.contract_ids.customer and vehicle.service_id == line.product_id:
+                        if vehicle.partner_id == line.contract_ids.customer and vehicle.service_id == line.product_id and vehicle.lot_id == line.lot_id:
                             qty = vehicle.loaded_qty
                             total_withdrawn_quantity += qty
                 line.withdrawn_quantity = total_withdrawn_quantity
@@ -126,16 +168,17 @@ class ContractLines(models.Model):
             vehicles = line.contract_ids.vehicles
             if vehicles:
                 for vehicle in vehicles:
-                    if vehicle.partner_id == line.contract_ids.customer and vehicle.service_id == line.product_id:
+                    if vehicle.service_id == line.product_id:
                         total_sent_quantity += vehicle.loaded_qty
             line.quantity_sent = total_sent_quantity
+
 
 
 
     @api.depends('purchase_ids')
     def _compute_orders_number(self):
         for requisition in self:
-            requisition.order_count = len(requisition.purchase_ids)
+            requisition.qty_entry_sent = len(requisition.purchase_ids)
 
 
 

@@ -33,14 +33,14 @@
                                 invisible="invoice_id or state!='confirmed'"/>
                         <field name="state" widget="statusbar" statusbar_visible="draft,confirmed,invoiced"/>
                     </header>
-                    <sheet>
+                    <sheet readonly="state in ('done')">
 
                         <h1>
                             <field name="name" readonly="1"/>
 
                         </h1>
-                        <group col="3">
-                            <group string="Vehicle Data">
+                        <group col="3" >
+                            <group string="Vehicle Data" >
                                 <field name="type_id" readonly="state!='draft'"/>
                                 <field name="date" readonly="state!='draft'"/>
                                 <field name="vehicle_id" readonly="state!='draft'"/>
@@ -50,8 +50,8 @@
                             </group>
                             <group string="Sale Data">
                                 <field name="sale_id" readonly="state!='draft'"/>
-                                <field name="partner_id"/>
-                                <field name="customer_share" readonly="state!='draft'"/>
+                                <field name="partner_id" readonly="state!='draft' or state in ('done')"/>
+                                <field name="customer_share" readonly="state!='draft' or state in ('done')"/>
                                 <field name="service_id" readonly="state!='draft'"/>
                                 <field name="uom" readonly="state!='draft'"/>
                                 <field name="loaded_qty" readonly="state!='draft'"/>
@@ -79,7 +79,7 @@
             <field name="name">vehicle.move.tree</field>
             <field name="model">vehicle.move</field>
             <field name="arch" type="xml">
-                <tree string="Vehicle Moves" editable="top">
+                <tree string="Vehicle Moves" editable="top" >
                     <field name="name" readonly="1"/>
                     <field name="type_id" readonly="state!='draft'"/>
                     <field name="date" readonly="state!='draft'"/>
@@ -92,11 +92,12 @@
                     <field name="service_id" readonly="state!='draft'"/>
                     <field name="lot_id" readonly="state!='draft'" context="{'default_product_id': service_id }"/>
                     <field name="loaded_qty" readonly="state!='draft'"/>
-                    <field name="partner_id"/>
+                    <field name="partner_id"  readonly="state!='draft'"/>
                     <field name="lots_id" column_invisible="1"/>
                     <field name="uom" readonly="state!='draft'" column_invisible="1"/>
                     <field name="discharged_qty" readonly="state!='draft'" column_invisible="1"/>
                     <field name="state" readonly="1"/>
+                    <field name="has_entry" column_invisible="1"/>
                     <field name="sale_id" readonly="state!='draft'"/>
                     <field name="invoice_id" optional="show" readonly="state!='draft'"/>
                     <field name="payment_state" optional="show" readonly="state!='draft'" column_invisible="1"/>
