@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+from collections import defaultdict
 
 from odoo import models, fields, api, _
 from odoo.exceptions import UserError
@@ -27,7 +28,7 @@ class FleetVehicleMoves(models.Model):
     loaded_qty = fields.Float(string='Quantity', default=1)
     discharged_qty = fields.Float(string='Discharged Quantity', default=1)
 
-    price = fields.Float(string='Price')
+    # price = fields.Float(string='Price',default=1)
     uom = fields.Many2one('uom.uom', string='Unit of Measure')
     destination = fields.Char(string='Destination')
     notes = fields.Char(string='Notes')
@@ -48,6 +49,7 @@ class FleetVehicleMoves(models.Model):
     has_entry  = fields.Boolean(
         string='Has Entry',
         required=False)
+
 
     def unlink(self):
         for rec in self:
@@ -71,7 +73,7 @@ class FleetVehicleMoves(models.Model):
         string='State',
         selection=[('draft', 'Draft'),
                    ('confirmed', 'Confirm'),
-                   ('invoiced', 'Invoiced'), ('done', 'Done'),
+                   ('invoiced', 'Invoiced'),('entry', 'Entry'), ('done', 'Done'),
                    ], default='draft', readonly=True
     )
     journal_id = fields.Many2one('account.journal', string="Journal")
@@ -88,6 +90,8 @@ class FleetVehicleMoves(models.Model):
                 raise models.ValidationError("Please Confirm Vehicle Move First !!", rec.name)
             elif rec.sale_id:
                 raise models.ValidationError("There Are Quotations So You Can Not Create Invoices !!")
+            analytic_account = rec.vehicle_id.analytic_account_id
+            analytic_account_trailer = rec.trailer.analytic_account_id
             if not rec.invoice_id:
                 invoice_vals = {
                     'partner_id': rec.partner_id.id,
@@ -98,8 +102,13 @@ class FleetVehicleMoves(models.Model):
                         'name': rec.service_id.name,
                         'product_id': rec.service_id.id,
                         'quantity': rec.loaded_qty,
-                        'price_unit': 0.0,
-                        'analytic_distribution': {rec.vehicle_id.analytic_account_id.id: 100},
+                        'price_unit': 1,
+                        'analytic_distribution': {
+                            analytic_account.id: 100,  # 50% to the vehicle analytic account
+                            analytic_account_trailer.id: 0  # 50% to the trailer analytic account
+                        } if analytic_account and analytic_account_trailer else
+                        {analytic_account.id: 100} if analytic_account else
+                        {analytic_account_trailer.id: 100} if analytic_account_trailer else {},
 
                     })],
                 }
@@ -108,6 +117,45 @@ class FleetVehicleMoves(models.Model):
                 rec.invoice_id = invoice.id
                 rec.state = 'invoiced'
 
+    def create_entry_invoice(self):
+        grouped_lines = defaultdict(lambda: {'quantity': 0, 'vehicles': []})
+
+        for rec in self:
+            if rec.state != 'entry':
+                raise models.ValidationError("Please Entry Vehicle Move First !!")
+
+            key = (rec.service_id.id, rec.lot_id.id, rec.price)
+            grouped_lines[key]['quantity'] += rec.loaded_qty
+            grouped_lines[key]['vehicles'].append(rec)
+
+        # if self and not self[0].invoice_id:
+        invoice_vals = {
+            'partner_id': self[0].partner_id.id,
+            'invoice_date': self[0].date,
+            'ref': ', '.join([rec.name for rec in self if isinstance(rec.name, str)]),
+            'move_type': 'out_invoice',
+            'contract_id': rec.contract_id.id,
+            'invoice_line_ids': [],
+        }
+
+
+        for (product_id, lot_id, price), line_data in grouped_lines.items():
+            invoice_line_vals = {
+                'name': line_data['vehicles'][0].service_id.name,
+                'product_id': product_id,
+                'quantity': line_data['quantity'],
+                'price_unit': price,
+            }
+            invoice_vals['invoice_line_ids'].append((0, 0, invoice_line_vals))
+
+        # Create the invoice
+        invoice = self.env['account.move'].create(invoice_vals)
+
+        # Link the invoice to all grouped records and update their state
+        for rec in self:
+            rec.invoice_id = invoice.id
+            rec.state = 'done'
+
     def generate_entries(self):
         journal = self.env.company.journal_id
         if not journal:
@@ -115,67 +163,77 @@ class FleetVehicleMoves(models.Model):
 
         account_move_obj = self.env['account.move']
 
-        total_debit = 0.0
-        total_credit = 0.0
-        partner_id = False
-
         for rec in self:
             contract = rec.contract_id
             if not contract:
                 raise UserError(_('Please choose a contract first!'))
             if contract.contract_type != 'general':
                 raise UserError(_('Contract Type should be general'))
+            if rec.state != 'confirmed':
+                raise UserError(_('Contract State should be Confirmed'))
 
-            debit = self.env.company.debit_account
-            credit = self.env.company.credit_account
-            entry = rec.vehicle_id.analytic_account_id
+            debit_account = self.env.company.debit_account
+            credit_account = self.env.company.credit_account
+            analytic_account = rec.vehicle_id.analytic_account_id
+            analytic_account_trailer = rec.trailer.analytic_account_id
 
-            if not debit:
+            if not debit_account:
                 raise UserError(_('Please set a receivable account for this contract!'))
-            if not credit:
+            if not credit_account:
                 raise UserError(_('Please set an income account for this contract!'))
 
-            matching_line = contract.contract_lines.filtered(lambda r: r.product_id == rec.service_id)
-            if not matching_line:
-                raise UserError(_('There is no product in this contract like vehicle product!'))
-            price = matching_line[0].price
-            total_line_cost = rec.loaded_qty * price
+            # Ensure the price is computed
+            if not rec.price:
+                rec.get_price()
 
-            total_debit += total_line_cost
-            total_credit += total_line_cost
+            # Calculate the total line cost
+            total_line_cost = rec.loaded_qty * rec.price
 
+            if total_line_cost <= 0:
+                raise UserError(_('The total line cost should be greater than zero.'))
+
+            partner_id = rec.partner_id.id
             if not partner_id:
-                partner_id = rec.partner_id.id
-            elif partner_id != rec.partner_id.id:
-                raise UserError(_('All entries must have the same partner!'))
+                raise UserError(_('Please set a partner for this entry!'))
 
-        entry = account_move_obj.create({
-            'ref': "Vehicle Entry",
-            'journal_id': journal.id,
-            'vehicle_id': self[0].id,
-            'contract_id': self[0].contract_id.id,
-            'line_ids': [
-                (0, 0, {
-                    'name': 'Vehicle Service',
-                    'partner_id': partner_id,
-                    'account_id': debit.id,  # Single debit line
-                    'debit': total_debit,
-                    'analytic_distribution': {entry.id: 100},
-                    'credit': 0.0,
-                }),
-                (0, 0, {
-                    'name': 'Vehicle Service',
-                    'partner_id': partner_id,
-                    'account_id': credit.id,  # Single credit line
-                    'debit': 0.0,
-                    'credit': total_credit,
-                })
-            ]
-        })
-        if entry:
-            rec.has_entry = True
+            # Create the account move (journal entry)
+            entry = account_move_obj.create({
+                'ref': "Vehicle Entry",
+                'journal_id': journal.id,
+                'vehicle_id': rec.id,
+                'contract_id': contract.id,
+                'line_ids': [
+                    (0, 0, {
+                        'name': 'Vehicle Service',
+                        'qty': rec.loaded_qty,
+                        'price': rec.price if rec.price else 1,
+                        'vehicle_entry': True,
+                        'partner_id': partner_id,
+                        'account_id': debit_account.id,  # Debit line
+                        'debit': total_line_cost,
+                        'analytic_distribution': {
+                            analytic_account.id: 100,  # 50% to the vehicle analytic account
+                            analytic_account_trailer.id: 0  # 50% to the trailer analytic account
+                        } if analytic_account and analytic_account_trailer else
+                        {analytic_account.id: 100} if analytic_account else
+                        {analytic_account_trailer.id: 100} if analytic_account_trailer else {},
+                        'credit': 0.0,
+                    }),
+                    (0, 0, {
+                        'name': 'Vehicle Service',
+                        'qty': rec.loaded_qty,
+                        'price': rec.price if rec.price else 1,
+                        'vehicle_entry': True,
+                        'partner_id': partner_id,
+                        'account_id': credit_account.id,  # Credit line
+                        'debit': 0.0,
+                        'credit': total_line_cost,
+                    })
+                ]
+            })
 
-
+            # Mark the state as 'entry' after the entry is created
+            rec.state = 'entry'
 
     @api.constrains('service_id')
     def service_per_contract(self):
@@ -221,6 +279,8 @@ class FleetVehicleMoves(models.Model):
 
         first_contract = self[0].contract_id
         first_partner = self[0].partner_id
+        analytic_account = rec.vehicle_id.analytic_account_id
+        analytic_account_trailer = rec.trailer.analytic_account_id
 
         for rec in self:
             if rec.contract_id != first_contract:
@@ -233,8 +293,14 @@ class FleetVehicleMoves(models.Model):
             order_lines = [(0, 0, {
                 'product_id': rec.service_id.id,
                 'lot_id': rec.lot_id.id,
-                'analytic_distribution': {rec.vehicle_id.analytic_account_id.id: 100},
+                'analytic_distribution': {
+                            analytic_account.id: 100,  # 50% to the vehicle analytic account
+                            analytic_account_trailer.id: 0  # 50% to the trailer analytic account
+                        } if analytic_account and analytic_account_trailer else
+                        {analytic_account.id: 100} if analytic_account else
+                        {analytic_account_trailer.id: 100} if analytic_account_trailer else {},
                 'product_uom_qty': rec.loaded_qty,
+                'price_unit': rec.price,
             })]
 
             so = self.env['sale.order'].create({
@@ -255,11 +321,11 @@ class FleetVehicleMoves(models.Model):
             self.driver_id = self.vehicle_id.driver_id.id
             self.service_id = self.vehicle_id.service_id.id
 
-    @api.onchange('service_id')
-    def service_changed(self):
-        if self.service_id:
-            self.price = self.service_id.lst_price
-            self.uom = self.service_id.uom_id.id
+    # @api.onchange('service_id')
+    # def service_changed(self):
+    #     if self.service_id:
+    #         # self.price = self.service_id.lst_price
+    #         self.uom = self.service_id.uom_id.id
 
 
 class FleetVehicle(models.Model):

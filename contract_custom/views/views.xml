@@ -57,9 +57,9 @@
                                 groups="contract_custom.button_access_to_return_draft"
                                 invisible="state not in 'confirmed'"
                                 type="object"/>
-                         <button name="create_invoice" string="Create Invoice" class="btn-primary" data-hotkey="q"
-                                invisible="state not in 'confirmed'  or contract_type not in ('general')"
-                                type="object"/>
+<!--                         <button name="create_invoice" string="Create Invoice" class="btn-primary" data-hotkey="q"-->
+<!--                                invisible="state not in 'confirmed'  or contract_type not in ('general')"-->
+<!--                                type="object"/>-->
                         <field name="state" widget="statusbar"/>
 
                     </header>
@@ -71,7 +71,7 @@
                                     <span class="o_stat_text">Purchase Order</span>
                                 </div>
                             </button>
-                            <button class="oe_stat_button" type="object"
+                            <button class="oe_stat_button" type="object" invisible="contract_type in ('general')"
                                     name="open_sales_order" icon="fa-book">
                                 <div class="o_stat_info">
                                     <span class="o_stat_text">Sales Order</span>
@@ -95,7 +95,7 @@
                                     <span class="o_stat_text">Vehicle Move</span>
                                 </div>
                             </button>
-                            <button class="oe_stat_button" type="object"
+                            <button class="oe_stat_button" type="object" invisible=" contract_type not in ('general')"
                                     name="action_open_invoice" icon="fa-book">
                                 <div class="o_stat_info">
                                     <span class="o_stat_text">General Contract Invoices</span>

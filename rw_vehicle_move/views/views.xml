@@ -57,7 +57,6 @@
                                 <field name="loaded_qty" readonly="state!='draft'"/>
                                 <field name="discharged_qty" readonly="state!='draft'"/>
 
-                                <field name="price" invisible="1"/>
                             </group>
                             <group string="Extra Data">
                                 <field name="destination" readonly="state!='draft'"/>
@@ -79,7 +78,7 @@
             <field name="name">vehicle.move.tree</field>
             <field name="model">vehicle.move</field>
             <field name="arch" type="xml">
-                <tree string="Vehicle Moves" editable="top" >
+                <tree string="Vehicle Moves" editable="top" open_form_view="True">
                     <field name="name" readonly="1"/>
                     <field name="type_id" readonly="state!='draft'"/>
                     <field name="date" readonly="state!='draft'"/>
@@ -96,12 +95,12 @@
                     <field name="lots_id" column_invisible="1"/>
                     <field name="uom" readonly="state!='draft'" column_invisible="1"/>
                     <field name="discharged_qty" readonly="state!='draft'" column_invisible="1"/>
-                    <field name="state" readonly="1"/>
+                    <field name="state" readonly="0"/>
                     <field name="has_entry" column_invisible="1"/>
                     <field name="sale_id" readonly="state!='draft'"/>
                     <field name="invoice_id" optional="show" readonly="state!='draft'"/>
                     <field name="payment_state" optional="show" readonly="state!='draft'" column_invisible="1"/>
-                    <field name="notes" optional="show" readonly="state!='draft'" column_invisible="1"/>
+                    <field name="notes" optional="show" readonly="state!='draft'" column_invisible="0"/>
                 </tree>
             </field>
         </record>
@@ -133,6 +132,16 @@
             <field name="code">
                 if records:
                 action = records.generate_entries()
+            </field>
+        </record>
+        <record model="ir.actions.server" id="create_generate_invoices_for_entries">
+            <field name="name">Create Invoice Entry</field>
+            <field name="model_id" ref="model_vehicle_move"/>
+            <field name="binding_model_id" ref="model_vehicle_move"/>
+            <field name="state">code</field>
+            <field name="code">
+                if records:
+                action = records.create_entry_invoice()
             </field>
         </record>
 

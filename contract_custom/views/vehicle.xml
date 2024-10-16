@@ -10,6 +10,7 @@
 
                 <xpath expr="//field[@name='notes']" position="after">
                     <field name="contract_id" optional="show"/>
+                    <field name="price" column_invisible="0"/>
                 </xpath>
             </field>
         </record>

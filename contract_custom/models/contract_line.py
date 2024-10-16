@@ -8,7 +8,7 @@ class ContractLines(models.Model):
 
     name = fields.Char()
     product_id = fields.Many2one(
-        comodel_name='product.product',
+        comodel_name='product.product',domain=[('is_vehicle', '=', True)],
         string='',
         required=False)
     contract_start_date = fields.Date(
@@ -94,7 +94,7 @@ class ContractLines(models.Model):
             vehicles = line.contract_ids.vehicles_entry
             if vehicles:
                 for vehicle in vehicles:
-                    if vehicle.service_id == line.product_id and vehicle.lot_id == line.lot_id and vehicle.has_entry == True and vehicle.state == 'confirmed':
+                    if vehicle.service_id == line.product_id and vehicle.lot_id == line.lot_id:
                         total_sent_quantity += vehicle.loaded_qty
             line.qty_entry_sent = total_sent_quantity
 

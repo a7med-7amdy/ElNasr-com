@@ -102,41 +102,42 @@ class ContractsCustom(models.Model):
         string='Tax Totals', compute='_compute_total_cost',
         required=False)
 
-    def create_invoice(self):
-        today = fields.Datetime.now()
-        for rec in self:
-            if rec.state != 'confirmed':
-                raise models.ValidationError("Please Confirm Contract First !!", rec.name)
-            elif not rec.vehicles_entry:
-                raise models.ValidationError("There Are Not Entries So You Can Not Create Invoices !!")
-            if not rec.contract_lines:
-                raise models.ValidationError("There Are Not Products So You Can Not Create Invoices !!")
-            else:
-                # Prepare all invoice lines in a list
-                invoice_lines = []
-                for line in rec.contract_lines:
-                    invoice_line_vals = {
-                        'name': line.product_id.name,
-                        'product_id': line.product_id.id,
-                        'quantity': line.qty_entry_sent,
-                        'price_unit': line.price,
-                        # Add any additional fields as needed
-                    }
-                    invoice_lines.append((0, 0, invoice_line_vals))
-
-                # Create a single invoice with all the lines
-                invoice_vals = {
-                    'partner_id': rec.customer.id,
-                    'invoice_date': today,
-                    'contract_id': rec.id,
-                    'ref': rec.name,
-                    'move_type': 'out_invoice',
-                    'invoice_line_ids': invoice_lines,  # Add all invoice lines here
-                }
-
-                invoice = self.env['account.move'].create(invoice_vals)
-                for vehicle in rec.vehicles_entry:
-                    vehicle.state='done'
+    # def create_invoice(self):
+    #     today = fields.Datetime.now()
+    #     for rec in self:
+    #         if rec.state != 'confirmed':
+    #             raise models.ValidationError("Please Confirm Contract First !!", rec.name)
+    #         elif not rec.vehicles_entry:
+    #             raise models.ValidationError("There Are Not Entries So You Can Not Create Invoices !!")
+    #         if not rec.contract_lines:
+    #             raise models.ValidationError("There Are Not Products So You Can Not Create Invoices !!")
+    #         else:
+    #             # Prepare all invoice lines in a list
+    #             invoice_lines = []
+    #             for line in rec.contract_lines:
+    #                 invoice_line_vals = {
+    #                     'name': line.product_id.name,
+    #                     'product_id': line.product_id.id,
+    #                     'quantity': line.qty_entry_sent,
+    #                     'price_unit': line.price,
+    #                     'tax_ids': line.tax_id.ids,
+    #                     # Add any additional fields as needed
+    #                 }
+    #                 invoice_lines.append((0, 0, invoice_line_vals))
+    #
+    #             # Create a single invoice with all the lines
+    #             invoice_vals = {
+    #                 'partner_id': rec.customer.id,
+    #                 'invoice_date': today,
+    #                 'contract_id': rec.id,
+    #                 'ref': rec.name,
+    #                 'move_type': 'out_invoice',
+    #                 'invoice_line_ids': invoice_lines,  # Add all invoice lines here
+    #             }
+    #
+    #             invoice = self.env['account.move'].create(invoice_vals)
+    #             for vehicle in rec.vehicles_entry:
+    #                 vehicle.state='done'
 
     def unlink(self):
         for rec in self:
@@ -191,7 +192,7 @@ class ContractsCustom(models.Model):
         self.vehicles = vehicles.ids
     
     def get_qty_vehicles_entry(self):
-        vehicles_ids = self.env['vehicle.move'].search([('contract_id','=',self.id),('has_entry','=',True)])
+        vehicles_ids = self.env['vehicle.move'].search([('contract_id','=',self.id),('state','=','entry')])
         self.vehicles_entry = vehicles_ids.ids
 
 
@@ -258,7 +259,7 @@ class ContractsCustom(models.Model):
     def open_vehicles_entry(self):
         return {
             'name': _('Vehicles Entry'),
-            'domain': [('contract_id', '=', self.id)],
+            'domain': [('contract_id', '=', self.id),('move_type', '=', 'entry')],
             'view_type': 'form',
             'view_mode': 'tree,form',
             'res_model': 'account.move',
@@ -363,6 +364,17 @@ class FleetVehicleMovesCustom(models.Model):
     _inherit = 'vehicle.move'
 
     contract_id = fields.Many2one(comodel_name='contract.contract', string="contract", domain=[('state', '=', 'confirmed')])
+    price = fields.Float(compute='get_price',default=1,
+                         string='Price',
+                         required=False)
+
+    def get_price(self):
+        for rec in self:
+            if rec.contract_id:  # Corrected the typo here
+                rec.price = rec.contract_id.contract_lines.filtered(
+                    lambda r: r.product_id == rec.service_id and r.lot_id == rec.lot_id).price
+            else:
+                rec.price = 1
 
 
 class AccountMoveCustom(models.Model):

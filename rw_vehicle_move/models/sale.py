@@ -1,6 +1,8 @@
 # -*- coding: utf-8 -*-
 
 from odoo import models, fields,api,_
+ 
+
 
 
 
@@ -42,6 +44,9 @@ class AccountMove(models.Model):
         string='Vehicle Moves Count',
         compute='get_vehicle_move_count')
 
+
+
+
     @api.depends('vehicle_move_ids')
     def get_vehicle_move_count(self):
         for rec in self:
@@ -64,5 +69,21 @@ class AccountMove(models.Model):
                 'res_id': self.vehicle_move_ids.id
             })
         return action
+
+class AccountLineCustom(models.Model):
+    _inherit = 'account.move.line'
+
+
+
+    qty = fields.Float(
+        string='QTY',
+        required=False)
+    price = fields.Float(
+        string='Price',
+        required=False)
+    vehicle_entry = fields.Boolean(default = False,
+        string='Vehicle Entry',
+        required=False)
+
 
 
