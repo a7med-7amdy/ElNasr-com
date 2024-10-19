@@ -26,13 +26,17 @@
             <field name="model">account.move</field>
             <field name="inherit_id" ref="account.view_move_form"/>
             <field name="arch" type="xml">
-                <xpath expr="//field[@name='ref']" position="after">
-                    <!-- <field name="vehicle_entry" invisible="1"/> -->
-                </xpath>
+
                 <xpath expr="//field[@name='line_ids']//field[@name='account_id']" position="after">
                     <field name="vehicle_entry" column_invisible="1"/>
                     <field name="qty" attrs="{'invisible': [('vehicle_entry', '=', False)]}"/>
                     <field name="price" attrs="{'invisible': [('vehicle_entry', '=', False)]}"/>
+                </xpath>
+                <xpath expr="//div[hasclass('o_col')]" position="after">
+                    <label for="ref" string="Reference"
+                           invisible="move_type not in ('out_invoice', 'in_receipt', 'in_refund')"/>
+                    <field name="ref" nolabel="1"
+                           invisible="move_type not in ('out_invoice', 'in_receipt', 'in_refund')"/>
                 </xpath>
             </field>
         </record>

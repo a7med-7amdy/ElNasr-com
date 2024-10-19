@@ -86,7 +86,7 @@ class PurchaseRequisitionLine(models.Model):
     qty_to_notify= fields.Float(string='Alert Qty', )
     date_to_notify= fields.Date(string="Alert Date")
 
-    lot_id = fields.Many2one('stock.lot', string='Lot',
+    lot_id = fields.Many2one('stock.lot', string='Operation',
                                domain="[('product_id','=', product_id)]",
                                help='Lot from which the product will be sold')
 

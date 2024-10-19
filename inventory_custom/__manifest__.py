@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 {
-    'name': "rw_vehicle_move",
+    'name': "inventory_custom",
 
     'summary': "Short (1 phrase/line) summary of the module's purpose",
 
@@ -18,20 +18,17 @@ Long description of module's purpose
     'version': '0.1',
 
     # any module necessary for this one to work correctly
-    'depends': ['base','fleet','sale_management','account','product','sale_auto_lot_selection'],
+    'depends': ['base','product','stock_account'],
 
     # always loaded
     'data': [
-        'security/ir.model.access.csv',
-        'views/groups.xml',
+        # 'security/ir.model.access.csv',
         'views/views.xml',
-        'views/product.xml',
-
-        'views/sale.xml',
         'views/templates.xml',
-        'demo/demo.xml',
-
     ],
-
+    # only loaded in demonstration mode
+    'demo': [
+        'demo/demo.xml',
+    ],
 }
 

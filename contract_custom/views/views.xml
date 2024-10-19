@@ -65,7 +65,7 @@
                     </header>
                     <sheet>
                         <div name="button_box" class="oe_button_box">
-                            <button class="oe_stat_button" type="object" invisible="contract_type not in ('indirect')"
+                            <button class="oe_stat_button" type="object" invisible="contract_type  in ('general')"
                                     name="open_purchase_order" icon="fa-book">
                                 <div class="o_stat_info">
                                     <span class="o_stat_text">Purchase Order</span>
@@ -95,10 +95,10 @@
                                     <span class="o_stat_text">Vehicle Move</span>
                                 </div>
                             </button>
-                            <button class="oe_stat_button" type="object" invisible=" contract_type not in ('general')"
+                            <button class="oe_stat_button" type="object" 
                                     name="action_open_invoice" icon="fa-book">
                                 <div class="o_stat_info">
-                                    <span class="o_stat_text">General Contract Invoices</span>
+                                    <span class="o_stat_text">Invoices</span>
                                 </div>
                             </button>
                         </div>

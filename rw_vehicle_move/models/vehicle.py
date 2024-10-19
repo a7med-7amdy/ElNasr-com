@@ -18,7 +18,7 @@ class FleetVehicleMoves(models.Model):
 
 
     date = fields.Date(string='Date', default=fields.Date.today(), required=True)
-    vehicle_id = fields.Many2one('fleet.vehicle', string='Vehicle', required=True)
+    vehicle_id = fields.Many2one('fleet.vehicle', string='Vehicle', required=True,domain=[('trailer', '=', False)],)
     driver_id = fields.Many2one('res.partner', string='Driver', required=True)
     follower_id = fields.Many2one('res.partner', string='Follower')
     partner_id = fields.Many2one('res.partner', string='Discharging', required=True)
@@ -32,7 +32,7 @@ class FleetVehicleMoves(models.Model):
     uom = fields.Many2one('uom.uom', string='Unit of Measure')
     destination = fields.Char(string='Destination')
     notes = fields.Char(string='Notes')
-    sale_id = fields.Many2one('sale.order', string='Sale Order', domain=[('state', '=', 'sale')])
+    sale_id = fields.Many2one('sale.order', string='Sale', domain=[('state', '=', 'sale')])
     invoice_id = fields.Many2one('account.move', readonly=True, copy=False)
     payment_state = fields.Selection(related='invoice_id.payment_state', readonly=True, tracking=True)
     lots_id = fields.Many2many(
@@ -49,6 +49,7 @@ class FleetVehicleMoves(models.Model):
     has_entry  = fields.Boolean(
         string='Has Entry',
         required=False)
+    purchase_id = fields.Many2one('purchase.order', 'Purchase',)
 
 
     def unlink(self):
@@ -277,38 +278,118 @@ class FleetVehicleMoves(models.Model):
             elif rec.sale_id:
                 raise UserError(_('You Can Not Create Quotation For 2 Times For The Same Vehicle Move'))
 
-        first_contract = self[0].contract_id
-        first_partner = self[0].partner_id
-        analytic_account = rec.vehicle_id.analytic_account_id
-        analytic_account_trailer = rec.trailer.analytic_account_id
+            if rec.contract_id.contract_type=='general' or rec.contract_id.contract_type=='transfer':
+                first_contract = self[0].contract_id
+                first_partner = self[0].partner_id
+                analytic_account = self[0].vehicle_id.analytic_account_id
+                analytic_account_trailer = self[0].trailer.analytic_account_id
 
-        for rec in self:
-            if rec.contract_id != first_contract:
-                raise UserError(
-                    _('All selected records must have the same Contract. Please select one contract for all records.'))
-            elif rec.partner_id != first_partner:
-                raise UserError(
-                    _('All selected records must have the same Partner. Please select one Partner for all records.'))
-        for rec in self:
-            order_lines = [(0, 0, {
-                'product_id': rec.service_id.id,
-                'lot_id': rec.lot_id.id,
-                'analytic_distribution': {
-                            analytic_account.id: 100,  # 50% to the vehicle analytic account
-                            analytic_account_trailer.id: 0  # 50% to the trailer analytic account
+                # Ensuring all records have the same contract and partner
+                for rec in self:
+                    if rec.contract_id != first_contract:
+                        raise UserError(
+                            _('All selected records must have the same Contract. Please select one contract for all records.'))
+                    elif rec.partner_id != first_partner:
+                        raise UserError(
+                            _('All selected records must have the same Partner. Please select one Partner for all records.'))
+
+                # Prepare order lines and service lines
+                for rec in self:
+                    # Main order lines for the vehicle move
+                    order_lines = [(0, 0, {
+                        'product_id': rec.service_id.id,
+                        'lot_id': rec.lot_id.id,
+                        'analytic_distribution': {
+                            analytic_account.id: 100,  # 100% to the vehicle analytic account
+                            analytic_account_trailer.id: 0  # 0% to the trailer analytic account
                         } if analytic_account and analytic_account_trailer else
                         {analytic_account.id: 100} if analytic_account else
                         {analytic_account_trailer.id: 100} if analytic_account_trailer else {},
-                'product_uom_qty': rec.loaded_qty,
-                'price_unit': rec.price,
-            })]
+                        'product_uom_qty': rec.loaded_qty,
+                        'price_unit': rec.price,
+                    })]
 
-            so = self.env['sale.order'].create({
-                'partner_id': rec.partner_id.id,
-                'contract_id': rec.contract_id.id,
-                'order_line': order_lines,
-            })
-            rec.sale_id = so.id
+                    # Create the sale order
+                    so = self.env['sale.order'].create({
+                        'partner_id': rec.partner_id.id,
+                        'contract_id': rec.contract_id.id,
+                        'order_line': order_lines,
+                    })
+                    rec.sale_id = so.id
+            else:
+                first_contract = self[0].contract_id
+                first_partner = self[0].partner_id
+                analytic_account = self[0].vehicle_id.analytic_account_id
+                analytic_account_trailer = self[0].trailer.analytic_account_id
+
+                # Ensuring all records have the same contract and partner
+                for rec in self:
+                    if rec.contract_id != first_contract:
+                        raise UserError(
+                            _('All selected records must have the same Contract. Please select one contract for all records.'))
+                    elif rec.partner_id != first_partner:
+                        raise UserError(
+                            _('All selected records must have the same Partner. Please select one Partner for all records.'))
+
+                # Prepare order lines and service lines
+                for rec in self:
+                    # Main order lines for the vehicle move
+                    order_lines = [(0, 0, {
+                        'product_id': rec.service_id.id,
+                        'lot_id': rec.lot_id.id,
+                        'analytic_distribution': False,
+                        'product_uom_qty': rec.loaded_qty,
+                        'price_unit': rec.price,
+                    })]
+
+                    # Additional service lines from contract
+                    service_lines = []
+                    if rec.contract_id.contract_lines:
+                        for line in rec.contract_id.contract_lines:
+                            if line.product_id.detailed_type == 'service':
+                                service_lines.append((0, 0, {
+                                    'product_id': line.product_id.id,
+                                    'analytic_distribution': {
+                                        analytic_account.id: 100,
+                                        analytic_account_trailer.id: 0
+                                    } if analytic_account and analytic_account_trailer else
+                                    {analytic_account.id: 100} if analytic_account else
+                                    {analytic_account_trailer.id: 100} if analytic_account_trailer else {},
+                                    'price_unit': line.price,
+                                    'product_uom_qty': rec.loaded_qty,
+                                    'tax_id': False,
+                                }))
+
+                    # Create the sale order
+                    so = self.env['sale.order'].create({
+                        'partner_id': rec.partner_id.id,
+                        'contract_id': rec.contract_id.id,
+                        'order_line': order_lines + service_lines,
+                    })
+                    rec.sale_id = so.id
+
+    def create_purchase_order(self):
+        for rec in self:
+            if  rec.contract_id:
+                raise UserError(_('You Can Not Create Purchase Order For Vehicle Moves Have A Contract'))
+            if  rec.purchase_id:
+                raise UserError(_('There Is Already Order Created For This Vehicle'))
+            if  rec.state != 'confirmed':
+                raise UserError(_('You Can Create Purchase Order For Confirmed Moves Only'))
+            else:
+                lines = []
+                lines.append((0, 0, {
+                    'product_id': rec.service_id.id,
+                    'name': rec.service_id.name,
+                    'product_qty': rec.loaded_qty,
+                    'lot_id': rec.lot_id.id,
+                }))
+
+                po = self.env['purchase.order'].create({
+                    'partner_id': rec.partner_id.id,
+                    'order_line': lines,
+                })
+                rec.purchase_id = po.id
 
     @api.onchange('sale_id')
     def sale_changed(self):

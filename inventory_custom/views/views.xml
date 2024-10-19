@@ -1,0 +1,22 @@
+<odoo>
+    <data>
+<!--        &lt;!&ndash; Inherit Form View to Modify it &ndash;&gt;-->
+        <record id="product_category_form_view_custom" model="ir.ui.view">
+            <field name="name">product.category.form.view</field>
+            <field name="model">product.category</field>
+            <field name="inherit_id" ref="product.product_category_form_view"/>
+            <field name="arch" type="xml">
+
+                <xpath expr="//field[@name='property_cost_method']" position="after">
+                    <field name="company_id"/>
+                </xpath>
+
+            </field>
+        </record>
+        <record id="product_category_form_view_rule" model="ir.rule">
+            <field name="name">product.category.view.rule</field>
+            <field ref="product.model_product_category" name="model_id"/>
+            <field name="domain_force">[('company_id','in',company_ids)]</field>
+        </record>
+    </data>
+</odoo>

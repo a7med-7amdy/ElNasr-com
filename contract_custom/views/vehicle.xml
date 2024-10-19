@@ -9,8 +9,21 @@
             <field name="arch" type="xml">
 
                 <xpath expr="//field[@name='notes']" position="after">
-                    <field name="contract_id" optional="show"/>
+                    <field name="contract_id" optional="show" readonly="state!='draft'"/>
                     <field name="price" column_invisible="0"/>
+                </xpath>
+            </field>
+        </record>
+         <record id="view_invoice_form_vehicle_custom" model="ir.ui.view">
+            <field name="name">account.move</field>
+            <field name="model">account.move</field>
+            <field name="inherit_id" ref="account.view_move_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//div[hasclass('o_col')]" position="after">
+                    <label for="contract_id" string="Contract"
+                           invisible="move_type not in ('out_invoice', 'in_receipt', 'in_refund')"/>
+                    <field name="contract_id" nolabel="1"
+                           invisible="move_type not in ('out_invoice', 'in_receipt', 'in_refund')"/>
                 </xpath>
             </field>
         </record>

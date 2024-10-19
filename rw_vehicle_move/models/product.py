@@ -11,4 +11,4 @@ class ProductTemplateCustom(models.Model):
 class ProductCustom(models.Model):
     _inherit = 'product.product'
 
-    is_vehicle = fields.Boolean(related='product_tmpl_id.is_vehicle')
+    is_vehicle = fields.Boolean(related='product_tmpl_id.is_vehicle',readonly=False)

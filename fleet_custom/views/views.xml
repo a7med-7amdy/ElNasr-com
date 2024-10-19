@@ -1,0 +1,29 @@
+<odoo>
+    <data>
+        <!-- Inherit Form View to Modify it -->
+        <record id="fleet_vehicle_form_custom" model="ir.ui.view">
+            <field name="name">fleet.vehicle.form.custom</field>
+            <field name="model">fleet.vehicle</field>
+            <field name="inherit_id" ref="fleet.fleet_vehicle_view_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='vin_sn']" position="attributes">
+                    <attribute name="string">Motor Number</attribute>
+                </xpath>
+                <xpath expr="//group[1]" position="before">
+                    <div class="text-right">
+                        <label for="car_owner"/>
+                            <field name="car_owner"/>
+                        <br/>
+                        <label for="traffic"/>
+                            <field name="traffic"/>
+                    </div>
+                </xpath>
+                <xpath expr="//field[@name='location']" position="after">
+                    <field name="license_date"/>
+                    <field name="license_end_date"/>
+                </xpath>
+
+            </field>
+        </record>
+    </data>
+</odoo>

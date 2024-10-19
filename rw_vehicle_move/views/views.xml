@@ -55,11 +55,11 @@
                                 <field name="service_id" readonly="state!='draft'"/>
                                 <field name="uom" readonly="state!='draft'"/>
                                 <field name="loaded_qty" readonly="state!='draft'"/>
-                                <field name="discharged_qty" readonly="state!='draft'"/>
+                                <field name="discharged_qty" readonly="state!='draft'" invisible="1"/>
 
                             </group>
                             <group string="Extra Data">
-                                <field name="destination" readonly="state!='draft'"/>
+                                <field name="destination" readonly="state!='draft'" invisible="1"/>
                                 <field name="notes" readonly="state!='draft'"/>
                                 <field name="invoice_id"/>
                                 <field name="payment_state"/>
@@ -95,9 +95,10 @@
                     <field name="lots_id" column_invisible="1"/>
                     <field name="uom" readonly="state!='draft'" column_invisible="1"/>
                     <field name="discharged_qty" readonly="state!='draft'" column_invisible="1"/>
-                    <field name="state" readonly="0"/>
+                    <field name="state" readonly="1"/>
                     <field name="has_entry" column_invisible="1"/>
-                    <field name="sale_id" readonly="state!='draft'"/>
+                    <field name="sale_id" readonly="state!='draft'" optional="show"/>
+                    <field name="purchase_id" readonly="state!='draft'" optional="show"/>
                     <field name="invoice_id" optional="show" readonly="state!='draft'"/>
                     <field name="payment_state" optional="show" readonly="state!='draft'" column_invisible="1"/>
                     <field name="notes" optional="show" readonly="state!='draft'" column_invisible="0"/>
@@ -142,6 +143,16 @@
             <field name="code">
                 if records:
                 action = records.create_entry_invoice()
+            </field>
+        </record>
+        <record model="ir.actions.server" id="vehicle_create_purchase_order">
+            <field name="name">Create Purchase</field>
+            <field name="model_id" ref="model_vehicle_move"/>
+            <field name="binding_model_id" ref="model_vehicle_move"/>
+            <field name="state">code</field>
+            <field name="code">
+                if records:
+                action = records.create_purchase_order()
             </field>
         </record>
 

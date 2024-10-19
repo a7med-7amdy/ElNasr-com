@@ -11,7 +11,7 @@ class SaleOrderLine(models.Model):
     _inherit = 'sale.order.line'
 
 
-    lot_id = fields.Many2one('stock.lot', string='Lot',
+    lot_id = fields.Many2one('stock.lot',string='Operation',
                                domain="[('product_id','=', product_id)]",
                                help='Lot from which the product will be sold')
 

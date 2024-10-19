@@ -14,9 +14,7 @@ class purchaseOrderLine(models.Model):
 
 
 
-    lot_id = fields.Many2one('stock.lot', string='Lot',
-                               domain="[('product_id','=', product_id)]",
-                               help='Lot from which the product will be sold')
+    lot_id = fields.Many2one('stock.lot', string='Operation',help='Lot from which the product will be sold')
 
     def _create_stock_moves(self, picking):
         res=super(purchaseOrderLine, self)._create_stock_moves(picking)
@@ -42,6 +40,21 @@ class purchaseOrderLine(models.Model):
                     'picking_id': move.picking_id.id,
                 })]
         return res
+
+
+
+class purchaseOrder(models.Model):
+    """
+    Inherits the model purchase Order Line to extend and add extra field and method
+    for the working of the app.
+    """
+    _inherit = 'purchase.order'
+
+
+
+
+
+
 
 
 
