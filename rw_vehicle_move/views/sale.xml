@@ -32,7 +32,7 @@
                     <field name="qty" attrs="{'invisible': [('vehicle_entry', '=', False)]}"/>
                     <field name="price" attrs="{'invisible': [('vehicle_entry', '=', False)]}"/>
                 </xpath>
-                <xpath expr="//div[hasclass('o_col')]" position="after">
+                <xpath expr="//group[@id='header_left_group']" position="inside">
                     <label for="ref" string="Reference"
                            invisible="move_type not in ('out_invoice', 'in_receipt', 'in_refund')"/>
                     <field name="ref" nolabel="1"
