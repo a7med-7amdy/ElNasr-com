@@ -316,7 +316,7 @@ class FleetVehicleMoves(models.Model):
                         'order_line': order_lines,
                     })
                     rec.sale_id = so.id
-            else:
+            if not rec.contract_id and rec.contract_id.contract_type == 'indirect':
                 first_contract = self[0].contract_id
                 first_partner = self[0].partner_id
                 analytic_account = self[0].vehicle_id.analytic_account_id
