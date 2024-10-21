@@ -26,7 +26,7 @@ Long description of module's purpose
         'views/groups.xml',
         'views/views.xml',
         'views/product.xml',
-
+        'views/move_type.xml',
         'views/sale.xml',
         'views/templates.xml',
         'demo/demo.xml',

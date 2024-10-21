@@ -39,8 +39,8 @@
                             <field name="name" readonly="1"/>
 
                         </h1>
-                        <group col="3" >
-                            <group string="Vehicle Data" >
+                        <group col="3">
+                            <group string="Vehicle Data">
                                 <field name="type_id" readonly="state!='draft'"/>
                                 <field name="date" readonly="state!='draft'"/>
                                 <field name="vehicle_id" readonly="state!='draft'"/>
@@ -63,7 +63,8 @@
                                 <field name="notes" readonly="state!='draft'"/>
                                 <field name="invoice_id"/>
                                 <field name="payment_state"/>
-
+                                <field name="purchase_id" readonly="state!='draft'"/>
+                                <field name="invoice_id"  readonly="state!='draft'"/>
                             </group>
 
 
@@ -80,7 +81,7 @@
             <field name="arch" type="xml">
                 <tree string="Vehicle Moves" editable="top" open_form_view="True">
                     <field name="name" readonly="1"/>
-                    <field name="type_id" readonly="state!='draft'"/>
+                    <field name="type_id" readonly="state!='draft'" options="{'no_create': True}"/>
                     <field name="date" readonly="state!='draft'"/>
                     <field name="vehicle_id" readonly="state!='draft'"/>
                     <field name="trailer" readonly="state!='draft'"/>
@@ -91,7 +92,7 @@
                     <field name="service_id" readonly="state!='draft'"/>
                     <field name="lot_id" readonly="state!='draft'" context="{'default_product_id': service_id }"/>
                     <field name="loaded_qty" readonly="state!='draft'"/>
-                    <field name="partner_id"  readonly="state!='draft'"/>
+                    <field name="partner_id" readonly="state!='draft'"/>
                     <field name="lots_id" column_invisible="1"/>
                     <field name="uom" readonly="state!='draft'" column_invisible="1"/>
                     <field name="discharged_qty" readonly="state!='draft'" column_invisible="1"/>

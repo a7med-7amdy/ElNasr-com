@@ -27,5 +27,19 @@
                 </xpath>
             </field>
         </record>
+        <!-- Inherit Form View to Modify it -->
+        <record id="view_fleet_vehicle_moves_form_custom" model="ir.ui.view">
+            <field name="name">vehicle.move.form.custom</field>
+            <field name="model">vehicle.move</field>
+            <field name="inherit_id" ref="rw_vehicle_move.view_fleet_vehicle_moves_form"/>
+            <field name="arch" type="xml">
+
+                <xpath expr="//field[@name='purchase_id']" position="before">
+                    <field name="contract_id"  readonly="state!='draft'"/>
+                    <field name="price"  readonly="state!='draft'"/>
+                </xpath>
+
+            </field>
+        </record>
     </data>
 </odoo>

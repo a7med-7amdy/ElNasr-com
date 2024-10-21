@@ -91,6 +91,11 @@ class FleetVehicleMoves(models.Model):
                 raise models.ValidationError("Please Confirm Vehicle Move First !!", rec.name)
             elif rec.sale_id:
                 raise models.ValidationError("There Are Quotations So You Can Not Create Invoices !!")
+            if rec.contract_id:
+                # if rec.contract_id.contract_type == 'general':
+                raise UserError(_('You cannot create Invoice for Vehicles have contracts.'))
+            if not rec.service_id.detailed_type=="service":
+                raise UserError(_('You can create Invoices for Service Products only.'))
             analytic_account = rec.vehicle_id.analytic_account_id
             analytic_account_trailer = rec.trailer.analytic_account_id
             if not rec.invoice_id:
@@ -236,10 +241,10 @@ class FleetVehicleMoves(models.Model):
             # Mark the state as 'entry' after the entry is created
             rec.state = 'entry'
 
-    @api.constrains('service_id')
+    @api.constrains('service_id','contract_id')
     def service_per_contract(self):
         for rec in self:
-            if rec.contract_id and rec.service_id:
+            if rec.contract_id :
                 if rec.service_id not in (line.product_id for line in rec.contract_id.contract_lines):
                     raise UserError(_('you should choose service same as in contract products'))
 

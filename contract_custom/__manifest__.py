@@ -1,14 +1,18 @@
 # -*- coding: utf-8 -*-
 {
-    'name': "Contracts",
+    'name': "Transfer Contracts",
     'summary': "Custom To Make New Module For Contract",
     'description': """Custom To Make New Module For Contract""",
-    'author': "Sobhy",
+    'author': "Rwad",
     'website': "https://www.yourcompany.com",
-    'category': 'Uncategorized',
+    'category': 'Contracts',
     'version': '17.0.1.8',
     'license': 'LGPL-3',
-    'depends': ['base','contacts','sale_management','purchase_auto_lot_selection','stock','rw_vehicle_move','account'],
+    'installable': True,
+    'application': True,
+    'sequence': 7,
+    'depends': ['base', 'contacts', 'sale_management', 'purchase_auto_lot_selection', 'stock', 'rw_vehicle_move',
+                'account'],
     'data': [
         'security/ir.model.access.csv',
         'security/groups.xml',

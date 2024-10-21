@@ -259,7 +259,7 @@
 
 
         <!-- Menu for accessing Contracts -->
-        <menuitem id="contract_menu_root" name="Contracts"/>
+        <menuitem id="contract_menu_root" name="Transfer Contracts"/>
         <menuitem id="contract_menu_sub" name="Choose Contract" parent="contract_menu_root" sequence="1"/>
         <menuitem id="contract_menu_all" name="ِAll Contracts" parent="contract_menu_sub" sequence="0"
                   action="contract_views_action"/>
