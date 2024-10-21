@@ -135,7 +135,8 @@ class ContractLines(models.Model):
             if line.contract_ids.contract_type == 'indirect':
                 total = 0.0
                 if line.contract_ids:
-                    for po in line.contract_ids.purchase_ids.filtered(
+                    purchase = self.env['purchase.order'].search([('contract_id','=',line.contract_ids.id)])
+                    for po in purchase.filtered(
                             lambda po: po.state in ['purchase', 'done']):
                         for po_line in po.order_line.filtered(
                                 lambda po_line: po_line.product_id == line.product_id and po_line.lot_id == line.lot_id):
@@ -164,16 +165,14 @@ class ContractLines(models.Model):
 
     def _compute_vehicles_qty_sent(self):
         for line in self:
-            total_sent_quantity = 0.0  # Reset for each line
-            vehicles = line.contract_ids.vehicles
-            if vehicles:
-                for vehicle in vehicles:
-                    if vehicle.service_id == line.product_id:
-                        total_sent_quantity += vehicle.loaded_qty
+            total_sent_quantity = 0.0
+            orders = self.env['sale.order'].search([('contract_id', '=', line.contract_ids.id)])
+            if orders:
+                for order in orders:
+                    for order_line in order.order_line:
+                        if order_line.product_id == line.product_id:
+                            total_sent_quantity += order_line.product_uom_qty
             line.quantity_sent = total_sent_quantity
-
-
-
 
     @api.depends('purchase_ids')
     def _compute_orders_number(self):

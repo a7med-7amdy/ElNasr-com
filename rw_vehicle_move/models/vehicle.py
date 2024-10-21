@@ -32,7 +32,7 @@ class FleetVehicleMoves(models.Model):
     uom = fields.Many2one('uom.uom', string='Unit of Measure')
     destination = fields.Char(string='Destination')
     notes = fields.Char(string='Notes')
-    sale_id = fields.Many2one('sale.order', string='Sale', domain=[('state', '=', 'sale')])
+    sale_id = fields.Many2one('sale.order', string='Sale', domain=[('state', '=', 'sale')],tracking=True,required=False)
     invoice_id = fields.Many2one('account.move', readonly=True, copy=False)
     payment_state = fields.Selection(related='invoice_id.payment_state', readonly=True, tracking=True)
     lots_id = fields.Many2many(
@@ -271,31 +271,29 @@ class FleetVehicleMoves(models.Model):
 
     def action_create_quotation(self):
         for rec in self:
-            if not rec.contract_id:
-                raise UserError(_('Please Choose Contract To Create Quotation'))
-            elif rec.state != 'confirmed':
+            # Check if the move is in 'confirmed' state
+            if rec.state != 'confirmed':
                 raise UserError(_('You Can Create Quotation For Confirmed Moves Only'))
-            elif rec.sale_id:
+
+            # Check if a sale order already exists for the move
+            if rec.sale_id:
                 raise UserError(_('You Can Not Create Quotation For 2 Times For The Same Vehicle Move'))
 
-            if rec.contract_id.contract_type=='general' or rec.contract_id.contract_type=='transfer':
-                first_contract = self[0].contract_id
-                first_partner = self[0].partner_id
-                analytic_account = self[0].vehicle_id.analytic_account_id
-                analytic_account_trailer = self[0].trailer.analytic_account_id
+            # Check for a contract and contract type
+            if rec.contract_id:
+                if rec.contract_id.contract_type == 'general':
+                    raise UserError(_('There is general contracts you cannot create quotations for them.'))
+                elif rec.contract_id.contract_type in ['transfer']:
+                    first_partner = self[0].partner_id
+                    analytic_account = self[0].vehicle_id.analytic_account_id
+                    analytic_account_trailer = self[0].trailer.analytic_account_id
 
-                # Ensuring all records have the same contract and partner
-                for rec in self:
-                    if rec.contract_id != first_contract:
-                        raise UserError(
-                            _('All selected records must have the same Contract. Please select one contract for all records.'))
-                    elif rec.partner_id != first_partner:
+                    # Ensure all selected records have the same partner
+                    if rec.partner_id != first_partner:
                         raise UserError(
                             _('All selected records must have the same Partner. Please select one Partner for all records.'))
 
-                # Prepare order lines and service lines
-                for rec in self:
-                    # Main order lines for the vehicle move
+                    # Prepare order lines with proper analytic distribution
                     order_lines = [(0, 0, {
                         'product_id': rec.service_id.id,
                         'lot_id': rec.lot_id.id,
@@ -316,24 +314,17 @@ class FleetVehicleMoves(models.Model):
                         'order_line': order_lines,
                     })
                     rec.sale_id = so.id
-            if not rec.contract_id and rec.contract_id.contract_type == 'indirect':
-                first_contract = self[0].contract_id
-                first_partner = self[0].partner_id
-                analytic_account = self[0].vehicle_id.analytic_account_id
-                analytic_account_trailer = self[0].trailer.analytic_account_id
+                elif rec.contract_id.contract_type in ['indirect']:
+                    first_partner = self[0].partner_id
+                    analytic_account = self[0].vehicle_id.analytic_account_id
+                    analytic_account_trailer = self[0].trailer.analytic_account_id
 
-                # Ensuring all records have the same contract and partner
-                for rec in self:
-                    if rec.contract_id != first_contract:
-                        raise UserError(
-                            _('All selected records must have the same Contract. Please select one contract for all records.'))
-                    elif rec.partner_id != first_partner:
+                    # Ensure all selected records have the same partner
+                    if rec.partner_id != first_partner:
                         raise UserError(
                             _('All selected records must have the same Partner. Please select one Partner for all records.'))
 
-                # Prepare order lines and service lines
-                for rec in self:
-                    # Main order lines for the vehicle move
+                    # Prepare order lines with proper analytic distribution
                     order_lines = [(0, 0, {
                         'product_id': rec.service_id.id,
                         'lot_id': rec.lot_id.id,
@@ -341,8 +332,6 @@ class FleetVehicleMoves(models.Model):
                         'product_uom_qty': rec.loaded_qty,
                         'price_unit': rec.price,
                     })]
-
-                    # Additional service lines from contract
                     service_lines = []
                     if rec.contract_id.contract_lines:
                         for line in rec.contract_id.contract_lines:
@@ -368,10 +357,35 @@ class FleetVehicleMoves(models.Model):
                     })
                     rec.sale_id = so.id
 
+            if not rec.contract_id:
+                    analytic_account = self[0].vehicle_id.analytic_account_id
+                    analytic_account_trailer = self[0].trailer.analytic_account_id
+                    order_lines = [(0, 0, {
+                        'product_id': rec.service_id.id,
+                        'lot_id': rec.lot_id.id,
+                        'analytic_distribution': {
+                            analytic_account.id: 100,  # 100% to the vehicle analytic account
+                            analytic_account_trailer.id: 0  # 0% to the trailer analytic account
+                        } if analytic_account and analytic_account_trailer else
+                        {analytic_account.id: 100} if analytic_account else
+                        {analytic_account_trailer.id: 100} if analytic_account_trailer else {},
+                        'product_uom_qty': rec.loaded_qty,
+                        'price_unit': rec.price,
+                    })]
+
+                    # Create the sale order
+                    so = self.env['sale.order'].create({
+                        'partner_id': rec.partner_id.id,
+                        'contract_id': rec.contract_id.id,
+                        'order_line': order_lines,
+                    })
+                    rec.sale_id = so.id
+
+
     def create_purchase_order(self):
         for rec in self:
-            if  rec.contract_id:
-                raise UserError(_('You Can Not Create Purchase Order For Vehicle Moves Have A Contract'))
+            # if  rec.contract_id:
+            #     raise UserError(_('You Can Not Create Purchase Order For Vehicle Moves Have A Contract'))
             if  rec.purchase_id:
                 raise UserError(_('There Is Already Order Created For This Vehicle'))
             if  rec.state != 'confirmed':
@@ -388,6 +402,7 @@ class FleetVehicleMoves(models.Model):
                 po = self.env['purchase.order'].create({
                     'partner_id': rec.partner_id.id,
                     'order_line': lines,
+                    'contract_id': rec.contract_id.id,
                 })
                 rec.purchase_id = po.id
 
@@ -433,6 +448,10 @@ class FleetVehicle(models.Model):
             res.analytic_account_id = analytic_account_id.id
 
         return res
+
+
+
+
 
 
 class AnalyticPlan(models.Model):
