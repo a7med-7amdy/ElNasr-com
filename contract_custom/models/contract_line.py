@@ -34,7 +34,7 @@ class ContractLines(models.Model):
         readonly=True,
         required=False)
     remaining_quantity_sent = fields.Float(
-        string='Remaining',
+        string='Remaining Sent',
         compute='_get_remaining_quantity_sent',
         readonly=True,
         required=False)
@@ -136,6 +136,9 @@ class ContractLines(models.Model):
         for rec in self:
             if rec.quantity_sent or rec.qty:
                 rec.remaining_quantity_sent = rec.qty - rec.quantity_sent
+            else:
+                rec.remaining_quantity_sent = rec.qty
+
 
 
     def _compute_ordered_qty_po(self):
