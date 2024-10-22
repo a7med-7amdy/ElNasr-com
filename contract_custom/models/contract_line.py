@@ -33,6 +33,11 @@ class ContractLines(models.Model):
         compute='_get_remaining_quantity',
         readonly=True,
         required=False)
+    remaining_quantity_sent = fields.Float(
+        string='Remaining',
+        compute='_get_remaining_quantity_sent',
+        readonly=True,
+        required=False)
     quantity_sent = fields.Float(
         string='Quantity Sent',compute='_compute_vehicles_qty_sent')
     contract_ids = fields.Many2one(
@@ -127,7 +132,10 @@ class ContractLines(models.Model):
             if rec.remaining_quantity or rec.qty:
                 rec.remaining_quantity = rec.qty - rec.withdrawn_quantity
 
-
+    def _get_remaining_quantity_sent(self):
+        for rec in self:
+            if rec.quantity_sent or rec.qty:
+                rec.remaining_quantity_sent = rec.qty - rec.quantity_sent
 
 
     def _compute_ordered_qty_po(self):

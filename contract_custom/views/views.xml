@@ -143,6 +143,7 @@
                                                optional="show" options="{'no_label': True}"/>
                                         <field name="remaining_quantity" optional="show"/>
                                         <field name="quantity_sent" optional="show"/>
+                                        <field name="remaining_quantity_sent" optional="show"/>
                                         <field name="contract_start_date"/>
                                         <field name="contract_end_date"/>
                                         <field name="assigning_party"/>
