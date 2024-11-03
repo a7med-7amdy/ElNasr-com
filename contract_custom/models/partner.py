@@ -1,7 +1,7 @@
 from odoo import api, fields, models
 
 
-class NewModule(models.Model):
+class PartnerCustomForContract(models.Model):
     _inherit = 'res.partner'
 
     construction_date = fields.Date(

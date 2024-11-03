@@ -102,42 +102,8 @@ class ContractsCustom(models.Model):
         string='Tax Totals', compute='_compute_total_cost',
         required=False)
 
-    # def create_invoice(self):
-    #     today = fields.Datetime.now()
-    #     for rec in self:
-    #         if rec.state != 'confirmed':
-    #             raise models.ValidationError("Please Confirm Contract First !!", rec.name)
-    #         elif not rec.vehicles_entry:
-    #             raise models.ValidationError("There Are Not Entries So You Can Not Create Invoices !!")
-    #         if not rec.contract_lines:
-    #             raise models.ValidationError("There Are Not Products So You Can Not Create Invoices !!")
-    #         else:
-    #             # Prepare all invoice lines in a list
-    #             invoice_lines = []
-    #             for line in rec.contract_lines:
-    #                 invoice_line_vals = {
-    #                     'name': line.product_id.name,
-    #                     'product_id': line.product_id.id,
-    #                     'quantity': line.qty_entry_sent,
-    #                     'price_unit': line.price,
-    #                     'tax_ids': line.tax_id.ids,
-    #                     # Add any additional fields as needed
-    #                 }
-    #                 invoice_lines.append((0, 0, invoice_line_vals))
-    #
-    #             # Create a single invoice with all the lines
-    #             invoice_vals = {
-    #                 'partner_id': rec.customer.id,
-    #                 'invoice_date': today,
-    #                 'contract_id': rec.id,
-    #                 'ref': rec.name,
-    #                 'move_type': 'out_invoice',
-    #                 'invoice_line_ids': invoice_lines,  # Add all invoice lines here
-    #             }
-    #
-    #             invoice = self.env['account.move'].create(invoice_vals)
-    #             for vehicle in rec.vehicles_entry:
-    #                 vehicle.state='done'
+
+
 
     def unlink(self):
         for rec in self:
@@ -158,20 +124,21 @@ class ContractsCustom(models.Model):
         for rec in self:
             rec.state = 'draft'
 
-
     def sent_to_contract_update(self):
         action = self.env.ref('contract_custom.wizard_contract_update_action')
         result = action.read()[0]
         res = self.env.ref('contract_custom.wizard_contract_update_action_view_form', False)
-        result['views'] = [(res and res.id or False, 'form')]
+        result['views'] = [(res.id, 'form')] if res else False
         lines = []
         for line in self.contract_lines:
             lines.append((0, 0, {
                 'old_product_id': line.product_id.id,
+                'lot_id': line.lot_id.id,
                 'old_qty': line.qty,
                 'old_price': line.price,
                 'old_load_place': line.load_place.id,
                 'old_unloading_place': line.unloading_place.id,
+                'tax_id': line.tax_id.ids if line.tax_id else False,  # Adjust this if the field type requires
             }))
         result['context'] = {
             'default_old_contract_start_date': self.contract_start_date,
@@ -181,8 +148,6 @@ class ContractsCustom(models.Model):
         }
         return result
 
-    
-    
     def get_qty(self):
         orders = self.env['sale.order'].search([('contract_id','=',self.id)])
         self.orders = orders.ids
@@ -205,11 +170,6 @@ class ContractsCustom(models.Model):
             contract.total_remaining_quantity = sum(line.remaining_quantity for line in contract.contract_lines)
             contract.total_withdrawn_quantity = sum(line.withdrawn_quantity for line in contract.contract_lines)
             contract.total_quantity_sent = sum(line.quantity_sent for line in contract.contract_lines)
-
-  
-
-
-
 
     def action_confirm(self):
         for rec in self:
@@ -238,9 +198,6 @@ class ContractsCustom(models.Model):
             })
             rec.purchased = True
             rec.purchase_ids = [(4, po.id)]
-
-
-
 
 
 

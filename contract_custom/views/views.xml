@@ -57,9 +57,6 @@
                                 groups="contract_custom.button_access_to_return_draft"
                                 invisible="state not in 'confirmed'"
                                 type="object"/>
-<!--                         <button name="create_invoice" string="Create Invoice" class="btn-primary" data-hotkey="q"-->
-<!--                                invisible="state not in 'confirmed'  or contract_type not in ('general')"-->
-<!--                                type="object"/>-->
                         <field name="state" widget="statusbar"/>
 
                     </header>
@@ -171,25 +168,26 @@
                                     </tree>
                                 </field>
                             </page>
-                            <page string="General Contract" invisible="contract_type not in 'general'">
+                            <page string="General Contract" invisible="contract_type not in 'general'" >
                                 <field name="contract_lines" widget="one2many">
-                                    <tree string="Lines" editable="bottom">
-                                        <field name="lots_id" column_invisible="1"/>
+                                    <tree string="Lines" editable="bottom" >
+                                        <field name="lots_id" column_invisible="1" readonly="state in ('confirmed')"/>
+                                        <field name="state" column_invisible="1"/>
                                         <field name="contract_type" column_invisible="1"/>
-                                        <field name="product_id" optional="show"/>
-                                        <field name="lot_id" context="{ 'default_product_id': product_id }"/>
-                                        <field name="qty" optional="show"/>
+                                        <field name="product_id" optional="show" readonly="state in ('confirmed')"/>
+                                        <field name="lot_id" context="{ 'default_product_id': product_id }" readonly="state in ('confirmed')"/>
+                                        <field name="qty" optional="show" readonly="state in ('confirmed')"/>
                                         <field name="qty_entry_sent" column_invisible="1"/>
                                         <field name="name" column_invisible="1"/>
-                                        <field name="price"/>
-                                        <field name="tax_id" widget="many2many_tags"/>
-                                        <field name="tax_unit_price" optional="show"/>
-                                        <field name="withdrawn_quantity" optional="show"/>
-                                        <field name="remaining_quantity" optional="show"/>
-                                        <field name="load_place" optional="show"/>
-                                        <field name="unloading_place" optional="show"/>
-                                        <field name="taxed_total_price" string="Taxed Cost" optional="show"/>
-                                        <field name="total_price" optional="show" string="Untaxed Cost"/>
+                                        <field name="price" readonly="state in ('confirmed')"/>
+                                        <field name="tax_id" widget="many2many_tags" readonly="state in ('confirmed')"/>
+                                        <field name="tax_unit_price" optional="show" readonly="state in ('confirmed')"/>
+                                        <field name="withdrawn_quantity" optional="show" readonly="state in ('confirmed')"/>
+                                        <field name="remaining_quantity" optional="show" readonly="state in ('confirmed')"/>
+                                        <field name="load_place" optional="show" readonly="state in ('confirmed')"/>
+                                        <field name="unloading_place" optional="show" readonly="state in ('confirmed')"/>
+                                        <field name="taxed_total_price" string="Taxed Cost" optional="show" readonly="state in ('confirmed')"/>
+                                        <field name="total_price" optional="show" string="Untaxed Cost" readonly="state in ('confirmed')"/>
                                     </tree>
                                 </field>
                             </page>

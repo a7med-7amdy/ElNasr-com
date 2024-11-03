@@ -89,11 +89,13 @@ class FleetVehicleMoves(models.Model):
         for rec in self:
             if rec.state != 'confirmed' :
                 raise models.ValidationError("Please Confirm Vehicle Move First !!", rec.name)
-            elif rec.sale_id:
+            if rec.sale_id:
                 raise models.ValidationError("There Are Quotations So You Can Not Create Invoices !!")
             if rec.contract_id:
                 # if rec.contract_id.contract_type == 'general':
                 raise UserError(_('You cannot create Invoice for Vehicles have contracts.'))
+            if rec.state in ('entry', 'invoiced', 'done') :
+                raise models.ValidationError("You cannot create Invoice for Vehicles have contracts or has Invoice")
             if not rec.service_id.detailed_type=="service":
                 raise UserError(_('You can create Invoices for Service Products only.'))
             analytic_account = rec.vehicle_id.analytic_account_id
@@ -217,13 +219,7 @@ class FleetVehicleMoves(models.Model):
                         'partner_id': partner_id,
                         'account_id': debit_account.id,  # Debit line
                         'debit': total_line_cost,
-                        'analytic_distribution': {
-                            analytic_account.id: 100,  # 50% to the vehicle analytic account
-                            analytic_account_trailer.id: 0  # 50% to the trailer analytic account
-                        } if analytic_account and analytic_account_trailer else
-                        {analytic_account.id: 100} if analytic_account else
-                        {analytic_account_trailer.id: 100} if analytic_account_trailer else {},
-                        'credit': 0.0,
+
                     }),
                     (0, 0, {
                         'name': 'Vehicle Service',
@@ -234,6 +230,12 @@ class FleetVehicleMoves(models.Model):
                         'account_id': credit_account.id,  # Credit line
                         'debit': 0.0,
                         'credit': total_line_cost,
+                        'analytic_distribution': {
+                            analytic_account.id: 100,  # 50% to the vehicle analytic account
+                            analytic_account_trailer.id: 0  # 50% to the trailer analytic account
+                        } if analytic_account and analytic_account_trailer else
+                        {analytic_account.id: 100} if analytic_account else
+                        {analytic_account_trailer.id: 100} if analytic_account_trailer else {},
                     })
                 ]
             })

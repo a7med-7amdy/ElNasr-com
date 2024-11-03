@@ -92,6 +92,10 @@ class ContractLines(models.Model):
     qty_entry_sent = fields.Float(
         string='Qty Entry', compute='get_total_qty_per_product_sent',
         required=False)
+    state = fields.Selection([('draft', 'Draft'),
+                              ('confirmed', 'Confirmed'), ('done', 'Done'),
+                              ('cancel', 'Canceled'),
+                              ], 'State', default='draft',related='contract_ids.state')
 
     def get_total_qty_per_product_sent(self):
         for line in self:
