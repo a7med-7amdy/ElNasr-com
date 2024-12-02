@@ -2,6 +2,7 @@
 <odoo>
     <menuitem id="account_reports_partners_reports_menu" name="Partner Reports" parent="account.menu_finance_reports" sequence="3">
         <menuitem id="menu_action_account_report_partner_ledger" name="Partner Ledger" action="action_account_report_partner_ledger" groups="account.group_account_readonly"/>
+        <menuitem id="menu_action_account_report_partner_ledger2" name="Elrowad Report" action="action_account_report_partner_ledger2" groups="account.group_account_readonly"/>
         <menuitem id="menu_action_account_report_aged_receivable" name="Aged Receivable" action="action_account_report_ar" groups="account.group_account_readonly"/>
         <menuitem id="menu_action_account_report_aged_payable" name="Aged Payable" action="action_account_report_ap" groups="account.group_account_readonly"/>
     </menuitem>
