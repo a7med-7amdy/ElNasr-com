@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="car_inspection_request_request" model="ir.sequence">
+            <field name="name">Car Inspection Sequence</field>
+            <field name="code">inspection.inspection</field>
+            <field name="prefix">In-</field>
+            <field name="padding">5</field>
+            <field name="number_increment">1</field>
+        </record>
+        <record id="car_inspection_action" model="ir.actions.act_window">
+            <field name="name">Car Inspection</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">inspection.inspection</field>
+            <field name="view_mode">search,tree,form</field>
+        </record>
+        <record id="inspection_view_form" model="ir.ui.view">
+            <field name="name">inspection.view.form</field>
+            <field name="model">inspection.inspection</field>
+            <field name="arch" type="xml">
+                <form string="inspection_form">
+                    <header>
+                        <button name="action_confirm" string="Confirm" class="btn-primary" data-hotkey="q"
+                                invisible="state  not in 'draft'"
+                                type="object"/>
+
+                        <button name="action_cancel" string="Cancel" class="btn-primary" data-hotkey="q"
+                                invisible="state not in 'draft'"
+                                type="object"/>
+                        <button name="action_create_order" string="Order" class="btn-primary" data-hotkey="q"
+                                invisible="state not in 'confirmed'"
+                                type="object"/>
+                        <button name="reset_to_draft" string="Reset To Draft" class="btn-primary" data-hotkey="q"
+                                invisible="state not in 'cancel'"
+                                type="object"/>
+                        <field name="state" widget="statusbar"/>
+                    </header>
+                    <sheet>
+                        <div name="button_box" class="oe_button_box">
+                            <button class="oe_stat_button" type="object"
+                                    name="action_open_orders" icon="fa-book">
+                                <div class="o_stat_info">
+                                    <span class="o_stat_text">Orders</span>
+                                </div>
+                                <field name="orders_count" widget="statinfo" nolabel="1" class="mr4"/>
+                            </button>
+                        </div>
+                        <group>
+                            <group>
+                                <field name="name"/>
+                                <field name="date"/>
+                                <field name="vehicle"/>
+                                <field name="kilometer"/>
+                            </group>
+                            <group>
+                                <field name="car_unit_number"/>
+                                <field name="car_license"/>
+                                <field name="car_Brand"/>
+                                <field name="request_id"/>
+                            </group>
+                        </group>
+                        <notebook>
+                            <page string="car inspection">
+                                <field name="inspection_ids" widget="one2many_list">
+                                    <tree string="inspection_data" editable="bottom">
+                                        <field name="name"/>
+                                        <field name="received_faults"/>
+                                        <field name="maintenance_specialist_inspection"/>
+                                        <field name="maintenance_specialist_decision"/>
+                                        <field name="fault_technician"/>
+                                        <field name="notes"/>
+                                    </tree>
+                                </field>
+                            </page>
+                        </notebook>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+        <record id="car_inspectio_view_tree" model="ir.ui.view">
+            <field name="name">car.inspection.view.tree</field>
+            <field name="model">inspection.inspection</field>
+            <field name="arch" type="xml">
+                <tree string="car_maintenance_tree">
+                    <field name="name"/>
+                    <field name="date"/>
+                    <field name="vehicle"/>
+                    <field name="car_unit_number"/>
+                    <field name="car_license"/>
+                    <field name="car_Brand"/>
+                </tree>
+            </field>
+        </record>
+        <menuitem id="car_inspection_all" name="Car Inspection Request" parent="car_maintenance_menu_root" sequence="2"
+                  action="car_inspection_action"/>
+    </data>
+</odoo>

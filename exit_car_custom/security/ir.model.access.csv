@@ -1,0 +1,10 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_car_car,car_car.car_car,model_car_car,base.group_user,1,1,1,1
+access_garage_garage,garage_garage.garage_garage,model_garage_garage,base.group_user,1,1,1,1
+access_governorate_governorate,governorate_governorate.governorate_governorate,model_governorate_governorate,base.group_user,1,1,1,1
+access_driver_driver,driver_driver.driver_driver,model_driver_driver,base.group_user,1,1,1,1
+access_sold_sold,sold_sold.sold_sold,model_sold_sold,base.group_user,1,1,1,1
+access_exit_exit,exit_exit.exit_exit,model_exit_exit,base.group_user,1,1,1,1
+access_loading_loading,loading_loading.loading_loading,model_loading_loading,base.group_user,1,1,1,1
+access_destination_destination,destination_destination.destination_destination,model_destination_destination,base.group_user,1,1,1,1
+

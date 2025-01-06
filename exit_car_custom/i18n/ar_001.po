@@ -1,0 +1,423 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* exit_car_custom
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 17.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-01-01 21:13+0000\n"
+"PO-Revision-Date: 2025-01-01 21:13+0000\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: exit_car_custom
+#: model:ir.ui.menu,name:exit_car_custom.car_movement_all
+msgid "All Movements"
+msgstr "جميع الحركات"
+
+#. module: exit_car_custom
+#: model:ir.model.fields,field_description:exit_car_custom.field_car_car__car_Brand
+msgid "Brand"
+msgstr "الماركة"
+
+#. module: exit_car_custom
+#: model:ir.model.fields,field_description:exit_car_custom.field_exit_exit__car_id
+#: model:ir.model.fields,field_description:exit_car_custom.field_loading_loading__car_id
+msgid "Car"
+msgstr "السيارات"
+
+#. module: exit_car_custom
+#: model:ir.model.fields,field_description:exit_car_custom.field_car_car__car_data
+msgid "Car Data"
+msgstr "بيانات الجرار"
+
+#. module: exit_car_custom
+#: model:ir.model,name:exit_car_custom.model_exit_exit
+msgid "Car Exit Date"
+msgstr "بيانات خروج السيارات"
+
+#. module: exit_car_custom
+#: model:ir.model.fields,field_description:exit_car_custom.field_car_car__car_license
+msgid "Car License"
+msgstr "الرقم المعدنى"
+
+#. module: exit_car_custom
+#: model_terms:ir.ui.view,arch_db:exit_car_custom.exit_car_view_form
+msgid "Car Loading Data"
+msgstr "بيانات حمولة السيارة"
+
+#. module: exit_car_custom
+#: model:ir.ui.menu,name:exit_car_custom.car_movement_menu_root
+msgid "Car Movement"
+msgstr " اوامر شغل السيارات "
+
+#. module: exit_car_custom
+#: model:ir.model.fields,field_description:exit_car_custom.field_car_car__car_unit_number
+msgid "Car Unit Number"
+msgstr "رقم الوحدة"
+
+#. module: exit_car_custom
+#: model:ir.actions.act_window,name:exit_car_custom.exit_car_custom_action
+msgid "Cars Movement Status"
+msgstr "اوامر الشغل"
+
+#. module: exit_car_custom
+#: model:ir.model,name:exit_car_custom.model_car_car
+msgid "CarsCustom"
+msgstr ""
+
+#. module: exit_car_custom
+#: model:ir.model.fields,field_description:exit_car_custom.field_loading_loading__client_name
+msgid "Client"
+msgstr "العميل"
+
+#. module: exit_car_custom
+#: model:ir.model.fields,field_description:exit_car_custom.field_loading_loading__portion_client
+msgid "Client Portion"
+msgstr "حصة العميل"
+
+#. module: exit_car_custom
+#: model:ir.model.fields,field_description:exit_car_custom.field_car_car__create_uid
+#: model:ir.model.fields,field_description:exit_car_custom.field_destination_destination__create_uid
+#: model:ir.model.fields,field_description:exit_car_custom.field_driver_driver__create_uid
+#: model:ir.model.fields,field_description:exit_car_custom.field_exit_exit__create_uid
+#: model:ir.model.fields,field_description:exit_car_custom.field_garage_garage__create_uid
+#: model:ir.model.fields,field_description:exit_car_custom.field_governorate_governorate__create_uid
+#: model:ir.model.fields,field_description:exit_car_custom.field_loading_loading__create_uid
+#: model:ir.model.fields,field_description:exit_car_custom.field_manufacturing_manufacturing__create_uid
+msgid "Created by"
+msgstr ""
+
+#. module: exit_car_custom
+#: model:ir.model.fields,field_description:exit_car_custom.field_car_car__create_date
+#: model:ir.model.fields,field_description:exit_car_custom.field_destination_destination__create_date
+#: model:ir.model.fields,field_description:exit_car_custom.field_driver_driver__create_date
+#: model:ir.model.fields,field_description:exit_car_custom.field_exit_exit__create_date
+#: model:ir.model.fields,field_description:exit_car_custom.field_garage_garage__create_date
+#: model:ir.model.fields,field_description:exit_car_custom.field_governorate_governorate__create_date
+#: model:ir.model.fields,field_description:exit_car_custom.field_loading_loading__create_date
+#: model:ir.model.fields,field_description:exit_car_custom.field_manufacturing_manufacturing__create_date
+msgid "Created on"
+msgstr ""
+
+#. module: exit_car_custom
+#: model:ir.model,name:exit_car_custom.model_destination_destination
+#: model:ir.model.fields,field_description:exit_car_custom.field_loading_loading__download_destination
+msgid "Destination"
+msgstr "جهة التحميل"
+
+#. module: exit_car_custom
+#: model:ir.model.fields,field_description:exit_car_custom.field_loading_loading__discharge_direction
+msgid "Direction"
+msgstr "جهة التفريغ"
+
+#. module: exit_car_custom
+#: model:ir.model.fields,field_description:exit_car_custom.field_car_car__display_name
+#: model:ir.model.fields,field_description:exit_car_custom.field_destination_destination__display_name
+#: model:ir.model.fields,field_description:exit_car_custom.field_driver_driver__display_name
+#: model:ir.model.fields,field_description:exit_car_custom.field_exit_exit__display_name
+#: model:ir.model.fields,field_description:exit_car_custom.field_garage_garage__display_name
+#: model:ir.model.fields,field_description:exit_car_custom.field_governorate_governorate__display_name
+#: model:ir.model.fields,field_description:exit_car_custom.field_loading_loading__display_name
+#: model:ir.model.fields,field_description:exit_car_custom.field_manufacturing_manufacturing__display_name
+msgid "Display Name"
+msgstr ""
+
+#. module: exit_car_custom
+#: model:ir.model.fields,field_description:exit_car_custom.field_exit_exit__distance
+msgid "Distance"
+msgstr "المسافة المقطوعة"
+
+#. module: exit_car_custom
+#: model:ir.model.fields,field_description:exit_car_custom.field_loading_loading__attachment_number
+msgid "Document"
+msgstr "رقم المستند"
+
+#. module: exit_car_custom
+#: model:ir.model.fields,field_description:exit_car_custom.field_car_car__driver
+#: model:ir.ui.menu,name:exit_car_custom.driver_custom_menu
+msgid "Driver"
+msgstr "السائقين"
+
+#. module: exit_car_custom
+#: model:ir.model,name:exit_car_custom.model_driver_driver
+msgid "Driver Custom"
+msgstr ""
+
+#. module: exit_car_custom
+#: model:ir.model.fields,field_description:exit_car_custom.field_car_car__driver_license_number
+#: model:ir.model.fields,field_description:exit_car_custom.field_driver_driver__driver_license_number
+msgid "Driver License Number"
+msgstr "رقم رخصة السائق"
+
+#. module: exit_car_custom
+#: model:ir.model.fields,field_description:exit_car_custom.field_car_car__driver_sold_name
+#: model:ir.model.fields,field_description:exit_car_custom.field_driver_driver__driver_sold_name
+msgid "Driver Sold Name"
+msgstr "اسم التباع"
+
+#. module: exit_car_custom
+#: model:ir.actions.act_window,name:exit_car_custom.driver_custom_action
+msgid "Drivers Data"
+msgstr "بيانات السائقين"
+
+#. module: exit_car_custom
+#: model:ir.model.fields,field_description:exit_car_custom.field_loading_loading__enter_empty_date
+msgid "Empty Entry"
+msgstr "دخول التفريغ"
+
+#. module: exit_car_custom
+#: model:ir.model.fields,field_description:exit_car_custom.field_loading_loading__exit_empty_date
+msgid "Empty Exit"
+msgstr "خروج التفريغ"
+
+#. module: exit_car_custom
+#: model:ir.model.fields,field_description:exit_car_custom.field_loading_loading__empty_quantity
+msgid "Empty Quantity"
+msgstr "كمية التفريغ"
+
+#. module: exit_car_custom
+#: model:ir.model.fields,field_description:exit_car_custom.field_loading_loading__manufacturing_entry_data
+msgid "Entry Data"
+msgstr "دخول المصنع"
+
+#. module: exit_car_custom
+#: model:ir.model.fields,field_description:exit_car_custom.field_exit_exit__exit_date
+#: model:ir.model.fields,field_description:exit_car_custom.field_loading_loading__manufacturing_exit_data
+msgid "Exit Data"
+msgstr "خروج المصنع"
+
+#. module: exit_car_custom
+#: model:ir.model,name:exit_car_custom.model_garage_garage
+msgid "Garage"
+msgstr "الجراج"
+
+#. module: exit_car_custom
+#: model:ir.model,name:exit_car_custom.model_governorate_governorate
+#: model:ir.model.fields,field_description:exit_car_custom.field_car_car__governorate_id
+msgid "Governorate"
+msgstr "المحافظة"
+
+#. module: exit_car_custom
+#: model:ir.model.fields,field_description:exit_car_custom.field_car_car__id
+#: model:ir.model.fields,field_description:exit_car_custom.field_destination_destination__id
+#: model:ir.model.fields,field_description:exit_car_custom.field_driver_driver__id
+#: model:ir.model.fields,field_description:exit_car_custom.field_exit_exit__id
+#: model:ir.model.fields,field_description:exit_car_custom.field_garage_garage__id
+#: model:ir.model.fields,field_description:exit_car_custom.field_governorate_governorate__id
+#: model:ir.model.fields,field_description:exit_car_custom.field_loading_loading__id
+#: model:ir.model.fields,field_description:exit_car_custom.field_manufacturing_manufacturing__id
+msgid "ID"
+msgstr ""
+
+#. module: exit_car_custom
+#: model:ir.model.fields,field_description:exit_car_custom.field_car_car__write_uid
+#: model:ir.model.fields,field_description:exit_car_custom.field_destination_destination__write_uid
+#: model:ir.model.fields,field_description:exit_car_custom.field_driver_driver__write_uid
+#: model:ir.model.fields,field_description:exit_car_custom.field_exit_exit__write_uid
+#: model:ir.model.fields,field_description:exit_car_custom.field_garage_garage__write_uid
+#: model:ir.model.fields,field_description:exit_car_custom.field_governorate_governorate__write_uid
+#: model:ir.model.fields,field_description:exit_car_custom.field_loading_loading__write_uid
+#: model:ir.model.fields,field_description:exit_car_custom.field_manufacturing_manufacturing__write_uid
+msgid "Last Updated by"
+msgstr ""
+
+#. module: exit_car_custom
+#: model:ir.model.fields,field_description:exit_car_custom.field_car_car__write_date
+#: model:ir.model.fields,field_description:exit_car_custom.field_destination_destination__write_date
+#: model:ir.model.fields,field_description:exit_car_custom.field_driver_driver__write_date
+#: model:ir.model.fields,field_description:exit_car_custom.field_exit_exit__write_date
+#: model:ir.model.fields,field_description:exit_car_custom.field_garage_garage__write_date
+#: model:ir.model.fields,field_description:exit_car_custom.field_governorate_governorate__write_date
+#: model:ir.model.fields,field_description:exit_car_custom.field_loading_loading__write_date
+#: model:ir.model.fields,field_description:exit_car_custom.field_manufacturing_manufacturing__write_date
+msgid "Last Updated on"
+msgstr ""
+
+#. module: exit_car_custom
+#: model:ir.model.fields,help:exit_car_custom.field_car_car__car_license
+#: model:ir.model.fields,help:exit_car_custom.field_car_car__trailer_license
+msgid "License plate number of the vehicle (i = plate number for a car)"
+msgstr ""
+
+#. module: exit_car_custom
+#: model:ir.model.fields,field_description:exit_car_custom.field_car_car__exit_ids
+msgid "Loading Data"
+msgstr "بيانات التحميل"
+
+#. module: exit_car_custom
+#: model:ir.model.fields,field_description:exit_car_custom.field_loading_loading__loading_quantity
+msgid "Loading Quantity"
+msgstr "الكمية المحملة"
+
+#. module: exit_car_custom
+#: model:ir.model,name:exit_car_custom.model_loading_loading
+msgid "LoadingMovementData"
+msgstr ""
+
+#. module: exit_car_custom
+#: model:ir.model,name:exit_car_custom.model_manufacturing_manufacturing
+#: model:ir.model.fields,field_description:exit_car_custom.field_car_car__manufacturing_id
+msgid "Manufacturing"
+msgstr "المصنع"
+
+#. module: exit_car_custom
+#: model:ir.model.fields,field_description:exit_car_custom.field_car_car__move_ids
+msgid "Movement Data"
+msgstr "بيانات الحركات"
+
+#. module: exit_car_custom
+#: model_terms:ir.ui.view,arch_db:exit_car_custom.exit_car_view_form
+msgid "Movement Loading Data"
+msgstr "بيانات التحميل"
+
+#. module: exit_car_custom
+#: model:ir.ui.menu,name:exit_car_custom.car_movement_menu_sub
+msgid "Movements"
+msgstr "الحركات"
+
+#. module: exit_car_custom
+#: model:ir.model.fields,field_description:exit_car_custom.field_car_car__name
+#: model:ir.model.fields,field_description:exit_car_custom.field_destination_destination__name
+#: model:ir.model.fields,field_description:exit_car_custom.field_driver_driver__name
+#: model:ir.model.fields,field_description:exit_car_custom.field_exit_exit__name
+#: model:ir.model.fields,field_description:exit_car_custom.field_garage_garage__name
+#: model:ir.model.fields,field_description:exit_car_custom.field_governorate_governorate__name
+#: model:ir.model.fields,field_description:exit_car_custom.field_loading_loading__name
+#: model:ir.model.fields,field_description:exit_car_custom.field_manufacturing_manufacturing__name
+msgid "Name"
+msgstr ""
+
+#. module: exit_car_custom
+#: model:ir.model.fields,field_description:exit_car_custom.field_car_car__national_id
+#: model:ir.model.fields,field_description:exit_car_custom.field_driver_driver__national_id
+msgid "National Id"
+msgstr "الرقم القومى"
+
+#. module: exit_car_custom
+#: model:ir.model.fields,field_description:exit_car_custom.field_loading_loading__notes
+msgid "Note"
+msgstr "الملاحظات"
+
+#. module: exit_car_custom
+#: model:ir.model.fields,field_description:exit_car_custom.field_loading_loading__product_id
+msgid "Product"
+msgstr "المنتج"
+
+#. module: exit_car_custom
+#: model:ir.model.fields,field_description:exit_car_custom.field_exit_exit__return_date
+msgid "Return Data"
+msgstr "بيانات العودة"
+
+#. module: exit_car_custom
+#: model:ir.model.fields,field_description:exit_car_custom.field_exit_exit__secret_line
+msgid "Secret Line"
+msgstr "خط السير"
+
+#. module: exit_car_custom
+#: model:ir.model.fields,field_description:exit_car_custom.field_exit_exit__Start_meter_reading
+msgid "Start Meter Reading"
+msgstr "قرءاة عداد البداية"
+
+#. module: exit_car_custom
+#: model:ir.model.fields,field_description:exit_car_custom.field_car_car__garage
+msgid "The garage"
+msgstr "الجراج"
+
+#. module: exit_car_custom
+#: model:ir.model.fields,field_description:exit_car_custom.field_car_car__trailer_data
+msgid "Trailer Data"
+msgstr "بيانات المقطورة"
+
+#. module: exit_car_custom
+#: model:ir.model.fields,field_description:exit_car_custom.field_car_car__trailer_license
+msgid "Trailer License"
+msgstr "الرقم المعدنى"
+
+#. module: exit_car_custom
+#: model:ir.model.fields,field_description:exit_car_custom.field_car_car__trailer_loading
+msgid "Trailer Loading"
+msgstr "حمولة المقطورة"
+
+#. module: exit_car_custom
+#: model:ir.model.fields,field_description:exit_car_custom.field_car_car__trailer_unit_number
+msgid "Trailer Unit Number"
+msgstr "رقم الوحدة"
+
+#. module: exit_car_custom
+#: model_terms:ir.ui.view,arch_db:exit_car_custom.car_movement_view_tree
+msgid "car_movement_tree"
+msgstr ""
+
+#. module: exit_car_custom
+#: model_terms:ir.ui.view,arch_db:exit_car_custom.driver_view_form
+msgid "driver_form"
+msgstr ""
+
+#. module: exit_car_custom
+#: model_terms:ir.ui.view,arch_db:exit_car_custom.driver_view_tree
+msgid "driver_tree"
+msgstr ""
+
+#. module: exit_car_custom
+#: model_terms:ir.ui.view,arch_db:exit_car_custom.exit_car_view_form
+msgid "exit_car_form"
+msgstr ""
+
+#. module: exit_car_custom
+#: model_terms:ir.ui.view,arch_db:exit_car_custom.exit_car_view_form
+msgid "exit_date"
+msgstr ""
+
+#. module: exit_car_custom
+#: model_terms:ir.ui.view,arch_db:exit_car_custom.exit_car_view_form
+msgid "move_date"
+msgstr ""
+
+
+#. module: exit_car_custom
+#: model:ir.ui.menu,name:exit_car_custom.sold_custom_menu
+msgid "Sold"
+msgstr "التباع"
+
+#. module: exit_car_custom
+#: model:ir.actions.act_window,name:exit_car_custom.sold_custom_action
+msgid "Sold Data"
+msgstr "بيانات التباع"
+
+#. module: exit_car_custom
+#: model:ir.model.fields,field_description:exit_car_custom.field_car_car__national_id
+#: model:ir.model.fields,field_description:exit_car_custom.field_sold_sold__national_id
+msgid "National Id"
+msgstr "الرقم القومى"
+
+
+
+#. module: exit_car_custom
+#: model:ir.model.fields,field_description:exit_car_custom.field_destination_destination__name
+#: model:ir.model.fields,field_description:exit_car_custom.field_driver_driver__name
+#: model:ir.model.fields,field_description:exit_car_custom.field_exit_exit__name
+#: model:ir.model.fields,field_description:exit_car_custom.field_garage_garage__name
+#: model:ir.model.fields,field_description:exit_car_custom.field_governorate_governorate__name
+#: model:ir.model.fields,field_description:exit_car_custom.field_loading_loading__name
+#: model:ir.model.fields,field_description:exit_car_custom.field_manufacturing_manufacturing__name
+#: model:ir.model.fields,field_description:exit_car_custom.field_sold_sold__name
+msgid "Name"
+msgstr "الاسم"
+
+#. module: exit_car_custom
+#: model:ir.model.fields,field_description:exit_car_custom.field_car_car__name
+msgid "Name"
+msgstr "أمر شغل رقم"
+
+
+
+#. module: exit_car_custom
+#: model:ir.model.fields,field_description:exit_car_custom.field_car_car__driver_sold_name
+msgid "Driver Sold Name"
+msgstr "اسم التباع"

@@ -1,0 +1,155 @@
+<odoo>
+    <data noupdate="1">
+        <record id="seq_request_request" model="ir.sequence">
+            <field name="name">Car Request Sequence</field>
+            <field name="code">request.request</field>
+            <field name="prefix">CR-</field>
+            <field name="padding">5</field>
+            <field name="number_increment">1</field>
+        </record>
+        <record id="car_maintenance_action" model="ir.actions.act_window">
+            <field name="name">Maintenance Request</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">request.request</field>
+            <field name="view_mode">tree,kanban,form,search</field>
+        </record>
+        <!-- Kanban View -->
+
+        <record id="car_maintenance_view_form" model="ir.ui.view">
+            <field name="name">car.maintenance.view.form</field>
+            <field name="model">request.request</field>
+            <field name="arch" type="xml">
+                <form string="car_maintenance_form">
+                    <header>
+                        <button name="action_confirm" string="Confirm" class="btn-primary" data-hotkey="q"
+                                invisible="state  not in 'draft'"
+                                type="object"/>
+
+                        <button name="action_cancel" string="Cancel" class="btn-primary" data-hotkey="q"
+                                invisible="state not in 'draft'"
+                                type="object"/>
+                        <button name="action_create_inspection" string="Inspection" class="btn-primary" data-hotkey="q"
+                                invisible="state not in 'confirmed'"
+                                type="object"/>
+                        <button name="reset_to_draft" string="Reset To Draft" class="btn-primary" data-hotkey="q"
+                                invisible="state not in 'cancel'"
+                                type="object"/>
+                        <field name="state" widget="statusbar"/>
+                    </header>
+
+                    <sheet>
+                        <div name="button_box" class="oe_button_box">
+                            <button class="oe_stat_button" type="object"
+                                    name="action_open_inspections" icon="fa-book">
+                                <div class="o_stat_info">
+                                    <span class="o_stat_text">Inspections</span>
+                                </div>
+                            </button>
+                        </div>
+                        <br/>
+                        <group col="3">
+
+                            <group></group>
+                            <group>
+                                <field name="name" readonly="1"/>
+                            </group>
+                            <group>
+
+                            </group>
+                        </group>
+                        <group col="3">
+                            <group>
+                                <field name="date"/>
+                                <field name="technical_name"/>
+                                <field name="malfunction"/>
+                            </group>
+                            <group>
+                                <field name="malfunction_type"/>
+                                <field name="malfunction_natural"/>
+                            </group>
+                            <group>
+                                <field name="car_unit_number"/>
+                                <field name="car_license"/>
+                                <field name="vehicle"/>
+                                <field name="car_Brand"/>
+                                <field name="kilometer"/>
+                            </group>
+                        </group>
+                        <notebook>
+                            <page string="car Maintenance Discreption">
+                                <field name="discreption_ids" widget="one2many_list">
+                                    <tree string="car_maintenance_data" editable="bottom">
+                                        <field name="name"/>
+                                        <field name="discreption"/>
+                                    </tree>
+                                </field>
+                            </page>
+                        </notebook>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+        <record id="car_maintenance_view_kanban" model="ir.ui.view">
+            <field name="name">car.maintenance.view.kanban</field>
+            <field name="model">request.request</field>
+            <field name="arch" type="xml">
+                <kanban>
+                    <field name="name"/>
+                    <field name="date"/>
+                    <field name="technical_name"/>
+                    <field name="malfunction"/>
+                    <field name="vehicle"/>
+                    <templates>
+                        <t t-name="kanban-box">
+                            <div class="oe_kanban_global_click">
+                                <strong>
+                                    <field name="name"/>
+                                </strong>
+                                <div>
+                                    <span>Date:
+                                        <field name="date"/>
+                                    </span>
+                                </div>
+                                <div>
+                                    <span>Technician:
+                                        <field name="technical_name"/>
+                                    </span>
+                                </div>
+                                <div>
+                                    <span>Malfunction:
+                                        <field name="malfunction"/>
+                                    </span>
+                                </div>
+                                <div>
+                                    <span>Vehicle:
+                                        <field name="vehicle"/>
+                                    </span>
+                                </div>
+                            </div>
+                        </t>
+                    </templates>
+                </kanban>
+            </field>
+        </record>
+        <menuitem id="car_maintenance_menu_root" name="Car Maintenance"/>
+        <!--        <menuitem id="car_maintenance_menu_root_menu_sub" name="Maintenance Request" parent="car_maintenance_menu_root" sequence="1"/>-->
+        <menuitem id="car_maintenance_all" name="Maintenance Request" parent="car_maintenance_menu_root" sequence="1"
+                  action="car_maintenance_action"/>
+
+        <record id="car_maintenance_view_tree" model="ir.ui.view">
+            <field name="name">car.maintenance.view.tree</field>
+            <field name="model">request.request</field>
+            <field name="arch" type="xml">
+                <tree string="car_maintenance_tree">
+                    <field name="name"/>
+                    <field name="date"/>
+                    <field name="technical_name"/>
+                    <field name="malfunction"/>
+                    <field name="malfunction_type"/>
+                    <field name="malfunction_natural"/>
+                    <field name="vehicle"/>
+                </tree>
+            </field>
+        </record>
+    </data>
+</odoo>

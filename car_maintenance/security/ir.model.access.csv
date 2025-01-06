@@ -1,0 +1,7 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_request_request,request_request.request_request,model_request_request,base.group_user,1,1,1,1
+access_request_discreption,request_discreption.request_discreption,model_request_discreption,base.group_user,1,1,1,1
+access_inspection_inspection,inspection_inspection.inspection_inspection,model_inspection_inspection,base.group_user,1,1,1,1
+access_inspection_line,inspection_line.inspection_line,model_inspection_line,base.group_user,1,1,1,1
+access_car_order,car_order.car_order,model_car_order,base.group_user,1,1,1,1
+access_order_line,order_line.order_line,model_order_line,base.group_user,1,1,1,1

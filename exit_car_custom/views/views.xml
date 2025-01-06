@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="exit_car_custom_action" model="ir.actions.act_window">
+            <field name="name">Cars Movement Status</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">car.car</field>
+            <field name="view_mode">tree,kanban,form,search</field>
+        </record>
+        <record id="exit_car_view_form" model="ir.ui.view">
+            <field name="name">exit_car_view_form</field>
+            <field name="model">car.car</field>
+            <field name="arch" type="xml">
+                <form string="exit_car_form">
+                    <sheet>
+                        <group  col="3">
+
+                            <group></group>
+                            <group>
+                                <field name="name" readonly="1"/>
+                            </group>
+                            <group>
+
+                            </group>
+                        </group>
+                        <group col="3">
+                            <group>
+                                <field name="garage"/>
+                                <field name="governorate_id"/>
+                                <field name="manufacturing_id"/>
+                            </group>
+                            <group>
+                                <field name="car_data"/>
+                                <field name="car_unit_number"/>
+                                <field name="car_license"/>
+                                <field name="car_Brand"/>
+                            </group>
+                            <group>
+                                <field name="trailer_data"/>
+                                <field name="trailer_unit_number"/>
+                                <field name="trailer_license"/>
+                                <field name="trailer_loading"/>
+                            </group>
+                        </group>
+                        <group col="2">
+                            <group>
+                                <field name="driver"/>
+                                <field name="driver_license_number"/>
+                            </group>
+                            <group>
+                                <field name="driver_sold_name"/>
+                                <field name="national_id"/>
+                            </group>
+                        </group>
+                        <notebook>
+                            <page string="Car Loading Data">
+                                <field name="exit_ids" widget="one2many_list">
+                                    <tree string="exit_date" editable="bottom">
+                                        <field name="exit_date"/>
+                                        <field name="Start_meter_reading"/>
+                                        <field name="return_date"/>
+                                        <field name="distance"/>
+                                        <field name="secret_line"/>
+                                    </tree>
+                                </field>
+                            </page>
+                        </notebook>
+                        <notebook>
+                            <page string="Movement Loading Data">
+                                <field name="move_ids" widget="one2many_list">
+                                    <tree string="move_date" editable="bottom">
+                                        <field name="attachment_number"/>
+                                        <field name="download_destination"/>
+                                        <field name="product_id"/>
+                                        <field name="manufacturing_entry_data"/>
+                                        <field name="manufacturing_exit_data"/>
+                                        <field name="portion_client"/>
+                                        <field name="loading_quantity"/>
+                                        <field name="discharge_direction"/>
+                                        <field name="client_name"/>
+                                        <field name="empty_quantity"/>
+                                        <field name="enter_empty_date"/>
+                                        <field name="exit_empty_date"/>
+                                        <field name="notes"/>
+                                    </tree>
+                                </field>
+                            </page>
+                        </notebook>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+        <record id="car_movement_view_tree" model="ir.ui.view">
+            <field name="name">car.movement.view.tree</field>
+            <field name="model">car.car</field>
+            <field name="arch" type="xml">
+                <tree string="car_movement_tree">
+                    <field name="name"/>
+                    <field name="garage"/>
+                    <field name="governorate_id"/>
+                    <field name="manufacturing_id"/>
+                    <field name="car_data"/>
+                    <field name="car_unit_number"/>
+                    <field name="car_license"/>
+                    <field name="car_Brand"/>
+                    <field name="trailer_data"/>
+                    <field name="trailer_unit_number"/>
+                    <field name="trailer_license"/>
+                    <field name="trailer_loading"/>
+                </tree>
+            </field>
+        </record>
+        <!-- Kanban View -->
+        <record id="car_movement_view_kanban" model="ir.ui.view">
+            <field name="name">car.movement.view.kanban</field>
+            <field name="model">car.car</field>
+            <field name="arch" type="xml">
+                <kanban>
+                    <field name="name"/>
+                    <field name="governorate_id"/>
+                    <templates>
+                        <t t-name="kanban-box">
+                            <div class="oe_kanban_global_click">
+                                <strong>
+                                    <field name="name"/>
+                                </strong>
+                                <div>
+                                    <span>
+                                        <field name="car_license"/>
+                                    </span>
+                                </div>
+                                <div>
+                                    <span>
+                                        <field name="garage"/>
+                                    </span>
+                                </div>
+                            </div>
+                        </t>
+                    </templates>
+                </kanban>
+            </field>
+        </record>
+        <!-- This Menu Item must have a parent and an action -->
+        <menuitem id="car_movement_menu_root" name="Car Movement"/>
+        <menuitem id="car_movement_menu_sub" name="Movements" parent="car_movement_menu_root" sequence="1"/>
+        <menuitem id="car_movement_all" name="All Movements" parent="car_movement_menu_sub" sequence="0"
+                  action="exit_car_custom_action"/>
+
+        <menuitem id="driver_custom_menu" name="Driver" parent="car_movement_menu_root"
+                  action="exit_car_custom.driver_custom_action" sequence="10"/>
+        <menuitem id="sold_custom_menu" name="Sold" parent="car_movement_menu_root"
+                  action="exit_car_custom.sold_custom_action" sequence="11"/>
+
+
+        <record id="seq_car_car" model="ir.sequence">
+            <field name="name">Car Sequence</field>
+            <field name="code">car.car</field>
+            <field name="prefix">CAR</field>
+            <field name="padding">4</field>
+            <field name="number_next">1</field>
+            <field name="number_increment">1</field>
+        </record>
+
+    </data>
+</odoo>
