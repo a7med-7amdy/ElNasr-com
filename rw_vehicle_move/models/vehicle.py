@@ -442,6 +442,7 @@ class FleetVehicle(models.Model):
         string='Trailer',
         required=False)
 
+
     @api.model
     def create(self, values):
         res = super(FleetVehicle, self).create(values)

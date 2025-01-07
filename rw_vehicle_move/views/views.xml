@@ -13,7 +13,6 @@
                     <field name="service_id"/>
                     <field name="analytic_account_id"/>
                     <field name="trailer"/>
-
                 </xpath>
 
             </field>
@@ -66,8 +65,6 @@
                                 <field name="purchase_id" readonly="state!='draft'"/>
                                 <field name="invoice_id"  readonly="state!='draft'"/>
                             </group>
-
-
                         </group>
                     </sheet>
                 </form>

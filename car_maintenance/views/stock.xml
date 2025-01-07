@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<odoo>
+    <!-- Define the new tree view -->
+    <record model="ir.ui.view" id="view_product_stock_tree_custom">
+        <field name="name">product.product.stock.tree.custom</field>
+        <field name="model">product.product</field>
+        <field name="arch" type="xml">
+            <tree sample="1" js_class="stock_report_list_view" duplicate="0">
+                <field name="id" column_invisible="True"/>
+                <field name="display_name" string="Product"/>
+                <field name="categ_id" optional="hide"/>
+                <field name="default_code" optional="show"/>
+                <field name="uom_id" string="Unit" groups="uom.group_uom" options="{'no_create': True}"/>
+                <field name="qty_available" string="On Hand" sum="Total On Hand"/>
+                <field name="free_qty" string="Free to Use" sum="Total Free to Use"/>
+                <field name="total_value" string="Total Value" sum="Total Free to Use"/>
+            </tree>
+        </field>
+    </record>
+
+    <!-- Define an action to use the new tree view -->
+    <record model="ir.actions.act_window" id="action_product_stock_tree_custom">
+        <field name="name">Stock Reporting</field>
+        <field name="res_model">product.product</field>
+        <field name="view_mode">tree</field>
+        <field name="view_id" ref="view_product_stock_tree_custom"/>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Create new stock records here.
+            </p>
+        </field>
+    </record>
+
+    <!-- Define a new menu item -->
+    <menuitem id="menu_stock_reporting_custom"
+              name="Stock Reporting"
+              parent="car_maintenance_menu_root"
+              action="action_product_stock_tree_custom"
+              sequence="10"/>
+</odoo>

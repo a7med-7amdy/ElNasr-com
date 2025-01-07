@@ -38,6 +38,7 @@ class CarRequestForMaintenance(models.Model):
         required=True)
     car_unit_number = fields.Char(related='vehicle.unit_number',
                                   readonly=True)
+
     car_license = fields.Char(related='vehicle.license_plate',
                               readonly=True)
     car_Brand = fields.Char(

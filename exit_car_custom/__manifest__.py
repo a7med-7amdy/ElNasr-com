@@ -10,7 +10,7 @@
     'installable': True,
     'application': True,
     'sequence': 7,
-    'depends': ['base','contract_custom'],
+    'depends': ['base','car_maintenance'],
     'data': [
         'security/ir.model.access.csv',
         'views/driver.xml',

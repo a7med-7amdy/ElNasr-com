@@ -91,7 +91,7 @@
                 </tree>
             </field>
         </record>
-        <menuitem id="car_inspection_all" name="Car Inspection Request" parent="car_maintenance_menu_root" sequence="2"
+        <menuitem id="car_inspection_all" name="Car Inspection Request" parent="car_maintenance_menu_root_menu_sub"
                   action="car_inspection_action"/>
     </data>
 </odoo>

@@ -7,12 +7,14 @@
     'website': "hamdy company",
     'category': 'Cars',
     'version': '1.2',
-    'depends': ['base','rw_vehicle_move'],
+    'depends': ['base','fleet','rw_vehicle_move','stock','hr',],
     'data': [
         'security/ir.model.access.csv',
         'views/views.xml',
         'views/car_inspection.xml',
         'views/car_order.xml',
+        'views/fleet.xml',
+        'views/stock.xml',
         'views/templates.xml',
     ],
     # only loaded in demonstration mode

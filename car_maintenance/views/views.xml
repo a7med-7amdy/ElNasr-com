@@ -1,5 +1,5 @@
 <odoo>
-    <data noupdate="1">
+    <data>
         <record id="seq_request_request" model="ir.sequence">
             <field name="name">Car Request Sequence</field>
             <field name="code">request.request</field>
@@ -132,8 +132,19 @@
             </field>
         </record>
         <menuitem id="car_maintenance_menu_root" name="Car Maintenance"/>
-        <!--        <menuitem id="car_maintenance_menu_root_menu_sub" name="Maintenance Request" parent="car_maintenance_menu_root" sequence="1"/>-->
-        <menuitem id="car_maintenance_all" name="Maintenance Request" parent="car_maintenance_menu_root" sequence="1"
+
+        <!-- Sub Menu -->
+        <menuitem id="car_maintenance_menu_root_menu_sub"
+                  name="Maintenance"
+                  parent="car_maintenance_menu_root"/>
+
+
+
+
+        <!-- Action Menu -->
+        <menuitem id="car_maintenance_all"
+                  name="Maintenance Request"
+                  parent="car_maintenance_menu_root_menu_sub"
                   action="car_maintenance_action"/>
 
         <record id="car_maintenance_view_tree" model="ir.ui.view">
