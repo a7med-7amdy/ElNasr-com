@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
     <data>
-         <record id="fleet_vehicle_view_form_service_custom" model="ir.ui.view">
+        <record id="fleet_vehicle_view_form_service_custom" model="ir.ui.view">
             <field name="name">fleet.vehicle</field>
             <field name="model">fleet.vehicle</field>
             <field name="inherit_id" ref="fleet.fleet_vehicle_view_form"/>
@@ -11,7 +11,25 @@
                     <field name="brand" invisible="trailer"/>
                     <field name="loading" invisible="not trailer"/>
                 </xpath>
+                <xpath expr="//notebook/page[@name='note']" position="after">
+                    <page string="Tools" name="tools">
+                        <label for="tools_ids">Vehicles Tools</label>
+                        <field name="tools_ids" widget='many2many_tags'/>
+                        <field name="tools_group" invisible="0"/>
+                    </page>
+                </xpath>
 
+            </field>
+        </record>
+        <record id="fleet_vehicle_view_search_group_by_tools" model="ir.ui.view">
+            <field name="name">fleet.vehicle.search.group.by.tools</field>
+            <field name="model">fleet.vehicle</field>
+            <field name="inherit_id" ref="fleet.fleet_vehicle_view_search"/> <!-- Reference the existing search view -->
+            <field name="arch" type="xml">
+                <xpath expr="//filter[@name='inactive']" position="after">
+					<separator />
+                    <filter name="group_by_tools" string="Tools" context="{'group_by': 'tools_group'}" />
+                </xpath>
             </field>
         </record>
     </data>

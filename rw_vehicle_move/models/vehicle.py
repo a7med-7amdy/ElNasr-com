@@ -407,7 +407,7 @@ class FleetVehicleMoves(models.Model):
                 }))
 
                 po = self.env['purchase.order'].create({
-                    'partner_id': rec.partner_id.id,
+                    'partner_id': rec.customer_share.id,
                     'order_line': lines,
                     'contract_id': rec.contract_id.id,
                 })

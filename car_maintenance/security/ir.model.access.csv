@@ -6,5 +6,12 @@ access_inspection_line,inspection_line.inspection_line,model_inspection_line,bas
 access_car_order,car_order.car_order,model_car_order,base.group_user,1,1,1,1
 access_order_line,order_line.order_line,model_order_line,base.group_user,1,1,1,1
 access_material_requisition_car_repair,material_requisition_car_repair.material_requisition_car_repair,model_material_requisition_car_repair,base.group_user,1,1,1,1
-access_material_purchase_requisition_line,material_purchase_requisition_line.material_purchase_requisition_line,model_material_purchase_requisition_line,base.group_user,1,1,1,1
 access_account_analytic_custom,account_analytic_custom.account_analytic_custom,model_account_analytic_custom,base.group_user,1,1,1,1
+access_tire_tire,tire_tire.tire_tire,model_tire_tire,base.group_user,1,1,1,1
+access_tire_type,tire_type.tire_type,model_tire_type,base.group_user,1,1,1,1
+access_oil_oil,oil_oil.oil_oil,model_oil_oil,base.group_user,1,1,1,1
+access_oil_line,oil_line.oil_line,model_oil_line,base.group_user,1,1,1,1
+access_oil_type,oil_type.oil_type,model_oil_type,base.group_user,1,1,1,1
+access_filter_filter,filter_filter.filter_filter,model_filter_filter,base.group_user,1,1,1,1
+access_change_change,change_change.change_change,model_change_change,base.group_user,1,1,1,1
+access_tools_tools,tools_tools.tools_tools,model_tools_tools,base.group_user,1,1,1,1

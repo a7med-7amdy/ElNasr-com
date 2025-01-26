@@ -116,17 +116,17 @@ class CarTechnicalInspectionLines(models.Model):
         required=False)
     received_faults = fields.Text(
         string='Received Faults',
-        required=True)
+        required=False)
     maintenance_specialist_inspection = fields.Text(
         string="specialist",
-        required=True)
+        required=False)
     maintenance_specialist_decision = fields.Text(
         string="Decision",
-        required=True)
+        required=False)
     fault_technician = fields.Many2one(
         comodel_name='hr.employee',
         string='Fault Technician',
-        required=True)
+        required=False)
     notes = fields.Text(
         string="Notes",
         required=False)
@@ -134,6 +134,9 @@ class CarTechnicalInspectionLines(models.Model):
         comodel_name='inspection.inspection',
         string='inspection id',
         required=False)
+    company_id = fields.Many2one('res.company', string='Company', change_default=True,
+                                 default=lambda self: self.env.company)
+
 
     @api.model
     def create(self, vals):

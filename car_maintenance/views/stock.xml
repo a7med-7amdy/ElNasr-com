@@ -31,6 +31,32 @@
             </p>
         </field>
     </record>
+    <!-- Inherit Form View to Modify it -->
+    <record id="purchase_order_custom" model="ir.ui.view">
+        <field name="name">purchase.order.custom</field>
+        <field name="model">purchase.order</field>
+        <field name="inherit_id" ref="purchase.purchase_order_form"/>
+        <field name="arch" type="xml">
+
+            <xpath expr="//field[@name='picking_type_id']" position="after">
+                <field name="origin_car_order_id"/>
+            </xpath>
+
+        </field>
+    </record>
+    <!-- Inherit Form View to Modify it -->
+    <record id="stock_picking_form_custom" model="ir.ui.view">
+        <field name="name">stock.picking.form.custom</field>
+        <field name="model">stock.picking</field>
+        <field name="inherit_id" ref="stock.view_picking_form"/>
+        <field name="arch" type="xml">
+
+            <xpath expr="//field[@name='origin']" position="after">
+               <field name="picking_id"/>
+            </xpath>
+
+        </field>
+    </record>
 
     <!-- Define a new menu item -->
     <menuitem id="menu_stock_reporting_custom"
@@ -38,4 +64,31 @@
               parent="car_maintenance_menu_root"
               action="action_product_stock_tree_custom"
               sequence="10"/>
+
+
+      <!-- Fleet Menus -->
+    <record id="action_open_fleet_vehicle" model="ir.actions.act_window">
+        <field name="name">Fleet Vehicles</field>
+        <field name="res_model">fleet.vehicle</field>
+        <field name="view_mode">tree,form</field>
+        <field name="domain">[('trailer', '=', False)]</field>
+    </record>
+    <record id="action_open_fleet_trailer" model="ir.actions.act_window">
+        <field name="name">Fleet Vehicles</field>
+        <field name="res_model">fleet.vehicle</field>
+        <field name="view_mode">tree,form</field>
+        <field name="domain">[('trailer', '!=', False)]</field>
+    </record>
+
+    <!-- Define a menu item that uses the action -->
+    <menuitem id="menu_vehicles"
+              name="Vehicles"
+              parent="car_maintenance_menu_root"
+              action="action_open_fleet_vehicle"
+              sequence="11"/>
+    <menuitem id="menu_trailers"
+              name="Trailers"
+              parent="car_maintenance_menu_root"
+              action="action_open_fleet_trailer"
+              sequence="12"/>
 </odoo>

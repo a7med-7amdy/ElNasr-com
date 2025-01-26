@@ -13,3 +13,7 @@ class PartnerCustomForContract(models.Model):
     commercial_registration_number = fields.Char(
         string='Commercial Registration Number',
         required=False)
+    is_coa_installed = fields.Integer(
+        string='',
+        required=False)
+

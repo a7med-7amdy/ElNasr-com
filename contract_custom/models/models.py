@@ -192,7 +192,7 @@ class ContractsCustom(models.Model):
                 }))
 
             po = self.env['purchase.order'].create({
-                'partner_id': rec.customer.id,
+                'partner_id': rec.vendor.id,
                 'contract_id': rec.id,
                 'order_line': lines,
             })

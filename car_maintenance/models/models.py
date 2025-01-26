@@ -27,11 +27,15 @@ class CarRequestForMaintenance(models.Model):
         selection=[('internal', 'Internal'),
                    ('external', 'External'), ],default='internal',
         required=False, )
+
     malfunction_natural = fields.Selection(
         string='Malfunction Natural',
         selection=[('natural_disaster', 'Natural Disaster'),
                    ('misuse', 'Misuse'), ],default='misuse',
         required=False, )
+    reason = fields.Text(
+        string="Reason",
+        required=False)
     vehicle= fields.Many2one(
         comodel_name='fleet.vehicle',
         string='Vehicle',
@@ -63,6 +67,8 @@ class CarRequestForMaintenance(models.Model):
         compute="_compute_inspection_count",
         store=False
     )
+    company_id = fields.Many2one('res.company', string='Company', change_default=True,
+                                 default=lambda self: self.env.company)
 
     @api.depends('name')  # Depends on the name because inspections are created based on the request
     def _compute_inspection_count(self):
@@ -82,6 +88,7 @@ class CarRequestForMaintenance(models.Model):
             'domain': [('request_id', '=', self.id)],
             'context': {'default_vehicle': self.vehicle.id},
         }
+
 
     def action_confirm(self):
         for rec in self:
@@ -139,6 +146,8 @@ class RequestDiscreption(models.Model):
         comodel_name='request.request',
         string='request',
         required=False)
+    company_id = fields.Many2one('res.company', string='Company', change_default=True,
+                                 default=lambda self: self.env.company)
 
     @api.model
     def create(self, vals):

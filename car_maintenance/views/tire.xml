@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="seq_tire_tire" model="ir.sequence">
+            <field name="name">Tire Sequence</field>
+            <field name="code">tire.tire</field>
+            <field name="prefix">TIRE-</field>
+            <field name="padding">5</field>
+            <field name="number_next">1</field>
+        </record>
+        <record id="tire_action" model="ir.actions.act_window">
+            <field name="name">Tire Inspection</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">tire.tire</field>
+            <field name="view_mode">kanban,tree,form</field>
+        </record>
+        <record id="tire_view_form" model="ir.ui.view">
+            <field name="name">tire_view_form</field>
+            <field name="model">tire.tire</field>
+            <field name="arch" type="xml">
+                <form string="tire_form">
+                    <header>
+                        <button name="action_confirm" string="Confirm" class="btn-primary" data-hotkey="q"
+                                invisible="state  not in 'draft'"
+                                type="object"/>
+
+                        <button name="action_cancel" string="Cancel" class="btn-primary" data-hotkey="q"
+                                invisible="state not in 'draft'"
+                                type="object"/>
+                        <button name="reset_to_draft" string="Reset To Draft" class="btn-primary" data-hotkey="q"
+                                invisible="state not in 'cancel'"
+                                type="object"/>
+                        <field name="state" widget="statusbar"/>
+                    </header>
+
+                    <sheet>
+                        <group>
+                            <group>
+                                <field name="name"/>
+                                <field name="kilometer"/>
+                                <field name="change_date"/>
+                            </group>
+                            <group>
+                                <field name="tire_type"/>
+                                <field name="year_of_manufacturing"/>
+                                <field name="number_of_tires"/>
+                            </group>
+                        </group>
+                        <field name="notes" class="oe_inline" placeholder="Please Fill Notes About This Car ..."/>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="tire_view_tree" model="ir.ui.view">
+            <field name="name">tire_view_tree</field>
+            <field name="model">tire.tire</field>
+            <field name="arch" type="xml">
+                <tree string="tire_tree">
+                    <field name="name"/>
+                    <field name="kilometer"/>
+                    <field name="change_date"/>
+                    <field name="tire_type"/>
+                    <field name="year_of_manufacturing"/>
+                    <field name="number_of_tires"/>
+                </tree>
+            </field>
+        </record>
+
+        <menuitem id="menu_tires"
+                  name="Tires"
+                  parent="car_maintenance_menu_root"
+                  action="tire_action"
+                  sequence="13"/>
+    </data>
+</odoo>

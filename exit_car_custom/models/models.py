@@ -27,7 +27,7 @@ class CarsCustom(models.Model):
         string='Governorate',
         required=True)
     manufacturing_id = fields.Many2one(
-        comodel_name='manufacturing.manufacturing',
+        comodel_name='res.partner',
         string='Manufacturing',
         required=False)
     car_data = fields.Many2one(

@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <!-- Inherit Form View to Modify it -->
+        <record id="car_company_base_custom" model="ir.ui.view">
+            <field name="name">company.base.custom</field>
+            <field name="model">res.company</field>
+            <field name="inherit_id" ref="base.view_company_form"/>
+            <field name="arch" type="xml">
+
+                <xpath expr="//field[@name='currency_id']" position="before">
+                    <field name="location_id" invisible="1"/>
+                    <field name="location_dest_id" invisible="1"/>
+                </xpath>
+
+            </field>
+        </record>
+        <!-- Inherit Form View to Modify it -->
+        <record id="car_res_config_settings_view_form_custom" model="ir.ui.view">
+            <field name="name">res.config.settings.view.form.custom</field>
+            <field name="model">res.config.settings</field>
+            <field name="inherit_id" ref="base.res_config_settings_view_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//form" position="inside">
+                    <app data-string="car_order_custom" string="Car Order Piking" name="Car Orders">
+                        <block title="Locations Of Internal Picking For Maintenance">
+                            <setting help="set Locations For Picking Of Maintenance Requests Please">
+                                <label for="location_id" class="col-lg-3 o_light_label"/>
+                                <field name="location_id"/>
+                                <br/>
+                               <label for="location_dest_id" class="col-lg-3 o_light_label"/>
+                                <field name="location_dest_id"/>
+                            </setting>
+                        </block>
+                    </app>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>

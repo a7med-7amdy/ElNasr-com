@@ -66,6 +66,7 @@
                             <group>
                                 <field name="malfunction_type"/>
                                 <field name="malfunction_natural"/>
+                                <field name="reason" invisible="malfunction_natural not in 'misuse'"/>
                             </group>
                             <group>
                                 <field name="car_unit_number"/>

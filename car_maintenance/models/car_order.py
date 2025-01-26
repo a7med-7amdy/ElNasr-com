@@ -1,4 +1,6 @@
 from odoo import api, fields, models ,_
+from odoo.exceptions import UserError
+
 
 class CarJobOrder(models.Model):
     _name = 'car.order'
@@ -63,7 +65,6 @@ class CarJobOrder(models.Model):
         copy=False,
     )
 
-
     requisition_count = fields.Integer(
         compute='_compute_requisition_counter',
         string="Requisition Count",
@@ -84,6 +85,148 @@ class CarJobOrder(models.Model):
         string='Currency',
         default=lambda self: self.env.company.currency_id,
     )
+
+    # Existing fields ...
+
+    purchase_order_ids = fields.One2many(
+        'purchase.order',
+        'origin_car_order_id',
+        string='Purchase Orders',
+        readonly=True,
+    )
+    purchase_order_count = fields.Integer(
+        compute='_compute_purchase_order_count',
+        string='Purchase Order Count',
+    )
+    partner_id = fields.Many2one(
+        comodel_name='res.partner',
+        string='Vendor',
+        required=False)
+    total_cost_requisitions = fields.Monetary(
+        string='Total Cost',
+        compute='_compute_total_cost',
+        currency_field='currency_id',  # Use the appropriate currency field
+        store=True,
+        help='Total cost from all material requisitions'
+    )
+
+    total_required_quantity = fields.Float(
+        string='Total Required Quantity',
+        compute='_compute_total_required_quantity',
+        store=True,
+        help='Total required quantity calculated from all material requisitions'
+    )
+
+    @api.depends('material_requisition_car_repair_ids.required')
+    def _compute_total_required_quantity(self):
+        for order in self:
+            total_required = sum(line.required for line in order.material_requisition_car_repair_ids)
+            order.total_required_quantity = total_required
+
+    @api.depends('material_requisition_car_repair_ids.total_cost')
+    def _compute_total_cost(self):
+        for order in self:
+            total = sum(order.material_requisition_car_repair_ids.mapped('total_cost'))
+            order.total_cost_requisitions = total
+
+
+    def create_purchase_order(self):
+        """Create Purchase Orders for lines with product_uom_qty = 0."""
+        for rec in self:
+            if not rec.material_requisition_car_repair_ids:
+                raise UserError(_('Please create requisition lines first!'))
+
+            # zero_qty_lines = rec.material_requisition_car_repair_ids.filtered(lambda l: l.product_uom_qty == 0)
+            # if not zero_qty_lines:
+            #     raise UserError(_('No lines with product quantity equal to 0 to create a Purchase Order.'))
+
+            purchase_order = self.env['purchase.order'].create({
+                'partner_id': rec.partner_id.id if hasattr(rec, 'partner_id') else None,
+                'origin': rec.name,
+                'origin_car_order_id': rec.id,
+                'order_line': [
+                    (0, 0, {
+                        'product_id': line.product_id.id,
+                        'name': line.description or line.product_id.name,
+                        'product_qty': line.required if line.required else 1,  # Default qty for purchase
+                        'product_uom': line.product_uom.id,
+                        'price_unit': line.product_id.standard_price,
+                        'date_planned': fields.Datetime.now(),
+                    }) for line in rec.material_requisition_car_repair_ids
+                ],
+            })
+
+    @api.depends('purchase_order_ids')
+    def _compute_purchase_order_count(self):
+        for record in self:
+            record.purchase_order_count = len(record.purchase_order_ids)
+
+    def action_open_purchase_orders(self):
+        """Open related purchase orders."""
+        self.ensure_one()
+        return {
+            'name': _('Purchase Orders'),
+            'type': 'ir.actions.act_window',
+            'res_model': 'purchase.order',
+            'view_mode': 'tree,form',
+            'domain': [('origin_car_order_id', '=', self.id)],
+        }
+
+
+    picking_ids = fields.One2many('stock.picking', 'picking_id', string="Pickings", readonly=True)
+    picking_count = fields.Integer(string="Picking Count", compute='_compute_picking_count', readonly=True)
+    company_id = fields.Many2one('res.company', string='Company', change_default=True,
+                                 default=lambda self: self.env.company)
+
+    def _compute_picking_count(self):
+        for record in self:
+            record.picking_count = len(record.picking_ids)
+
+    def action_open_pickings(self):
+        """Open related picking orders."""
+        picking_ids = self.env['stock.picking'].search([('origin', '=', self.name)]).ids
+        return {
+            'name': _('Car Picking Order'),
+            'view_type': 'form',
+            'view_mode': 'tree,form',
+            'res_model': 'stock.picking',  # Corrected model
+            'type': 'ir.actions.act_window',
+            'domain': [('picking_id', '=', self.id)],
+            'context': self.env.context,
+        }
+
+    def create_piking_order(self):
+        """Create an Internal Picking Order for Car Orders."""
+        for rec in self:
+            if not rec.company_id.location_id or not rec.company_id.location_dest_id:
+                raise UserError(
+                    _('Please set Source and Destination Locations for Internal Picking in the Company Settings!'))
+            if not rec.material_requisition_car_repair_ids:
+                raise UserError(
+                    _('Please Create Requisition Lines!'))
+
+            picking = self.env['stock.picking'].sudo().create({
+                'picking_type_id': self.env.ref('stock.picking_type_internal').id,
+                'location_id': rec.company_id.location_id.id,
+                'location_dest_id': rec.company_id.location_dest_id.id,
+                'picking_id': rec.id,
+                'partner_id': rec.partner_id.id if hasattr(rec, 'partner_id') else None,
+                'origin': rec.name,  # Link the picking to the current record
+                'move_ids_without_package': [
+                    (0, 0, {
+                        'name': line.description,
+                        'product_id': line.product_id.id,
+                        'product_uom_qty': line.product_uom_qty,
+                        'product_uom': line.product_uom.id,
+                        'location_id': rec.company_id.location_id.id,
+                        'location_dest_id': rec.company_id.location_dest_id.id,
+                    }) for line in rec.material_requisition_car_repair_ids if line.product_uom_qty > 0
+                ],
+            })
+
+
+
+
 
     @api.depends('timesheet_line_ids.time_difference', 'timesheet_line_ids.total_cost')
     def _compute_total_hours_and_cost(self):
@@ -124,81 +267,12 @@ class CarJobOrder(models.Model):
             rec.state = 'done'
 
 
-
-
-class HrTimesheetSheetCustom(models.Model):
-    _name = 'account.analytic.custom'
-    _description = 'HrTimesheetSheet'
-
-    name = fields.Char(
-        string='',
-        required=False)
-
-
-
-    car_repair_request_id = fields.Many2one(
-        'car.order',
-        string="Repair Request"
-    )
-    employee_id = fields.Many2one(
-        comodel_name='hr.employee',
-        string='Employee',
-        required=False)
-    start_date = fields.Datetime(
-        string='Start Date',
-        required=False)
-    end_date = fields.Datetime(
-        string='End Date',
-        required=False)
-    time_difference = fields.Float(
-        string='Hours',
-        compute='_compute_time_difference',
-        store=True,
-        help="Difference in time (hours) between Start Date and End Date")
-    hourly_cost = fields.Monetary(
-        string='Hour Cost',related='employee_id.hourly_cost',readonly=False,
-        required=False)
-    total_cost = fields.Monetary(
-        string='Total', compute='_compute_total_cost', store=True,
-        required=False)
-    currency_id = fields.Many2one(
-        'res.currency',
-        string='Currency',
-        default=lambda self: self.env.company.currency_id,
-    )
-
-    @api.depends('hourly_cost','time_difference')
-    def _compute_total_cost(self):
-        for rec in self:
-            if rec.hourly_cost or rec.time_difference:
-                rec.total_cost = rec.time_difference * rec.hourly_cost
-            else:
-                rec.total_cost = 0
-
-    @api.depends('start_date', 'end_date')
-    def _compute_time_difference(self):
-        for record in self:
-            if record.start_date and record.end_date:
-                # Extract only the time part from datetime fields
-                start_time = record.start_date.time()
-                end_time = record.end_date.time()
-
-                # Convert time to seconds for difference calculation
-                start_seconds = (start_time.hour * 3600) + (start_time.minute * 60) + start_time.second
-                end_seconds = (end_time.hour * 3600) + (end_time.minute * 60) + end_time.second
-
-                # Calculate the difference in hours
-                diff_seconds = end_seconds - start_seconds
-                record.time_difference = diff_seconds / 3600.0
-            else:
-                record.time_difference = 0.0
-
-
-
 class CarOrderLine(models.Model):
     _name = 'order.line'
     _description = 'CarOrderLine'
 
+    company_id = fields.Many2one('res.company', string='Company', change_default=True,
+                                 default=lambda self: self.env.company)
     name = fields.Char(
         string='Name',readonly=True,
         required=False)
@@ -227,115 +301,6 @@ class CarOrderLine(models.Model):
         return super(CarOrderLine, self).write(vals)
 
 
-
-class MaterialRequisitionCarRepair(models.Model):
-    _name = "material.requisition.car.repair"
-    _description = 'material.requisition.car.repair'
-
-    requisition_id = fields.Many2one(
-        'car.order',
-        string='Requisitions',
-    )
-    custom_requisition_line_id = fields.Many2one(
-        'material.purchase.requisition.line',
-        string='Requisition Line',
-        copy=False,
-        readonly=True
-    )
-    # custom_material_requisition_id = fields.Many2one(
-    #     'material.purchase.requisition',
-    #     string='Material Requisition',
-    #     related ='custom_requisition_line_id.requisition_id',
-    #     copy=False,
-    #     readonly=True,
-    # )
-    product_id = fields.Many2one(
-        'product.product',
-        string='Product',
-        required=True,
-    )
-    qty = fields.Float(
-        string='Quantity',
-        default=1,
-        required=True,
-    )
-    uom = fields.Many2one(
-        'uom.uom',
-        string='Unit of Measure',
-        required=True,
-    )
-    description = fields.Char(
-        string='Description',
-        required=True,
-    )
-    requisition_type = fields.Selection(
-        selection=[
-                    ('internal','Internal Picking'),
-                    ('purchase','Purchase Order'),
-        ],
-        string='Requisition Action',
-        default='purchase',
-        required=True,
-    )
-
-    @api.onchange('product_id')
-    def onchange_product_id(self):
-        for rec in self:
-            rec.description = rec.product_id.name
-            rec.uom = rec.product_id.uom_id.id
-
-
-class MaterialPurchaseRequisitionLine(models.Model):
-    _name = "material.purchase.requisition.line"
-    _description = 'Material Purchase Requisition Lines'
-
-    requisition_id = fields.Many2one(
-        'material.purchase.requisition',
-        string='Requisitions',
-    )
-    product_id = fields.Many2one(
-        'product.product',
-        string='Product',
-        required=True,
-    )
-    #     layout_category_id = fields.Many2one(
-    #         'sale.layout_category',
-    #         string='Section',
-    #     )
-    description = fields.Char(
-        string='Description',
-        required=True,
-    )
-    qty = fields.Float(
-        string='Quantity',
-        default=1,
-        required=True,
-    )
-    uom = fields.Many2one(
-        'uom.uom',  # product.uom in odoo11
-        string='Unit of Measure',
-        required=True,
-    )
-    partner_id = fields.Many2many(
-        'res.partner',
-        string='Vendors',
-    )
-    requisition_type = fields.Selection(
-        selection=[
-            ('internal', 'Internal Picking'),
-            ('purchase', 'Purchase Order'),
-        ],
-        string='Requisition Action',
-        default='purchase',
-        required=True,
-    )
-
-    @api.onchange('product_id')
-    def onchange_product_id(self):
-        for rec in self:
-            # rec.description = rec.product_id.name
-            rec.description = rec.product_id.display_name
-            rec.uom = rec.product_id.uom_id.id
 
 
 
