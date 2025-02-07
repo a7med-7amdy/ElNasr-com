@@ -63,7 +63,7 @@ class CarTechnicalInspection(models.Model):
     def reset_to_draft(self):
         for rec in self:
             rec.state = 'draft'
-            
+
     def action_create_order(self):
         for rec in self:
             if rec.inspection_ids:
@@ -77,7 +77,16 @@ class CarTechnicalInspection(models.Model):
                         'discreption': line.received_faults
                     }) for line in rec.inspection_ids],
                 }
-                self.env['car.order'].create(order_vals)
+                order = self.env['car.order'].create(order_vals)
+
+                return {
+                    'name': 'Car Order',
+                    'type': 'ir.actions.act_window',
+                    'res_model': 'car.order',
+                    'view_mode': 'form',
+                    'res_id': order.id,  # Open the last created order
+                    'context': {'default_vehicle': rec.vehicle.id},
+                }
 
     @api.depends('name')  # Depends on the name because inspections are created based on the request
     def _compute_order_count(self):

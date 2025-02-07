@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 17.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-01-01 21:13+0000\n"
-"PO-Revision-Date: 2025-01-01 21:13+0000\n"
+"POT-Creation-Date: 2025-02-07 14:08+0000\n"
+"PO-Revision-Date: 2025-02-07 14:08+0000\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -90,6 +90,7 @@ msgstr "حصة العميل"
 #: model:ir.model.fields,field_description:exit_car_custom.field_governorate_governorate__create_uid
 #: model:ir.model.fields,field_description:exit_car_custom.field_loading_loading__create_uid
 #: model:ir.model.fields,field_description:exit_car_custom.field_manufacturing_manufacturing__create_uid
+#: model:ir.model.fields,field_description:exit_car_custom.field_sold_sold__create_uid
 msgid "Created by"
 msgstr ""
 
@@ -102,6 +103,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:exit_car_custom.field_governorate_governorate__create_date
 #: model:ir.model.fields,field_description:exit_car_custom.field_loading_loading__create_date
 #: model:ir.model.fields,field_description:exit_car_custom.field_manufacturing_manufacturing__create_date
+#: model:ir.model.fields,field_description:exit_car_custom.field_sold_sold__create_date
 msgid "Created on"
 msgstr ""
 
@@ -125,6 +127,7 @@ msgstr "جهة التفريغ"
 #: model:ir.model.fields,field_description:exit_car_custom.field_governorate_governorate__display_name
 #: model:ir.model.fields,field_description:exit_car_custom.field_loading_loading__display_name
 #: model:ir.model.fields,field_description:exit_car_custom.field_manufacturing_manufacturing__display_name
+#: model:ir.model.fields,field_description:exit_car_custom.field_sold_sold__display_name
 msgid "Display Name"
 msgstr ""
 
@@ -146,6 +149,7 @@ msgstr "السائقين"
 
 #. module: exit_car_custom
 #: model:ir.model,name:exit_car_custom.model_driver_driver
+#: model:ir.model,name:exit_car_custom.model_sold_sold
 msgid "Driver Custom"
 msgstr ""
 
@@ -157,7 +161,6 @@ msgstr "رقم رخصة السائق"
 
 #. module: exit_car_custom
 #: model:ir.model.fields,field_description:exit_car_custom.field_car_car__driver_sold_name
-#: model:ir.model.fields,field_description:exit_car_custom.field_driver_driver__driver_sold_name
 msgid "Driver Sold Name"
 msgstr "اسم التباع"
 
@@ -180,6 +183,11 @@ msgstr "خروج التفريغ"
 #: model:ir.model.fields,field_description:exit_car_custom.field_loading_loading__empty_quantity
 msgid "Empty Quantity"
 msgstr "كمية التفريغ"
+
+#. module: exit_car_custom
+#: model:ir.model.fields,field_description:exit_car_custom.field_exit_exit__end_meter_reading
+msgid "End Meter"
+msgstr "نهاية العداد"
 
 #. module: exit_car_custom
 #: model:ir.model.fields,field_description:exit_car_custom.field_loading_loading__manufacturing_entry_data
@@ -212,6 +220,7 @@ msgstr "المحافظة"
 #: model:ir.model.fields,field_description:exit_car_custom.field_governorate_governorate__id
 #: model:ir.model.fields,field_description:exit_car_custom.field_loading_loading__id
 #: model:ir.model.fields,field_description:exit_car_custom.field_manufacturing_manufacturing__id
+#: model:ir.model.fields,field_description:exit_car_custom.field_sold_sold__id
 msgid "ID"
 msgstr ""
 
@@ -224,6 +233,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:exit_car_custom.field_governorate_governorate__write_uid
 #: model:ir.model.fields,field_description:exit_car_custom.field_loading_loading__write_uid
 #: model:ir.model.fields,field_description:exit_car_custom.field_manufacturing_manufacturing__write_uid
+#: model:ir.model.fields,field_description:exit_car_custom.field_sold_sold__write_uid
 msgid "Last Updated by"
 msgstr ""
 
@@ -236,6 +246,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:exit_car_custom.field_governorate_governorate__write_date
 #: model:ir.model.fields,field_description:exit_car_custom.field_loading_loading__write_date
 #: model:ir.model.fields,field_description:exit_car_custom.field_manufacturing_manufacturing__write_date
+#: model:ir.model.fields,field_description:exit_car_custom.field_sold_sold__write_date
 msgid "Last Updated on"
 msgstr ""
 
@@ -282,7 +293,6 @@ msgid "Movements"
 msgstr "الحركات"
 
 #. module: exit_car_custom
-#: model:ir.model.fields,field_description:exit_car_custom.field_car_car__name
 #: model:ir.model.fields,field_description:exit_car_custom.field_destination_destination__name
 #: model:ir.model.fields,field_description:exit_car_custom.field_driver_driver__name
 #: model:ir.model.fields,field_description:exit_car_custom.field_exit_exit__name
@@ -290,14 +300,25 @@ msgstr "الحركات"
 #: model:ir.model.fields,field_description:exit_car_custom.field_governorate_governorate__name
 #: model:ir.model.fields,field_description:exit_car_custom.field_loading_loading__name
 #: model:ir.model.fields,field_description:exit_car_custom.field_manufacturing_manufacturing__name
+#: model:ir.model.fields,field_description:exit_car_custom.field_sold_sold__name
 msgid "Name"
-msgstr ""
+msgstr "الاسم"
 
 #. module: exit_car_custom
 #: model:ir.model.fields,field_description:exit_car_custom.field_car_car__national_id
-#: model:ir.model.fields,field_description:exit_car_custom.field_driver_driver__national_id
+#: model:ir.model.fields,field_description:exit_car_custom.field_sold_sold__national_id
 msgid "National Id"
 msgstr "الرقم القومى"
+
+#. module: exit_car_custom
+#. odoo-python
+#: code:addons/exit_car_custom/models/models.py:0
+#: code:addons/exit_car_custom/models/models.py:0
+#: code:addons/exit_car_custom/models/models.py:0
+#: code:addons/exit_car_custom/models/models.py:0
+#, python-format
+msgid "New"
+msgstr ""
 
 #. module: exit_car_custom
 #: model:ir.model.fields,field_description:exit_car_custom.field_loading_loading__notes
@@ -320,9 +341,19 @@ msgid "Secret Line"
 msgstr "خط السير"
 
 #. module: exit_car_custom
+#: model:ir.ui.menu,name:exit_car_custom.sold_custom_menu
+msgid "Sold"
+msgstr "التباع"
+
+#. module: exit_car_custom
+#: model:ir.actions.act_window,name:exit_car_custom.sold_custom_action
+msgid "Sold Data"
+msgstr "بيانات التباع"
+
+#. module: exit_car_custom
 #: model:ir.model.fields,field_description:exit_car_custom.field_exit_exit__Start_meter_reading
-msgid "Start Meter Reading"
-msgstr "قرءاة عداد البداية"
+msgid "Start Meter"
+msgstr "بداية العداد"
 
 #. module: exit_car_custom
 #: model:ir.model.fields,field_description:exit_car_custom.field_car_car__garage
@@ -356,6 +387,7 @@ msgstr ""
 
 #. module: exit_car_custom
 #: model_terms:ir.ui.view,arch_db:exit_car_custom.driver_view_form
+#: model_terms:ir.ui.view,arch_db:exit_car_custom.sold_view_form
 msgid "driver_form"
 msgstr ""
 
@@ -371,53 +403,15 @@ msgstr ""
 
 #. module: exit_car_custom
 #: model_terms:ir.ui.view,arch_db:exit_car_custom.exit_car_view_form
-msgid "exit_date"
-msgstr ""
-
-#. module: exit_car_custom
-#: model_terms:ir.ui.view,arch_db:exit_car_custom.exit_car_view_form
 msgid "move_date"
 msgstr ""
 
-
 #. module: exit_car_custom
-#: model:ir.ui.menu,name:exit_car_custom.sold_custom_menu
-msgid "Sold"
-msgstr "التباع"
-
-#. module: exit_car_custom
-#: model:ir.actions.act_window,name:exit_car_custom.sold_custom_action
-msgid "Sold Data"
-msgstr "بيانات التباع"
-
-#. module: exit_car_custom
-#: model:ir.model.fields,field_description:exit_car_custom.field_car_car__national_id
-#: model:ir.model.fields,field_description:exit_car_custom.field_sold_sold__national_id
-msgid "National Id"
-msgstr "الرقم القومى"
-
-
-
-#. module: exit_car_custom
-#: model:ir.model.fields,field_description:exit_car_custom.field_destination_destination__name
-#: model:ir.model.fields,field_description:exit_car_custom.field_driver_driver__name
-#: model:ir.model.fields,field_description:exit_car_custom.field_exit_exit__name
-#: model:ir.model.fields,field_description:exit_car_custom.field_garage_garage__name
-#: model:ir.model.fields,field_description:exit_car_custom.field_governorate_governorate__name
-#: model:ir.model.fields,field_description:exit_car_custom.field_loading_loading__name
-#: model:ir.model.fields,field_description:exit_car_custom.field_manufacturing_manufacturing__name
-#: model:ir.model.fields,field_description:exit_car_custom.field_sold_sold__name
-msgid "Name"
-msgstr "الاسم"
+#: model_terms:ir.ui.view,arch_db:exit_car_custom.sold_view_tree
+msgid "sold_tree"
+msgstr ""
 
 #. module: exit_car_custom
 #: model:ir.model.fields,field_description:exit_car_custom.field_car_car__name
-msgid "Name"
+msgid "أمر شغل"
 msgstr "أمر شغل رقم"
-
-
-
-#. module: exit_car_custom
-#: model:ir.model.fields,field_description:exit_car_custom.field_car_car__driver_sold_name
-msgid "Driver Sold Name"
-msgstr "اسم التباع"

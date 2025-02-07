@@ -110,7 +110,16 @@ class CarRequestForMaintenance(models.Model):
                         'received_faults': line.discreption
                     }) for line in rec.discreption_ids],
                 }
-                self.env['inspection.inspection'].create(inspection_vals)
+                inspection = self.env['inspection.inspection'].create(inspection_vals)
+
+                return {
+                    'name': 'Inspections',
+                    'type': 'ir.actions.act_window',
+                    'res_model': 'inspection.inspection',
+                    'view_mode': 'form',
+                    'res_id': inspection.id,  # Open the last created inspection
+                    'context': {'default_vehicle': rec.vehicle.id},
+                }
 
 
 

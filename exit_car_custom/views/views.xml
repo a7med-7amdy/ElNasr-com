@@ -13,7 +13,7 @@
             <field name="arch" type="xml">
                 <form string="exit_car_form">
                     <sheet>
-                        <group  col="3">
+                        <group col="3">
 
                             <group></group>
                             <group>
@@ -55,12 +55,13 @@
                         <notebook>
                             <page string="Car Loading Data">
                                 <field name="exit_ids" widget="one2many_list">
-                                    <tree string="exit_date" editable="bottom">
-                                        <field name="exit_date"/>
-                                        <field name="Start_meter_reading"/>
-                                        <field name="return_date"/>
-                                        <field name="distance"/>
-                                        <field name="secret_line"/>
+                                    <tree string="Car Loading Data" editable="bottom">
+                                        <field name="exit_date" width="120"/>
+                                        <field name="Start_meter_reading" width="150"/>
+                                        <field name="end_meter_reading" width="150"/>
+                                        <field name="distance" width="100"/>
+                                        <field name="return_date" width="120"/>
+                                        <field name="secret_line" width="200"/>
                                     </tree>
                                 </field>
                             </page>

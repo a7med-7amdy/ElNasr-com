@@ -20,6 +20,7 @@
         'views/tire.xml',
         'views/oils.xml',
         'views/tools.xml',
+        'views/product.xml',
     ],
     # only loaded in demonstration mode
     'demo': [

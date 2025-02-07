@@ -8,9 +8,9 @@
         <field name="arch" type="xml">
             <tree sample="1" js_class="stock_report_list_view" duplicate="0">
                 <field name="id" column_invisible="True"/>
+                <field name="default_code" optional="show"/>
                 <field name="display_name" string="Product"/>
                 <field name="categ_id" optional="hide"/>
-                <field name="default_code" optional="show"/>
                 <field name="uom_id" string="Unit" groups="uom.group_uom" options="{'no_create': True}"/>
                 <field name="qty_available" string="On Hand" sum="Total On Hand"/>
                 <field name="free_qty" string="Free to Use" sum="Total Free to Use"/>
@@ -25,6 +25,7 @@
         <field name="res_model">product.product</field>
         <field name="view_mode">tree</field>
         <field name="view_id" ref="view_product_stock_tree_custom"/>
+        <field name="domain">['|', ('spare_parts', '=', True), ('row_material', '=', True)]</field>
         <field name="help" type="html">
             <p class="o_view_nocontent_smiling_face">
                 Create new stock records here.
@@ -41,6 +42,9 @@
             <xpath expr="//field[@name='picking_type_id']" position="after">
                 <field name="origin_car_order_id"/>
             </xpath>
+<!--            <xpath expr="//tree/field[@name='product_qty']" position="after">-->
+<!--                <field name="requisition_line"/>-->
+<!--            </xpath>-->
 
         </field>
     </record>
@@ -52,8 +56,12 @@
         <field name="arch" type="xml">
 
             <xpath expr="//field[@name='origin']" position="after">
-               <field name="picking_id"/>
+                <field name="picking_id"/>
+                <field name="vehicle"/>
             </xpath>
+<!--             <xpath expr="//tree/field[@name='product_id']" position="after">-->
+<!--                <field name="requisition_line"  column_invisible="0"/>-->
+<!--            </xpath>-->
 
         </field>
     </record>
@@ -66,7 +74,7 @@
               sequence="10"/>
 
 
-      <!-- Fleet Menus -->
+    <!-- Fleet Menus -->
     <record id="action_open_fleet_vehicle" model="ir.actions.act_window">
         <field name="name">Fleet Vehicles</field>
         <field name="res_model">fleet.vehicle</field>

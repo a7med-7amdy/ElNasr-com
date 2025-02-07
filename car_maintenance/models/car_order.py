@@ -116,6 +116,12 @@ class CarJobOrder(models.Model):
         store=True,
         help='Total required quantity calculated from all material requisitions'
     )
+    location_id = fields.Many2one(
+        'stock.location',
+        string='Source Location',
+        help='Default source location for internal transfers.',
+        required=False,
+    )
 
     @api.depends('material_requisition_car_repair_ids.required')
     def _compute_total_required_quantity(self):
@@ -129,32 +135,40 @@ class CarJobOrder(models.Model):
             total = sum(order.material_requisition_car_repair_ids.mapped('total_cost'))
             order.total_cost_requisitions = total
 
-
     def create_purchase_order(self):
         """Create Purchase Orders for lines with product_uom_qty = 0."""
-        for rec in self:
-            if not rec.material_requisition_car_repair_ids:
-                raise UserError(_('Please create requisition lines first!'))
+        self.ensure_one()  # Ensure this method is called on a single record
+        if not self.material_requisition_car_repair_ids:
+            raise UserError(_('Please create requisition lines first!'))
 
-            # zero_qty_lines = rec.material_requisition_car_repair_ids.filtered(lambda l: l.product_uom_qty == 0)
-            # if not zero_qty_lines:
-            #     raise UserError(_('No lines with product quantity equal to 0 to create a Purchase Order.'))
+        purchase_order = self.env['purchase.order'].create({
+            'partner_id': self.partner_id.id if hasattr(self, 'partner_id') else None,
+            'origin': self.name,
+            'origin_car_order_id': self.id,
+            'order_line': [
+                (0, 0, {
+                    'product_id': line.product_id.id,
+                    'name': line.description or line.product_id.name,
+                    'product_qty': line.required or 1,  # Default qty for purchase
+                    'product_uom': line.product_uom.id,
+                    'price_unit': line.product_id.standard_price,
+                    'date_planned': fields.Datetime.now(),
+                    'requisition_line': line.id,
+                }) for line in self.material_requisition_car_repair_ids
+            ],
+        })
 
-            purchase_order = self.env['purchase.order'].create({
-                'partner_id': rec.partner_id.id if hasattr(rec, 'partner_id') else None,
-                'origin': rec.name,
-                'origin_car_order_id': rec.id,
-                'order_line': [
-                    (0, 0, {
-                        'product_id': line.product_id.id,
-                        'name': line.description or line.product_id.name,
-                        'product_qty': line.required if line.required else 1,  # Default qty for purchase
-                        'product_uom': line.product_uom.id,
-                        'price_unit': line.product_id.standard_price,
-                        'date_planned': fields.Datetime.now(),
-                    }) for line in rec.material_requisition_car_repair_ids
-                ],
-            })
+        # Return action to open the created purchase order
+        return {
+            'name': _('Purchase Order'),
+            'view_type': 'form',
+            'view_mode': 'form',
+            'res_model': 'purchase.order',
+            'res_id': purchase_order.id,
+            'type': 'ir.actions.act_window',
+            'target': 'current',  # Open in the same window
+        }
+
 
     @api.depends('purchase_order_ids')
     def _compute_purchase_order_count(self):
@@ -198,7 +212,7 @@ class CarJobOrder(models.Model):
     def create_piking_order(self):
         """Create an Internal Picking Order for Car Orders."""
         for rec in self:
-            if not rec.company_id.location_id or not rec.company_id.location_dest_id:
+            if not rec.location_id or not rec.company_id.location_dest_id:
                 raise UserError(
                     _('Please set Source and Destination Locations for Internal Picking in the Company Settings!'))
             if not rec.material_requisition_car_repair_ids:
@@ -207,7 +221,7 @@ class CarJobOrder(models.Model):
 
             picking = self.env['stock.picking'].sudo().create({
                 'picking_type_id': self.env.ref('stock.picking_type_internal').id,
-                'location_id': rec.company_id.location_id.id,
+                'location_id': rec.location_id.id,
                 'location_dest_id': rec.company_id.location_dest_id.id,
                 'picking_id': rec.id,
                 'partner_id': rec.partner_id.id if hasattr(rec, 'partner_id') else None,
@@ -218,8 +232,9 @@ class CarJobOrder(models.Model):
                         'product_id': line.product_id.id,
                         'product_uom_qty': line.product_uom_qty,
                         'product_uom': line.product_uom.id,
-                        'location_id': rec.company_id.location_id.id,
+                        'location_id': rec.location_id.id,
                         'location_dest_id': rec.company_id.location_dest_id.id,
+                        'analytic_distribution': {rec.vehicle.analytic_account_id.id: 100},
                     }) for line in rec.material_requisition_car_repair_ids if line.product_uom_qty > 0
                 ],
             })

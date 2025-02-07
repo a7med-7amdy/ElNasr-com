@@ -15,7 +15,9 @@ class MaterialRequisitionCarRepair(models.Model):
         'product.product',
         string='Product',
         required=True,
+        domain="['|',('spare_parts', '=', True), ('row_material', '=', True)]"
     )
+
     qty = fields.Float(
         string='Quantity',
         default=1,
@@ -44,10 +46,8 @@ class MaterialRequisitionCarRepair(models.Model):
     product_on_hand_qty = fields.Float(
         string='On Hand',related='product_id.qty_available',
         required=False)
-    avg_cost = fields.Monetary(
-        related='product_id.avg_cost',
+    avg_cost = fields.Float(
         string="Cost",
-        currency_field='company_currency_id',  # Specify the currency field here
         required=False
     )
     company_currency_id = fields.Many2one(
