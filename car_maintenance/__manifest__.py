@@ -21,6 +21,9 @@
         'views/oils.xml',
         'views/tools.xml',
         'views/product.xml',
+        'views/oil_type.xml',
+        'views/change_type.xml',
+        'views/filter_type.xml',
     ],
     # only loaded in demonstration mode
     'demo': [

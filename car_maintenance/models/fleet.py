@@ -4,6 +4,14 @@ from odoo import api, fields, models
 class FleetVehicleCustom(models.Model):
     _inherit = 'fleet.vehicle'
 
+    
+    car_code = fields.Many2one(
+        comodel_name='code.code',
+        string='Car Code',
+        required=False)
+    _sql_constraints = [
+        ('unique_car_code', 'unique (car_code)', 'Please Add Unique Car Code .')
+    ]
 
     unit_number = fields.Char(
         string='Unit Number',
@@ -25,6 +33,59 @@ class FleetVehicleCustom(models.Model):
         compute="_compute_tools_group",
         store=True,
     )
+
+    car_order_ids = fields.One2many('car.order', 'vehicle', string="Car Orders")
+    inspection_ids = fields.One2many('inspection.inspection', 'vehicle', string="Inspections")
+    maintenance_request_ids = fields.One2many('request.request', 'vehicle', string="Maintenance Requests")
+
+    car_order_count = fields.Integer(string="Car Order Count", compute="_compute_car_order_count")
+    inspection_count = fields.Integer(string="Car Inspection Count", compute="_compute_inspection_count")
+    maintenance_request_count = fields.Integer(string="Car Maintenance Request Count", compute="_compute_maintenance_request_count")
+
+    @api.depends('car_order_ids')
+    def _compute_car_order_count(self):
+        for record in self:
+            record.car_order_count = len(record.car_order_ids)
+
+    @api.depends('inspection_ids')
+    def _compute_inspection_count(self):
+        for record in self:
+            record.inspection_count = len(record.inspection_ids)
+
+    @api.depends('maintenance_request_ids')
+    def _compute_maintenance_request_count(self):
+        for record in self:
+            record.maintenance_request_count = len(record.maintenance_request_ids)
+
+    def action_view_car_orders(self):
+        return {
+            'name': 'Car Orders',
+            'type': 'ir.actions.act_window',
+            'view_mode': 'tree,form',
+            'res_model': 'car.order',
+            'domain': [('vehicle', '=', self.id)],
+            'context': {'default_vehicle': self.id},
+        }
+
+    def action_view_inspections(self):
+        return {
+            'name': 'Technical Inspections',
+            'type': 'ir.actions.act_window',
+            'view_mode': 'tree,form',
+            'res_model': 'inspection.inspection',
+            'domain': [('vehicle', '=', self.id)],
+            'context': {'default_vehicle': self.id},
+        }
+
+    def action_view_maintenance_requests(self):
+        return {
+            'name': 'Maintenance Requests',
+            'type': 'ir.actions.act_window',
+            'view_mode': 'tree,form',
+            'res_model': 'request.request',
+            'domain': [('vehicle', '=', self.id)],
+            'context': {'default_vehicle': self.id},
+        }
 
     @api.model
     @api.depends('tools_ids')
@@ -81,16 +142,21 @@ class FleetVehicleCustom(models.Model):
         return super(FleetVehicleCustom, self).write(vals)
 
 
+
 class ToolsForCars(models.Model):
     _name = 'tools.tools'
-    _description = 'ToolsForCars'
+    _description = 'Tools For Cars'
 
-    name = fields.Char(
-        string='Tool Name',
-        required=True)
-    vehicle_ids = fields.Many2many(
-        comodel_name='fleet.vehicle',
-        string='Available Vehicle')
+    name = fields.Char(string="Reference", required=True, copy=False, readonly=True, default="New")
+    tool_name = fields.Char(string='Tool Name', required=True)
+    vehicle_ids = fields.Many2many(comodel_name='fleet.vehicle', string='Available Vehicles')
+
+    @api.model
+    def create(self, vals):
+        if vals.get('name', 'New') == 'New':
+            vals['name'] = self.env['ir.sequence'].next_by_code('tools.tools') or 'New'
+        return super(ToolsForCars, self).create(vals)
+
 
 
     @api.onchange('vehicle_ids')
@@ -116,5 +182,15 @@ class ToolsForCars(models.Model):
                 vehicle.tools_ids = [(4, self.id)]
 
         return super(ToolsForCars, self).write(vals)
+    
+class CarCode(models.Model):
+    _name = 'code.code'
+    _description = 'CarCode'
+
+    name = fields.Char()
+    vehicle_id = fields.Many2one('fleet.vehicle', string="Related Vehicle")
+
+    
+
 
 

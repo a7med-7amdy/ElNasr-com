@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <!-- Action for Change Type -->
+        <record id="change_type_action" model="ir.actions.act_window">
+            <field name="name">Change Type Configuration</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">change.change</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <!-- Form View for Change Type -->
+        <record id="change_type_view_form" model="ir.ui.view">
+            <field name="name">change.change.view.form</field>
+            <field name="model">change.change</field>
+            <field name="arch" type="xml">
+                <form string="Change Type Form">
+                    <sheet>
+                        <group>
+                            <field name="name"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <!-- Tree View for Change Type -->
+        <record id="change_type_view_tree" model="ir.ui.view">
+            <field name="name">change.change.view.tree</field>
+            <field name="model">change.change</field>
+            <field name="arch" type="xml">
+                <tree string="Change Type Tree">
+                    <field name="name"/>
+                </tree>
+            </field>
+        </record>
+
+        <!-- Configuration Menu -->
+        <menuitem id="configuration_car_maintenance_root" name="Configuration" sequence="20" parent="car_maintenance_menu_root"/>
+
+        <!-- Menu Item for Change Type -->
+        <menuitem id="change_type_menu" name="Change Type" parent="configuration_car_maintenance_root" action="change_type_action" sequence="2"/>
+    </data>
+</odoo>

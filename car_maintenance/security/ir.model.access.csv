@@ -15,3 +15,4 @@ access_oil_type,oil_type.oil_type,model_oil_type,base.group_user,1,1,1,1
 access_filter_filter,filter_filter.filter_filter,model_filter_filter,base.group_user,1,1,1,1
 access_change_change,change_change.change_change,model_change_change,base.group_user,1,1,1,1
 access_tools_tools,tools_tools.tools_tools,model_tools_tools,base.group_user,1,1,1,1
+access_code_code,code_code.code_code,model_code_code,base.group_user,1,1,1,1

@@ -25,7 +25,7 @@ class CarRequestForMaintenance(models.Model):
     malfunction_type = fields.Selection(
         string='Malfunction Type',
         selection=[('internal', 'Internal'),
-                   ('external', 'External'), ],default='internal',
+                   ('external', 'External'),('oil', 'Oil'), ],default='internal',
         required=False, )
 
     malfunction_natural = fields.Selection(
@@ -69,6 +69,57 @@ class CarRequestForMaintenance(models.Model):
     )
     company_id = fields.Many2one('res.company', string='Company', change_default=True,
                                  default=lambda self: self.env.company)
+    oil_ids = fields.One2many(
+        comodel_name='oil.line',
+        inverse_name='maintenance_id',
+        string='Oils',
+        required=False)
+    
+    
+    def action_create_oil_order(self):
+        for rec in self:
+            if rec.oil_ids:
+                order_vals = {
+                    'vehicle': rec.vehicle.id,
+                    'maintenance_id': rec.id,
+                    'kilometer': rec.kilometer,
+                    'oil_ids': [(0, 0, {
+                        'name': line.name,
+                        'car_code': line.car_code.id,
+                        'vehicle': line.vehicle.id,
+                        'oil_type': line.oil_type.id,
+                        'kilometer': line.kilometer,
+                        'time_start': line.time_start,
+                        'time_end': line.time_end,
+                        'difference': line.difference,
+                        'change_type': line.change_type.id,
+                        'oil_kilometer': line.oil_kilometer,
+                        'filter_km': line.filter_km,
+                        'filter_type': line.filter_type.id,
+                    }) for line in rec.oil_ids],
+                }
+                order = self.env['car.order'].create(order_vals)
+
+                return {
+                    'name': 'Car Oil Orders',
+                    'type': 'ir.actions.act_window',
+                    'res_model': 'car.order',
+                    'view_mode': 'form',
+                    'res_id': order.id,  # Open the last created order
+                    'context': {'default_vehicle': rec.vehicle.id},
+                }
+
+    def action_open_oil_orders(self):
+        for rec in self:
+            return {
+                'name': 'Car Oil Orders',
+                'type': 'ir.actions.act_window',
+                'res_model': 'car.order',
+                'view_mode': 'tree,form',
+                'domain': [('request_id', '=', self.id)],
+                'context': {'default_vehicle': rec.vehicle.id},
+            }
+
 
     @api.depends('name')  # Depends on the name because inspections are created based on the request
     def _compute_inspection_count(self):

@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <!-- Action for Filter Type -->
+        <record id="filter_type_action" model="ir.actions.act_window">
+            <field name="name">Filter Type Configuration</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">filter.filter</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <!-- Form View for Filter Type -->
+        <record id="filter_type_view_form" model="ir.ui.view">
+            <field name="name">filter.filter.view.form</field>
+            <field name="model">filter.filter</field>
+            <field name="arch" type="xml">
+                <form string="Filter Type Form">
+                    <sheet>
+                        <group>
+                            <field name="name"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <!-- Tree View for Filter Type -->
+        <record id="filter_type_view_tree" model="ir.ui.view">
+            <field name="name">filter.filter.view.tree</field>
+            <field name="model">filter.filter</field>
+            <field name="arch" type="xml">
+                <tree string="Filter Type Tree">
+                    <field name="name"/>
+                </tree>
+            </field>
+        </record>
+
+        <!-- Configuration Menu -->
+        <menuitem id="configuration_car_maintenance_root" name="Configuration" sequence="20" parent="car_maintenance_menu_root"/>
+
+        <!-- Menu Item for Filter Type -->
+        <menuitem id="filter_type_menu" name="Filter Type" parent="configuration_car_maintenance_root" action="filter_type_action" sequence="3"/>
+    </data>
+</odoo>

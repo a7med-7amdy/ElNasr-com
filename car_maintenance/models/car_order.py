@@ -122,6 +122,55 @@ class CarJobOrder(models.Model):
         help='Default source location for internal transfers.',
         required=False,
     )
+    oil_ids = fields.One2many(
+        comodel_name='oil.line',
+        inverse_name='order_id',
+        string='Oils',
+        required=False)
+    maintenance_id = fields.Many2one(
+        comodel_name='request.request',
+        string='Maintenance',
+        required=False)
+
+    # Many2many for labors from timesheets
+    labour_ids = fields.Many2many('hr.employee', string="Labours", compute="_compute_labour_ids", store=True)
+
+    # Total cost of timesheet labors
+    total_labour_cost = fields.Float(string="Total Labour Cost", compute="_compute_total_labour_cost", store=True)
+
+    # Many2many for products from requisition lines
+    product_ids = fields.Many2many('product.product', string="Products", compute="_compute_product_ids", store=True)
+
+    # Total cost of requisition products based on stock valuation layer
+    total_product_cost = fields.Float(string="Total Product Cost", compute="_compute_total_product_cost", store=True)
+
+    @api.depends('timesheet_line_ids.employee_id')
+    def _compute_labour_ids(self):
+        for order in self:
+            order.labour_ids = order.timesheet_line_ids.mapped('employee_id')
+
+    @api.depends('timesheet_line_ids.total_cost')
+    def _compute_total_labour_cost(self):
+        for order in self:
+            order.total_labour_cost = sum(order.timesheet_line_ids.mapped('total_cost'))
+
+    @api.depends('material_requisition_car_repair_ids.product_id')
+    def _compute_product_ids(self):
+        for order in self:
+            order.product_ids = order.material_requisition_car_repair_ids.mapped('product_id')
+
+    @api.depends('product_ids')
+    def _compute_total_product_cost(self):
+        for order in self:
+            total_cost = 0.0
+            for product in order.product_ids:
+                valuation_layer = self.env['stock.valuation.layer'].search([('product_id', '=', product.id)],
+                                                                           order="create_date desc", limit=1)
+                if valuation_layer:
+                    total_cost += valuation_layer.unit_cost * sum(
+                        order.material_requisition_car_repair_ids.filtered(lambda r: r.product_id == product).mapped(
+                            'product_uom_qty'))
+            order.total_product_cost = total_cost
 
     @api.depends('material_requisition_car_repair_ids.required')
     def _compute_total_required_quantity(self):

@@ -69,7 +69,7 @@ class HrTimesheetSheetCustom(models.Model):
                 end_seconds = (end_time.hour * 3600) + (end_time.minute * 60) + end_time.second
 
                 # Calculate the difference in hours
-                diff_seconds = end_seconds - start_seconds
+                diff_seconds =  end_seconds - start_seconds
                 record.time_difference = diff_seconds / 3600.0
             else:
                 record.time_difference = 0.0

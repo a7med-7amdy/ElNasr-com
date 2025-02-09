@@ -64,9 +64,21 @@ class CarsOilsMaintenanceLines(models.Model):
     name = fields.Char(
         string='Name',
         required=False)
+    maintenance_id = fields.Many2one(
+        comodel_name='request.request',
+        string='Maintenance',
+        required=False)
+    order_id = fields.Many2one(
+        comodel_name='car.order',
+        string='Order',
+        required=False)
     vehicle = fields.Many2one(
         comodel_name='fleet.vehicle',
         string='Vehicles',
+        required=False)
+    car_code = fields.Many2one(
+        comodel_name='code.code',
+        string='Car Code',
         required=False)
     oil_type = fields.Many2one(
         comodel_name='oil.type',
@@ -100,6 +112,31 @@ class CarsOilsMaintenanceLines(models.Model):
         comodel_name='oil.oil',
         string='oil',
         required=False)
+    time_start = fields.Datetime(string='Start Time', required=False)
+    time_end = fields.Datetime(string='End Time', required=False)
+
+    difference = fields.Float(
+        string='Hours',
+        compute='_compute_difference',
+        store=True
+    )
+
+    @api.onchange('car_code')
+    def _onchange_car_code(self):
+        if self.car_code:
+            vehicle = self.env['fleet.vehicle'].search([('car_code', '=', self.car_code.id)], limit=1)
+            if vehicle:
+                self.vehicle = vehicle if vehicle else False
+
+
+    @api.depends('time_start', 'time_end')
+    def _compute_difference(self):
+        for record in self:
+            if record.time_start and record.time_end:
+                duration = record.time_end - record.time_start
+                record.difference = duration.total_seconds() / 3600  # Convert seconds to hours
+            else:
+                record.difference = 0.0
 
     
     
@@ -123,8 +160,12 @@ class OilType(models.Model):
     _description = 'OilType'
 
     name = fields.Char()
-    
-
+    kilometer = fields.Float(
+        string='Kilometer',
+        required=False)
+    work_hours = fields.Float(
+        string='Work Hours',
+        required=False)
     
 
     

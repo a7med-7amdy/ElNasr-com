@@ -16,6 +16,7 @@
                         <group>
                             <group>
                                 <field name="name"/>
+                                <field name="tool_name"/>
                             </group>
                             <group>
                                 <field name="vehicle_ids" widget='many2many_tags'/>
@@ -31,9 +32,18 @@
             <field name="arch" type="xml">
                 <tree string="tools_tree">
                     <field name="name"/>
+                    <field name="tool_name"/>
                     <field name="vehicle_ids" widget='many2many_tags'/>
                 </tree>
             </field>
+        </record>
+        <record id="seq_tools_tools" model="ir.sequence">
+            <field name="name">Tools Sequence</field>
+            <field name="code">tools.tools</field>
+            <field name="prefix">tool/</field>
+            <field name="padding">6</field>
+            <field name="number_next">1</field>
+            <field name="number_increment">1</field>
         </record>
 
         <menuitem id="menu_tools"

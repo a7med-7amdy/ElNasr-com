@@ -55,6 +55,9 @@ class PurchaseOrderLinesCustom(models.Model):
         comodel_name='material.requisition.car.repair',
         string='Requisition',
         required=False)
+    product_on_hand_qty = fields.Float(
+        string='On Hand', related='product_id.qty_available',
+        required=False)
 
 
 class StockMovesLinesCustom(models.Model):

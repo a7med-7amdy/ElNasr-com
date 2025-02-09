@@ -39,7 +39,7 @@
                                 string="Create Purchase Order"
                                 type="object"
                                 class="btn-primary"
-                               invisible="state not in 'confirmed'"/>
+                                invisible="state not in 'confirmed'"/>
                         <field name="state" widget="statusbar"/>
                     </header>
                     <sheet>
@@ -99,7 +99,7 @@
                                         <field name="end_date"/>
                                         <field name="time_difference"/>
                                         <field name="employee_id"/>
-                                        <field name="hourly_cost"/>
+                                        <field name="hourly_cost" readonly="1"/>
                                         <field name="total_cost"/>
                                     </tree>
                                 </field>
@@ -122,12 +122,41 @@
                                         <field name="product_uom"/>
                                         <field name="avg_cost"/>
                                         <field name="total_cost"/>
-                                        <!--                                        <field name="custom_material_requisition_id"/>-->
                                     </tree>
                                 </field>
-                                 <group>
+                                <group>
                                     <field name="total_required_quantity" readonly="1"/>
                                     <field name="total_cost_requisitions" readonly="1"/>
+                                </group>
+                            </page>
+                            <page string="Oils">
+                                <field name="oil_ids" widget="one2many_list">
+                                    <tree string="oil_ids_data" editable="bottom">
+                                        <field name="car_code"/>
+                                        <field name="vehicle"/>
+                                        <field name="oil_type"/>
+                                        <field name="kilometer"/>
+                                        <field name="time_start"/>
+                                        <field name="time_end"/>
+                                        <field name="difference"/>
+                                        <field name="change_type"/>
+                                        <field name="oil_kilometer"/>
+                                        <field name="filter_km"/>
+                                        <field name="filter_type"/>
+                                    </tree>
+                                </field>
+                            </page>
+                            <!-- Job Costing Page -->
+                            <page string="Job Costing">
+                                <group>
+                                    <group>
+                                        <field name="labour_ids" widget="many2many_tags"/>
+                                        <field name="total_labour_cost" readonly="1"/>
+                                    </group>
+                                    <group>
+                                        <field name="product_ids" widget="many2many_tags"/>
+                                        <field name="total_product_cost" readonly="1"/>
+                                    </group>
                                 </group>
                             </page>
                         </notebook>

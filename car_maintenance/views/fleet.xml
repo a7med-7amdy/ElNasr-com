@@ -7,6 +7,7 @@
             <field name="inherit_id" ref="fleet.fleet_vehicle_view_form"/>
             <field name="arch" type="xml">
                 <xpath expr="//field[@name='driver_id']" position="after">
+                    <field name="car_code"/>
                     <field name="unit_number"/>
                     <field name="brand" invisible="trailer"/>
                     <field name="loading" invisible="not trailer"/>
@@ -18,7 +19,33 @@
                         <field name="tools_group" invisible="0"/>
                     </page>
                 </xpath>
+                <xpath expr="//sheet//div/button" position="after">
+                    <div class="oe_button_box" name="button_box">
+                        <button name="action_view_car_orders"
+                                type="object"
+                                class="oe_stat_button" string="Car Orders"
+                                icon="fa-car">
+                            <field name="car_order_count" string="Car Orders"/>
+                            <span>Orders</span>
+                        </button>
 
+                        <button name="action_view_inspections"
+                                type="object"
+                                class="oe_stat_button"
+                                icon="fa-search">
+                            <field name="inspection_count"/>
+                             <span>Inspection</span>
+                        </button>
+
+                        <button name="action_view_maintenance_requests"
+                                type="object"
+                                class="oe_stat_button"
+                                icon="fa-wrench">
+                            <field name="maintenance_request_count"/>
+                             <span>Maintenance</span>
+                        </button>
+                    </div>
+                </xpath>
             </field>
         </record>
         <record id="fleet_vehicle_view_search_group_by_tools" model="ir.ui.view">
@@ -27,8 +54,8 @@
             <field name="inherit_id" ref="fleet.fleet_vehicle_view_search"/> <!-- Reference the existing search view -->
             <field name="arch" type="xml">
                 <xpath expr="//filter[@name='inactive']" position="after">
-					<separator />
-                    <filter name="group_by_tools" string="Tools" context="{'group_by': 'tools_group'}" />
+                    <separator/>
+                    <filter name="group_by_tools" string="Tools" context="{'group_by': 'tools_group'}"/>
                 </xpath>
             </field>
         </record>

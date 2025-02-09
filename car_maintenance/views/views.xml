@@ -31,6 +31,9 @@
                         <button name="action_create_inspection" string="Inspection" class="btn-primary" data-hotkey="q"
                                 invisible="state not in 'confirmed'"
                                 type="object"/>
+                        <button name="action_create_oil_order" string="Oil Order" class="btn-primary" data-hotkey="q"
+                                invisible="state not in 'confirmed'"
+                                type="object"/>
                         <button name="reset_to_draft" string="Reset To Draft" class="btn-primary" data-hotkey="q"
                                 invisible="state not in 'cancel'"
                                 type="object"/>
@@ -43,6 +46,12 @@
                                     name="action_open_inspections" icon="fa-book">
                                 <div class="o_stat_info">
                                     <span class="o_stat_text">Inspections</span>
+                                </div>
+                            </button>
+                            <button class="oe_stat_button" type="object"
+                                    name="action_open_oil_orders" icon="fa-book">
+                                <div class="o_stat_info">
+                                    <span class="o_stat_text">Oil Orders</span>
                                 </div>
                             </button>
                         </div>
@@ -82,6 +91,23 @@
                                     <tree string="car_maintenance_data" editable="bottom">
                                         <field name="name"/>
                                         <field name="discreption"/>
+                                    </tree>
+                                </field>
+                            </page>
+                            <page string="Oils" invisible="malfunction_type not in 'oil'">
+                                <field name="oil_ids" widget="one2many_list">
+                                    <tree string="oil_ids_data" editable="bottom">
+                                        <field name="car_code"/>
+                                        <field name="vehicle"/>
+                                        <field name="oil_type"/>
+                                        <field name="kilometer"/>
+                                        <field name="time_start"/>
+                                        <field name="time_end"/>
+                                        <field name="difference"/>
+                                        <field name="change_type"/>
+                                        <field name="oil_kilometer"/>
+                                        <field name="filter_km"/>
+                                        <field name="filter_type"/>
                                     </tree>
                                 </field>
                             </page>
@@ -138,8 +164,6 @@
         <menuitem id="car_maintenance_menu_root_menu_sub"
                   name="Maintenance"
                   parent="car_maintenance_menu_root"/>
-
-
 
 
         <!-- Action Menu -->

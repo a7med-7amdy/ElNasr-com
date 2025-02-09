@@ -47,11 +47,15 @@
                             <page string="Oils">
                                 <field name="oil_ids" widget="one2many_list">
                                     <tree string="oil_ids_data" editable="bottom">
+                                        <field name="car_code"/>
                                         <field name="vehicle"/>
                                         <field name="oil_type"/>
-                                        <field name="vehicles_numbers"/>
-                                        <field name="car_license"/>
+<!--                                        <field name="vehicles_numbers"/>-->
+<!--                                        <field name="car_license"/>-->
                                         <field name="kilometer"/>
+                                        <field name="time_start"/>
+                                        <field name="time_end"/>
+                                        <field name="difference"/>
                                         <field name="change_type"/>
                                         <field name="oil_kilometer"/>
                                         <field name="filter_km"/>
@@ -79,7 +83,7 @@
             <field name="name">oil_view_kanban</field>
             <field name="model">oil.oil</field>
             <field name="arch" type="xml">
-                <kanban>
+                <kanban class="o_kanban_small_column" on_create="quick_create">
                     <field name="name"/>
                     <field name="date"/>
                     <field name="state"/>
@@ -108,10 +112,10 @@
             </field>
         </record>
 
-        <menuitem id="menu_oils"
-                  name="Oils"
-                  parent="car_maintenance_menu_root"
-                  action="oil_oil_action"
-                  sequence="14"/>
+<!--        <menuitem id="menu_oils"-->
+<!--                  name="Oils"-->
+<!--                  parent="car_maintenance_menu_root"-->
+<!--                  action="oil_oil_action"-->
+<!--                  sequence="14"/>-->
     </data>
 </odoo>
