@@ -66,6 +66,16 @@ class FleetVehicleCustom(models.Model):
             'domain': [('vehicle', '=', self.id)],
             'context': {'default_vehicle': self.id},
         }
+    def action_view_job_costing(self):
+        return {
+            'name': 'Car Orders',
+            'type': 'ir.actions.act_window',
+            'view_mode': 'tree',
+            'res_model': 'car.order',
+            'domain': [('vehicle', '=', self.id)],
+            'view_id': self.env.ref('car_maintenance.view_car_order_data').id,
+            'context': {'default_vehicle': self.id},
+        }
 
     def action_view_inspections(self):
         return {

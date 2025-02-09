@@ -28,10 +28,44 @@
                 <field name="labour_ids" widget="many2many_tags"/>
                 <field name="total_labour_cost"/>
                 <field name="product_ids" widget="many2many_tags"/>
-                <field name="total_product_cost" />
+                <field name="total_product_cost"/>
             </tree>
         </field>
     </record>
+    <record model="ir.ui.view" id="view_car_order_data">
+        <field name="name">Car Orders Job Costing</field>
+        <field name="model">car.order</field>
+        <field name="arch" type="xml">
+            <tree string="Car Orders Job Costing Report" sample="1">
+                <field name="name" string="Order Reference"/>
+                <field name="vehicle" string="Vehicle"/>
+                <field name="labour_ids" widget="many2many_tags" string="Labour Involved"/>
+                <field name="total_labour_cost" string="Total Labour Cost" sum="Total"/>
+                <field name="product_ids" widget="many2many_tags" string="Used Products"/>
+                <field name="total_product_cost" string="Total Product Cost" sum="Total"/>
+                <field name="state" string="Status"/>
+            </tree>
+        </field>
+    </record>
+    <record model="ir.ui.view" id="view_car_order_analysis_pivot">
+        <field name="name">Car Orders Job Costing Analysis</field>
+        <field name="model">car.order</field>
+        <field name="arch" type="xml">
+            <pivot string="Car Orders Analysis">
+                <field name="name" type="row"/>
+                <field name="vehicle" type="row"/>
+                <field name="total_labour_cost" type="measure"/>
+                <field name="total_product_cost" type="measure"/>
+            </pivot>
+        </field>
+    </record>
+    <record id="action_car_order_analysis" model="ir.actions.act_window">
+        <field name="name">Car Orders Analysis</field>
+        <field name="res_model">car.order</field>
+        <field name="view_mode">pivot,graph</field>
+    </record>
+
+
 
     <!-- Define an action to use the new tree view -->
     <record model="ir.actions.act_window" id="action_product_stock_tree_custom">
@@ -84,9 +118,9 @@
                 <field name="picking_id"/>
                 <field name="vehicle"/>
             </xpath>
-<!--             <xpath expr="//tree/field[@name='product_id']" position="after">-->
-<!--                <field name="requisition_line"  column_invisible="0"/>-->
-<!--            </xpath>-->
+            <!--             <xpath expr="//tree/field[@name='product_id']" position="after">-->
+            <!--                <field name="requisition_line"  column_invisible="0"/>-->
+            <!--            </xpath>-->
 
         </field>
     </record>
@@ -100,10 +134,15 @@
               action="action_product_stock_tree_custom"
               sequence="1"/>
     <menuitem id="orders_menu_total_report"
-              name="Orders Job Costing Reporting"
+              name="Job Costing  Analysis"
+              parent="reporting_root_menu"
+              action="action_car_order_analysis"
+              sequence="2"/>
+    <menuitem id="orders_menu_total_report2"
+              name="Job Costing Reporting"
               parent="reporting_root_menu"
               action="action_orders_report"
-              sequence="2"/>
+              sequence="3"/>
 
 
     <!-- Fleet Menus -->
