@@ -96,6 +96,32 @@ class ContractLines(models.Model):
                               ('confirmed', 'Confirmed'), ('done', 'Done'),
                               ('cancel', 'Canceled'),
                               ], 'State', default='draft',related='contract_ids.state')
+    # on_hand_qty = fields.Float(
+    #     string="On Hand Quantity",
+    #     compute="_compute_on_hand_qty",
+    #     store=True
+    # )
+    #
+    #
+    # @api.depends('product_id')
+    # def _compute_on_hand_qty(self):
+    #     for record in self:
+    #         record.on_hand_qty = record.product_id.qty_available if record.product_id else 0.0
+
+    max_qty = fields.Float(
+        string='Max qty',
+        required=False)
+
+    @api.onchange('qty')
+    def check_qty(self):
+        for record in self:
+            if record.max_qty and record.max_qty >= record.withdrawn_quantity:
+                return {
+                    'warning': {
+                        'title': "Low Stock Warning",
+                        'message': f"The on-hand quantity ({record.max_qty}) is below 5. Please check stock availability.",
+                    }
+                }
 
     def get_total_qty_per_product_sent(self):
         for line in self:

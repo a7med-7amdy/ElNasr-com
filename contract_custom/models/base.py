@@ -12,6 +12,10 @@ class CompanySitting(models.Model):
                                      required=False, )
     journal_id = fields.Many2one('account.journal',
                                  string="Journal")
+    managers = fields.Many2many(
+        comodel_name='res.users',
+        string='Managers',
+        required=False)
 
 
 class NewModule(models.TransientModel):
@@ -29,4 +33,8 @@ class NewModule(models.TransientModel):
                                      required=False, )
     journal_id = fields.Many2one('account.journal',related='company_id.journal_id',readonly=False,
                                  string="Journal")
+    managers = fields.Many2many(
+        comodel_name='res.users',related='company_id.managers',readonly=False,
+        string='Managers',
+        required=False)
 

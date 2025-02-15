@@ -10,17 +10,8 @@ class CarStockCustom(models.Model):
     vehicle = fields.Many2one(
         comodel_name='fleet.vehicle',
         string='Vehicle',related='picking_id.vehicle',
-        required=True)
+        required=False)
 
-    # def button_validate(self):
-    #     res = super(CarStockCustom, self).button_validate()
-    #     for rec in self:
-    #         for line in rec.move_ids_without_package:
-    #             if line.requisition_line and line.price_unit:
-    #                 line.requisition_line.write({
-    #                     'avg_cost': line.price_unit,
-    #                 })
-    #     return res
 
 
 

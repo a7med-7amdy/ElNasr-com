@@ -12,6 +12,7 @@
                     <field name="debit_account" invisible="1"/>
                     <field name="credit_account" invisible="1"/>
                     <field name="journal_id" invisible="1"/>
+                    <field name="managers" invisible="1"/>
                 </xpath>
 
             </field>
@@ -34,6 +35,13 @@
                                 <br/>
                                 <label for="debit_account" class="col-lg-3 o_light_label"/>
                                 <field name="debit_account"/>
+                            </setting>
+                        </block>
+                        <br/>
+                        <block title="contract Managers">
+                            <setting help="set Managers For Contracts">
+                                <label for="managers" class="col-lg-3 o_light_label"/>
+                                <field name="managers" widget="many2many_tags"/>
                             </setting>
                         </block>
                     </app>

@@ -10,3 +10,4 @@ from . import contract_update
 from . import update_contract_wizard
 from . import base
 from . import assigning
+from . import emails

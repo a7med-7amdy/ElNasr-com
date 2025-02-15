@@ -6,6 +6,7 @@ from odoo.exceptions import UserError
 class ContractsCustom(models.Model):
     _name = 'contract.contract'
     _description = 'Custom For Contracts'
+    _inherit = ['mail.thread']
 
 
     state = fields.Selection([('draft', 'Draft'),
@@ -60,7 +61,7 @@ class ContractsCustom(models.Model):
         string='',
         required=False)
     sales = fields.Boolean(
-        string='',
+        string='Sales',
         required=False)
 
     total_cost  = fields.Float(
@@ -101,7 +102,12 @@ class ContractsCustom(models.Model):
     total_taxes =  fields.Float(
         string='Tax Totals', compute='_compute_total_cost',
         required=False)
-
+    company_id = fields.Many2one("res.company", "Company", required=True, index=True, copy=False,
+                                 default=lambda self: self.env.user.company_id.id, tracking=True)
+    contract_admin = fields.Many2many(
+        comodel_name='res.users',
+        string='Manager',related='company_id.managers',
+        required=True)
 
 
 
@@ -149,23 +155,26 @@ class ContractsCustom(models.Model):
         return result
 
     def get_qty(self):
-        orders = self.env['sale.order'].search([('contract_id','=',self.id)])
-        self.orders = orders.ids
+        for record in self:
+            orders = self.env['sale.order'].search([('contract_id', '=', record.id)])
+            record.orders = orders.ids
 
     def get_qty_general(self):
-        vehicles = self.env['vehicle.move'].search([('contract_id','=',self.id)])
-        self.vehicles = vehicles.ids
+        for record in self:
+            vehicles = self.env['vehicle.move'].search([('contract_id','=',record.id)])
+            record.vehicles = vehicles.ids
     
     def get_qty_vehicles_entry(self):
-        vehicles_ids = self.env['vehicle.move'].search([('contract_id','=',self.id),('state','=','entry')])
-        self.vehicles_entry = vehicles_ids.ids
+        for record in self:
+            vehicles_ids = self.env['vehicle.move'].search([('contract_id','=',record.id),('state','=','entry')])
+            record.vehicles_entry = vehicles_ids.ids
 
 
     def _compute_total_cost(self):
         for contract in self:
             contract.total_cost = sum(line.total_price for line in contract.contract_lines)
             contract.total_amount_with_tax = sum(line.taxed_total_price for line in contract.contract_lines)
-            contract.total_taxes = sum(line.taxed_total_amount for line in contract.contract_lines)*100
+            contract.total_taxes = contract.total_amount_with_tax - contract.total_cost
             contract.total_qty = sum(line.qty for line in contract.contract_lines)
             contract.total_remaining_quantity = sum(line.remaining_quantity for line in contract.contract_lines)
             contract.total_withdrawn_quantity = sum(line.withdrawn_quantity for line in contract.contract_lines)

@@ -27,6 +27,7 @@
         'views/update_contract_wizard.xml',
         'views/company.xml',
         'views/templates.xml',
+        'views/ir_cron.xml',
     ],
     'demo': [
         'demo/demo.xml',
