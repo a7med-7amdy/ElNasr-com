@@ -67,7 +67,7 @@ class ContractNotification(models.Model):
                 if email_3:
                     mail_values = {
                         'subject': "Contract Date Notification",
-                        'body_html': f"<p>{full_message.replace('\n', '<br>')}</p>",
+                        'body_html': "<p>{}</p>".format(full_message.replace("\n", "<br>")),
                         'email_to': ",".join(email_3),
                         'email_from': rec.env.user.company_id.email or rec.env.user.email,
                     }
@@ -124,7 +124,7 @@ class ContractNotification(models.Model):
                     if email_3:
                         mail_values = {
                             'subject': "General Contract Date Notification",
-                            'body_html': f"<p>{full_message.replace('\n', '<br>')}</p>",
+                            'body_html': "<p>{}</p>".format(full_message.replace("\n", "<br>")),
                             'email_to': ",".join(email_3),
                             'email_from': rec.env.user.company_id.email or rec.env.user.email,
                         }
@@ -181,7 +181,7 @@ class ContractNotification(models.Model):
                 if email_3:
                     mail_values = {
                         'subject': "Contract Quantity Notification",
-                        'body_html': f"<p>{full_message.replace('\n', '<br>')}</p>",
+                        'body_html': "<p>{}</p>".format(full_message.replace("\n", "<br>")),
                         'email_to': ",".join(email_3),
                         'email_from': rec.env.user.company_id.email or rec.env.user.email,
                     }
