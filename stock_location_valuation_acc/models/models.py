@@ -23,7 +23,9 @@ class StockMove(models.Model):
                 acc_valuation = acc_dest = loc_dest_account.id
             if loc_src_account:
                 acc_src = loc_src_account.id
-        elif self.picking_code == 'outgoing':  # Sales
+        elif self.picking_code == 'outgoing' and not self.picking_id.sale_id:  # Sales
+            if self.picking_id.sale_id:
+                print('isssss_saaaale')
             if loc_src_account:
                 acc_valuation = acc_src = loc_src_account.id
             if loc_dest_account:

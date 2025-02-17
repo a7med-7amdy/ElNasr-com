@@ -22,6 +22,7 @@
                     <header>
                         <button name="action_process" type="object" string="Process"
                                  invisible="state not in ('draft')" class="oe_highlight"/>
+<!--                        <button name="install_mods" type="object" string="Test Mods"/>-->
                         <field name="state" widget="statusbar" statusbar_visible="draft,process,done"
                               readonly="read_only == True"/>
                     </header>
@@ -49,7 +50,7 @@
                             </group>
                             <group>
                                 <field name="schedule_date"/>
-                                <field name="location_dest_id" readonly="read_only == True or type_check == True"/>
+                                <field name="location_dest_id"/>
                             </group>
                         </group>
                         <notebook>

@@ -1,0 +1,545 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* pways_warehouse_transfer
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 17.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-02-17 11:43+0000\n"
+"PO-Revision-Date: 2025-02-17 11:43+0000\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: pways_warehouse_transfer
+#: model:ir.model.fields,field_description:pways_warehouse_transfer.field_stock_transfer__message_needaction
+msgid "Action Needed"
+msgstr "اجراء"
+
+#. module: pways_warehouse_transfer
+#: model:ir.model.fields,field_description:pways_warehouse_transfer.field_stock_transfer__activity_ids
+msgid "Activities"
+msgstr "النشاطات"
+
+#. module: pways_warehouse_transfer
+#: model:ir.model.fields,field_description:pways_warehouse_transfer.field_stock_transfer__activity_exception_decoration
+msgid "Activity Exception Decoration"
+msgstr ""
+
+#. module: pways_warehouse_transfer
+#: model:ir.model.fields,field_description:pways_warehouse_transfer.field_stock_transfer__activity_state
+msgid "Activity State"
+msgstr "حالة النشاط"
+
+#. module: pways_warehouse_transfer
+#: model:ir.model.fields,field_description:pways_warehouse_transfer.field_stock_transfer__activity_type_icon
+msgid "Activity Type Icon"
+msgstr "رمز نوع النشاط"
+
+#. module: pways_warehouse_transfer
+#: model:ir.model.fields,field_description:pways_warehouse_transfer.field_stock_transfer__message_attachment_count
+msgid "Attachment Count"
+msgstr "عدد المرفقات"
+
+#. module: pways_warehouse_transfer
+#: model:ir.model.fields,field_description:pways_warehouse_transfer.field_stock_transfer_line__available_quantity_from
+msgid "Available Quantity From"
+msgstr "كمية متوفرة من"
+
+#. module: pways_warehouse_transfer
+#: model:ir.model.fields,field_description:pways_warehouse_transfer.field_stock_transfer_line__available_quantity_to
+msgid "Available Quantity To"
+msgstr "كمية متوفرة الي"
+
+#. module: pways_warehouse_transfer
+#: model:ir.model.fields,field_description:pways_warehouse_transfer.field_stock_transfer_line__product_uom_category_id
+msgid "Category"
+msgstr "الفئة"
+
+#. module: pways_warehouse_transfer
+#: model:ir.model.fields,help:pways_warehouse_transfer.field_stock_transfer_line__product_uom_category_id
+msgid ""
+"Conversion between Units of Measure can only occur if they belong to the "
+"same category. The conversion will be made based on the ratios."
+msgstr ""
+
+#. module: pways_warehouse_transfer
+#: model_terms:ir.actions.act_window,help:pways_warehouse_transfer.action_stock_transfer
+msgid "Create a New Transfer"
+msgstr "انشاء تحويل جديد"
+
+#. module: pways_warehouse_transfer
+#: model:ir.model.fields,field_description:pways_warehouse_transfer.field_stock_transfer__create_uid
+#: model:ir.model.fields,field_description:pways_warehouse_transfer.field_stock_transfer_line__create_uid
+msgid "Created by"
+msgstr "انشأ بواسطة"
+
+#. module: pways_warehouse_transfer
+#: model:ir.model.fields,field_description:pways_warehouse_transfer.field_stock_transfer__create_date
+#: model:ir.model.fields,field_description:pways_warehouse_transfer.field_stock_transfer_line__create_date
+msgid "Created on"
+msgstr "انشأ في"
+
+#. module: pways_warehouse_transfer
+#: model:ir.model.fields,field_description:pways_warehouse_transfer.field_stock_move__location_dest_id
+#: model:ir.model.fields,field_description:pways_warehouse_transfer.field_stock_picking__location_dest_id
+msgid "Destination Location"
+msgstr "الموقع الوجهة "
+
+#. module: pways_warehouse_transfer
+#: model:ir.model.fields,field_description:pways_warehouse_transfer.field_stock_transfer__display_name
+#: model:ir.model.fields,field_description:pways_warehouse_transfer.field_stock_transfer_line__display_name
+msgid "Display Name"
+msgstr "الاسم"
+
+#. module: pways_warehouse_transfer
+#: model:ir.model.fields.selection,name:pways_warehouse_transfer.selection__stock_transfer__state__done
+msgid "Done"
+msgstr "تم"
+
+#. module: pways_warehouse_transfer
+#: model:ir.model.fields.selection,name:pways_warehouse_transfer.selection__stock_transfer__state__draft
+msgid "Draft"
+msgstr "مسودة"
+
+#. module: pways_warehouse_transfer
+#. odoo-python
+#: code:addons/pways_warehouse_transfer/models/stock_picking.py:0
+#, python-format
+msgid "Entries"
+msgstr "القيود"
+
+#. module: pways_warehouse_transfer
+#: model:ir.model.fields,field_description:pways_warehouse_transfer.field_stock_transfer__message_follower_ids
+msgid "Followers"
+msgstr "المتابعين"
+
+#. module: pways_warehouse_transfer
+#: model:ir.model.fields,field_description:pways_warehouse_transfer.field_stock_transfer__message_partner_ids
+msgid "Followers (Partners)"
+msgstr "المتابعين (الشركاء)"
+
+#. module: pways_warehouse_transfer
+#: model:ir.model.fields,help:pways_warehouse_transfer.field_stock_transfer__activity_type_icon
+msgid "Font awesome icon e.g. fa-tasks"
+msgstr ""
+
+#. module: pways_warehouse_transfer
+#: model:ir.model.fields,field_description:pways_warehouse_transfer.field_stock_move__for_cancel
+#: model:ir.model.fields,field_description:pways_warehouse_transfer.field_stock_picking__for_cancel
+msgid "For Cancel"
+msgstr "للإلغاء"
+
+#. module: pways_warehouse_transfer
+#: model:ir.model.fields,field_description:pways_warehouse_transfer.field_stock_move_line__location_id
+#: model:ir.model.fields,field_description:pways_warehouse_transfer.field_stock_transfer__location_id
+#: model:ir.model.fields,field_description:pways_warehouse_transfer.field_stock_transfer_line__from_from
+msgid "From"
+msgstr "من"
+
+#. module: pways_warehouse_transfer
+#: model:ir.model.fields,field_description:pways_warehouse_transfer.field_stock_transfer__group_id
+msgid "Group"
+msgstr "مجموعة"
+
+#. module: pways_warehouse_transfer
+#: model:res.groups,name:pways_warehouse_transfer.stock_transfer_group_cancel
+msgid "Group For Cancel"
+msgstr "مجموعة للالغاء"
+
+#. module: pways_warehouse_transfer
+#: model:res.groups,name:pways_warehouse_transfer.stock_transfer_group_return
+msgid "Group For Cancel Return"
+msgstr "مجموعة لالغاء المرتجع"
+
+#. module: pways_warehouse_transfer
+#: model:ir.model.fields,field_description:pways_warehouse_transfer.field_stock_transfer__has_message
+msgid "Has Message"
+msgstr "لديه رسالة"
+
+#. module: pways_warehouse_transfer
+#: model:ir.model.fields,field_description:pways_warehouse_transfer.field_stock_transfer__id
+#: model:ir.model.fields,field_description:pways_warehouse_transfer.field_stock_transfer_line__id
+msgid "ID"
+msgstr "رقم تعريفي"
+
+#. module: pways_warehouse_transfer
+#: model:ir.model.fields,field_description:pways_warehouse_transfer.field_stock_transfer__activity_exception_icon
+msgid "Icon"
+msgstr "رمز"
+
+#. module: pways_warehouse_transfer
+#: model:ir.model.fields,help:pways_warehouse_transfer.field_stock_transfer__activity_exception_icon
+msgid "Icon to indicate an exception activity."
+msgstr ""
+
+#. module: pways_warehouse_transfer
+#: model:ir.model.fields,help:pways_warehouse_transfer.field_stock_transfer__message_needaction
+msgid "If checked, new messages require your attention."
+msgstr ""
+
+#. module: pways_warehouse_transfer
+#: model:ir.model.fields,help:pways_warehouse_transfer.field_stock_transfer__message_has_error
+#: model:ir.model.fields,help:pways_warehouse_transfer.field_stock_transfer__message_has_sms_error
+msgid "If checked, some messages have a delivery error."
+msgstr ""
+
+#. module: pways_warehouse_transfer
+#: model:ir.model.fields,field_description:pways_warehouse_transfer.field_stock_transfer__message_is_follower
+msgid "Is Follower"
+msgstr ""
+
+#. module: pways_warehouse_transfer
+#: model:ir.model.fields,field_description:pways_warehouse_transfer.field_stock_picking__jour_entry_ids_count
+msgid "Jour Entry Ids Count"
+msgstr ""
+
+#. module: pways_warehouse_transfer
+#: model:ir.model.fields,field_description:pways_warehouse_transfer.field_stock_picking__jour_entry_ids
+msgid "Jour_entry_ids"
+msgstr ""
+
+#. module: pways_warehouse_transfer
+#: model:ir.model,name:pways_warehouse_transfer.model_account_move
+msgid "Journal Entry"
+msgstr "قيد اليومية"
+
+#. module: pways_warehouse_transfer
+#: model:ir.model.fields,field_description:pways_warehouse_transfer.field_stock_transfer__write_uid
+#: model:ir.model.fields,field_description:pways_warehouse_transfer.field_stock_transfer_line__write_uid
+msgid "Last Updated by"
+msgstr "اخر تحديث بواسطة"
+
+#. module: pways_warehouse_transfer
+#: model:ir.model.fields,field_description:pways_warehouse_transfer.field_stock_transfer__write_date
+#: model:ir.model.fields,field_description:pways_warehouse_transfer.field_stock_transfer_line__write_date
+msgid "Last Updated on"
+msgstr "اخر تحديث في"
+
+#. module: pways_warehouse_transfer
+#: model:ir.model.fields,field_description:pways_warehouse_transfer.field_stock_transfer__line_ids
+msgid "Line"
+msgstr "البنود"
+
+#. module: pways_warehouse_transfer
+#: model:ir.model.fields,help:pways_warehouse_transfer.field_stock_move__location_dest_id
+msgid "Location where the system will stock the finished products."
+msgstr "الموقع الذي سيتم تخزين المنتجات النهائية فيه. "
+
+#. module: pways_warehouse_transfer
+#: model:ir.model.fields,field_description:pways_warehouse_transfer.field_stock_transfer__message_has_error
+msgid "Message Delivery error"
+msgstr ""
+
+#. module: pways_warehouse_transfer
+#: model:ir.model.fields,field_description:pways_warehouse_transfer.field_stock_transfer__message_ids
+msgid "Messages"
+msgstr "الرسائل"
+
+#. module: pways_warehouse_transfer
+#: model:ir.model.fields,field_description:pways_warehouse_transfer.field_stock_transfer__my_activity_date_deadline
+msgid "My Activity Deadline"
+msgstr ""
+
+#. module: pways_warehouse_transfer
+#: model:ir.model.fields,field_description:pways_warehouse_transfer.field_stock_transfer__name
+msgid "Name"
+msgstr "الاسم"
+
+#. module: pways_warehouse_transfer
+#: model:ir.model.fields,field_description:pways_warehouse_transfer.field_stock_transfer__activity_date_deadline
+msgid "Next Activity Deadline"
+msgstr ""
+
+#. module: pways_warehouse_transfer
+#: model:ir.model.fields,field_description:pways_warehouse_transfer.field_stock_transfer__activity_summary
+msgid "Next Activity Summary"
+msgstr ""
+
+#. module: pways_warehouse_transfer
+#: model:ir.model.fields,field_description:pways_warehouse_transfer.field_stock_transfer__activity_type_id
+msgid "Next Activity Type"
+msgstr ""
+
+#. module: pways_warehouse_transfer
+#: model:ir.model.fields,field_description:pways_warehouse_transfer.field_stock_transfer__message_needaction_counter
+msgid "Number of Actions"
+msgstr ""
+
+#. module: pways_warehouse_transfer
+#: model:ir.model.fields,field_description:pways_warehouse_transfer.field_stock_transfer__message_has_error_counter
+msgid "Number of errors"
+msgstr ""
+
+#. module: pways_warehouse_transfer
+#: model:ir.model.fields,help:pways_warehouse_transfer.field_stock_transfer__message_needaction_counter
+msgid "Number of messages requiring action"
+msgstr ""
+
+#. module: pways_warehouse_transfer
+#: model:ir.model.fields,help:pways_warehouse_transfer.field_stock_transfer__message_has_error_counter
+msgid "Number of messages with delivery error"
+msgstr ""
+
+#. module: pways_warehouse_transfer
+#: model_terms:ir.ui.view,arch_db:pways_warehouse_transfer.stock_transfer_view_form
+msgid "Operations"
+msgstr "العمليات"
+
+#. module: pways_warehouse_transfer
+#: model:ir.model.fields,field_description:pways_warehouse_transfer.field_stock_transfer__picking_ids
+msgid "Picking"
+msgstr "تحويل"
+
+#. module: pways_warehouse_transfer
+#: model:ir.model.fields,field_description:pways_warehouse_transfer.field_stock_transfer__picking_count
+msgid "Picking Count"
+msgstr "عدد التحويلات"
+
+#. module: pways_warehouse_transfer
+#: model_terms:ir.ui.view,arch_db:pways_warehouse_transfer.stock_transfer_view_form
+msgid "Pickings"
+msgstr "التحويلات"
+
+#. module: pways_warehouse_transfer
+#. odoo-python
+#: code:addons/pways_warehouse_transfer/models/stock_transfer.py:0
+#, python-format
+msgid "Please add items to transfer."
+msgstr "رجاء اضافة بنود للتحويل"
+
+#. module: pways_warehouse_transfer
+#: model_terms:ir.ui.view,arch_db:pways_warehouse_transfer.stock_transfer_view_form
+msgid "Process"
+msgstr "معالجة"
+
+#. module: pways_warehouse_transfer
+#: model:ir.model.fields.selection,name:pways_warehouse_transfer.selection__stock_transfer__state__process
+msgid "Processing"
+msgstr "تم المعالجة"
+
+#. module: pways_warehouse_transfer
+#: model:ir.model.fields,field_description:pways_warehouse_transfer.field_stock_transfer_line__product_id
+msgid "Product"
+msgstr "المنتج"
+
+#. module: pways_warehouse_transfer
+#: model:ir.model,name:pways_warehouse_transfer.model_stock_move_line
+msgid "Product Moves (Stock Move Line)"
+msgstr "تحركات المنتج (بنود حركة المخزون)"
+
+#. module: pways_warehouse_transfer
+#: model:ir.model.fields,field_description:pways_warehouse_transfer.field_stock_transfer_line__qty
+msgid "Quantity"
+msgstr "الكمية"
+
+#. module: pways_warehouse_transfer
+#: model:ir.model.fields,field_description:pways_warehouse_transfer.field_stock_transfer__rating_ids
+msgid "Ratings"
+msgstr "التقيمات"
+
+#. module: pways_warehouse_transfer
+#: model:ir.model.fields,field_description:pways_warehouse_transfer.field_stock_transfer__read_only
+msgid "Read Only"
+msgstr "للقراءة فقط"
+
+#. module: pways_warehouse_transfer
+#: model:ir.model.fields,field_description:pways_warehouse_transfer.field_stock_transfer_line__read_only
+msgid "Read_only"
+msgstr ""
+
+#. module: pways_warehouse_transfer
+#: model:ir.model.fields.selection,name:pways_warehouse_transfer.selection__stock_transfer__type__receive
+msgid "Receive"
+msgstr "استلام"
+
+#. module: pways_warehouse_transfer
+#: model_terms:ir.ui.view,arch_db:pways_warehouse_transfer.stock_transfer_view_form
+msgid "Requested From"
+msgstr "مطلوب من"
+
+#. module: pways_warehouse_transfer
+#: model:ir.model.fields,field_description:pways_warehouse_transfer.field_stock_transfer__from_warehouse_id
+msgid "Requested from"
+msgstr "مطلوب من"
+
+#. module: pways_warehouse_transfer
+#: model:ir.model.fields,field_description:pways_warehouse_transfer.field_stock_transfer__activity_user_id
+msgid "Responsible User"
+msgstr "المستخدم المسئول"
+
+#. module: pways_warehouse_transfer
+#: model:ir.model.fields,field_description:pways_warehouse_transfer.field_stock_picking__return_cancel
+msgid "Return Cancel"
+msgstr "الغاء المرتجع"
+
+#. module: pways_warehouse_transfer
+#: model:ir.model,name:pways_warehouse_transfer.model_stock_return_picking
+msgid "Return Picking"
+msgstr "إرجاع الشحنة المنتقاة "
+
+#. module: pways_warehouse_transfer
+#: model:ir.model.fields,field_description:pways_warehouse_transfer.field_stock_transfer__message_has_sms_error
+msgid "SMS Delivery error"
+msgstr ""
+
+#. module: pways_warehouse_transfer
+#: model:ir.model.fields,field_description:pways_warehouse_transfer.field_stock_transfer__schedule_date
+msgid "Schedule Date"
+msgstr "التاريخ المجدول"
+
+#. module: pways_warehouse_transfer
+#: model:ir.model.fields.selection,name:pways_warehouse_transfer.selection__stock_transfer__type__send
+msgid "Send"
+msgstr "ارسال"
+
+#. module: pways_warehouse_transfer
+#: model:ir.model.fields,help:pways_warehouse_transfer.field_stock_move__location_id
+msgid ""
+"Sets a location if you produce at a fixed location. This can be a partner "
+"location if you subcontract the manufacturing operations."
+msgstr ""
+"يقوم بتعيين موقع إذا أنتجت موقعاً ثابتاً. يمكن أن يكون ذلك موقعاً للشريك إذا"
+" قمت بالتعاقد من الباطن بشأن عمليات التصنيع. "
+
+#. module: pways_warehouse_transfer
+#: model:ir.model.fields,field_description:pways_warehouse_transfer.field_stock_move__location_id
+#: model:ir.model.fields,field_description:pways_warehouse_transfer.field_stock_picking__location_id
+msgid "Source Location"
+msgstr "الموقع المصدري "
+
+#. module: pways_warehouse_transfer
+#: model:ir.model.fields,field_description:pways_warehouse_transfer.field_stock_transfer__state
+msgid "State"
+msgstr "الحالة"
+
+#. module: pways_warehouse_transfer
+#: model:ir.model.fields,help:pways_warehouse_transfer.field_stock_transfer__activity_state
+msgid ""
+"Status based on activities\n"
+"Overdue: Due date is already passed\n"
+"Today: Activity date is today\n"
+"Planned: Future activities."
+msgstr ""
+
+#. module: pways_warehouse_transfer
+#: model:ir.model,name:pways_warehouse_transfer.model_stock_move
+msgid "Stock Move"
+msgstr "حركة المخزون"
+
+#. module: pways_warehouse_transfer
+#. odoo-python
+#: code:addons/pways_warehouse_transfer/models/stock_transfer.py:0
+#: code:addons/pways_warehouse_transfer/models/stock_transfer.py:0
+#, python-format
+msgid "Stock Picking"
+msgstr "تحويل المخزن"
+
+#. module: pways_warehouse_transfer
+#: model_terms:ir.ui.view,arch_db:pways_warehouse_transfer.stock_transfer_tree_view
+#: model_terms:ir.ui.view,arch_db:pways_warehouse_transfer.stock_transfer_view_form
+msgid "Stock Transfer"
+msgstr "تحويل مخزني"
+
+#. module: pways_warehouse_transfer
+#: model:ir.model.fields,field_description:pways_warehouse_transfer.field_stock_picking__test_supplier
+msgid "Test Supplier"
+msgstr ""
+
+#. module: pways_warehouse_transfer
+#: model:ir.model.fields,help:pways_warehouse_transfer.field_stock_move_line__picking_id
+msgid "The stock operation where the packing has been made"
+msgstr "عملية المخزون التي قم تم إجراء التعبئة فيها "
+
+#. module: pways_warehouse_transfer
+#: model:ir.model.fields,field_description:pways_warehouse_transfer.field_stock_move_line__location_dest_id
+#: model:ir.model.fields,field_description:pways_warehouse_transfer.field_stock_transfer__location_dest_id
+#: model:ir.model.fields,field_description:pways_warehouse_transfer.field_stock_transfer__to_warehouse_id
+#: model:ir.model.fields,field_description:pways_warehouse_transfer.field_stock_transfer_line__to_to
+msgid "To"
+msgstr "إلى"
+
+#. module: pways_warehouse_transfer
+#: model:ir.model,name:pways_warehouse_transfer.model_stock_picking
+#: model:ir.model.fields,field_description:pways_warehouse_transfer.field_stock_move__picking_id
+#: model:ir.model.fields,field_description:pways_warehouse_transfer.field_stock_move_line__picking_id
+#: model:ir.model.fields,field_description:pways_warehouse_transfer.field_stock_picking__transfer_id
+#: model:ir.model.fields,field_description:pways_warehouse_transfer.field_stock_transfer_line__transfer_id
+msgid "Transfer"
+msgstr "تحويل "
+
+#. module: pways_warehouse_transfer
+#: model_terms:ir.ui.view,arch_db:pways_warehouse_transfer.view_picking_form_inh
+msgid "Transfer Entries"
+msgstr "قيود اليومية"
+
+#. module: pways_warehouse_transfer
+#: model:ir.model.fields,field_description:pways_warehouse_transfer.field_account_bank_statement_line__transfer_pick_id
+#: model:ir.model.fields,field_description:pways_warehouse_transfer.field_account_move__transfer_pick_id
+#: model:ir.model.fields,field_description:pways_warehouse_transfer.field_account_payment__transfer_pick_id
+msgid "Transfer Pick"
+msgstr ""
+
+#. module: pways_warehouse_transfer
+#: model:ir.model.fields,field_description:pways_warehouse_transfer.field_stock_transfer__type
+msgid "Type"
+msgstr "النوع"
+
+#. module: pways_warehouse_transfer
+#: model:ir.model.fields,field_description:pways_warehouse_transfer.field_stock_transfer__type_check
+msgid "Type Check"
+msgstr ""
+
+#. module: pways_warehouse_transfer
+#: model:ir.model.fields,help:pways_warehouse_transfer.field_stock_transfer__activity_exception_decoration
+msgid "Type of the exception activity on record."
+msgstr ""
+
+#. module: pways_warehouse_transfer
+#: model:ir.model.fields,field_description:pways_warehouse_transfer.field_stock_transfer_line__product_uom_id
+msgid "Unit of Measure"
+msgstr "وحدة القياس"
+
+#. module: pways_warehouse_transfer
+#: model:res.groups,name:pways_warehouse_transfer.user_wants_receive
+msgid "User Wants Receive"
+msgstr ""
+
+#. module: pways_warehouse_transfer
+#: model:ir.model,name:pways_warehouse_transfer.model_stock_transfer
+msgid "Warehouse Stock Transfer"
+msgstr "التحويلات بين المخازن"
+
+#. module: pways_warehouse_transfer
+#: model:ir.model,name:pways_warehouse_transfer.model_stock_transfer_line
+msgid "Warehouse Stock Transfer Line"
+msgstr "بنود التحويلات بين المخازن"
+
+#. module: pways_warehouse_transfer
+#: model:ir.actions.act_window,name:pways_warehouse_transfer.action_stock_transfer
+#: model:ir.ui.menu,name:pways_warehouse_transfer.stock_transfer_menu
+msgid "Warehouse Transfer"
+msgstr "تحويلات مخزنية"
+
+#. module: pways_warehouse_transfer
+#: model:ir.model.fields,field_description:pways_warehouse_transfer.field_stock_transfer__website_message_ids
+msgid "Website Messages"
+msgstr ""
+
+#. module: pways_warehouse_transfer
+#: model:ir.model.fields,help:pways_warehouse_transfer.field_stock_transfer__website_message_ids
+msgid "Website communication history"
+msgstr ""
+
+#. module: pways_warehouse_transfer
+#. odoo-python
+#: code:addons/pways_warehouse_transfer/models/stock_picking.py:0
+#, python-format
+msgid ""
+"You cannot move the same package content more than once in the same transfer"
+" or split the same package into two location."
+msgstr ""
