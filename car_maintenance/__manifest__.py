@@ -7,7 +7,7 @@
     'website': "hamdy company",
     'category': 'Cars',
     'version': '1.2',
-    'depends': ['base','fleet','rw_vehicle_move','stock','hr','hr_hourly_cost',],
+    'depends': ['base','fleet','hr','hr_hourly_cost','purchase','product',],
     'data': [
         'security/ir.model.access.csv',
         'views/views.xml',

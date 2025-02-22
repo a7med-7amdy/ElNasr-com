@@ -33,6 +33,9 @@ class FleetVehicleCustom(models.Model):
         compute="_compute_tools_group",
         store=True,
     )
+    trailer = fields.Boolean(
+        string='Trailer',
+        required=False)
 
     car_order_ids = fields.One2many('car.order', 'vehicle', string="Car Orders")
     inspection_ids = fields.One2many('inspection.inspection', 'vehicle', string="Inspections")

@@ -438,9 +438,7 @@ class FleetVehicle(models.Model):
 
     analytic_account_id = fields.Many2one('account.analytic.account', 'Analytic Account', readonly=True)
 
-    trailer = fields.Boolean(
-        string='Trailer',
-        required=False)
+
 
 
     @api.model

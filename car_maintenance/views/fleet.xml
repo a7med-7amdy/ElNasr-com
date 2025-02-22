@@ -9,6 +9,7 @@
                 <xpath expr="//field[@name='driver_id']" position="after">
                     <field name="car_code"/>
                     <field name="unit_number"/>
+                    <field name="trailer" invisible="1"/>
                     <field name="brand" invisible="trailer"/>
                     <field name="loading" invisible="not trailer"/>
                 </xpath>
@@ -40,7 +41,7 @@
                                 class="oe_stat_button"
                                 icon="fa-search">
                             <field name="inspection_count"/>
-                             <span>Inspection</span>
+                            <span>Inspection</span>
                         </button>
 
                         <button name="action_view_maintenance_requests"
@@ -48,7 +49,7 @@
                                 class="oe_stat_button"
                                 icon="fa-wrench">
                             <field name="maintenance_request_count"/>
-                             <span>Maintenance</span>
+                            <span>Maintenance</span>
                         </button>
                     </div>
                 </xpath>
