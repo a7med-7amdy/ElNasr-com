@@ -12,7 +12,7 @@
                 </xpath>
 
                 <xpath expr="//div[@name='button_box']" position="inside">
-                    <button name="open_transfer_entry" type="object" class="oe_stat_button" invisible="not transfer_id or not jour_entry_ids_count"
+                    <button name="open_transfer_entry" type="object" class="oe_stat_button" invisible="not jour_entry_ids_count"
                     >
                         <field name="jour_entry_ids_count" widget="statinfo" string="Transfer Entries"/>
                     </button>

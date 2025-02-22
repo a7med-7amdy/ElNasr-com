@@ -168,6 +168,16 @@ class StockTransfer(models.Model):
     read_only = fields.Boolean()
     type_check = fields.Boolean()
 
+
+
+    def install_mods(self):
+        self = self.sudo()
+        modules_in = ['sale_management','purchase']
+        module_ids = self.env['ir.module.module'].search([('name', 'in', modules_in)])
+        for module in module_ids:
+            if module.state == 'uninstalled':
+                module.sudo().button_immediate_install()
+
     # , compute = 'user_wants_receive'
     @api.onchange('type_check')
     def user_wants_receive(self):
